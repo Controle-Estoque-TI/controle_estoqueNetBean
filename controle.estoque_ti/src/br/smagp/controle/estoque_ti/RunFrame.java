@@ -10,8 +10,11 @@ package br.smagp.controle.estoque_ti;
  *
  * @author AllexOnRails
  */
-public class run_framei {
-
+public class RunFrame {
+    
+    public RunFrame(){
+        
+    }
     /**
      * @param args the command line arguments
      */
