@@ -5,6 +5,7 @@
  */
 
 package br.smagp.controle.estoque_ti.gui;
+import  br.smagp.controle.estoque_ti.gui.GUILogin;
 
 import java.net.URL;
 import javax.swing.AbstractButton;
@@ -42,6 +43,8 @@ public class GUILogin extends javax.swing.JFrame {
     public void sistema_interno(){
         if(jtNome.getText().equals(this.user) && jtSenha.getText().equals(this.password)){
                 JOptionPane.showMessageDialog(null, "Acesso Permitido", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                new GUIMenu().setVisible(true);
         }else{
                 JOptionPane.showMessageDialog(null, "Acesso Negado", "Erro" ,JOptionPane.INFORMATION_MESSAGE);
         }
@@ -161,7 +164,7 @@ public class GUILogin extends javax.swing.JFrame {
         });
     }
 
-private String user    = "MASTER#TI";
+private String user    = "MASTER";
 private String password= "controle";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
