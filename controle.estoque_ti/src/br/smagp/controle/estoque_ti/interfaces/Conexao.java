@@ -16,8 +16,4 @@ import java.sql.SQLException;
  * @author AllexOnRails
  *
  */
-public interface Conexao
-{	
-	public  Connection getConnection();	
-	public void conexao();
-}
+public interface Conexao { public  Connection getConnection();	public void conexao(); }

@@ -49,8 +49,6 @@ public class ConnectionFactory implements Conexao{
     protected String password;
     private static boolean status;
     
-    
-    
     //VERIFICA UMA INSTANCIA
     public static ConnectionFactory getInstance() {
         return instance;
