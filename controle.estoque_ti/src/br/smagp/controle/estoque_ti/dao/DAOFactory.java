@@ -30,8 +30,4 @@ public class DAOFactory {
 	public static ControleDAO getControleEstoque(){
 		return new ControleDAO();	
 	}
-	
-	public LogDAO getLogDAO(){
-		return new LogDAO();
-	}
 }

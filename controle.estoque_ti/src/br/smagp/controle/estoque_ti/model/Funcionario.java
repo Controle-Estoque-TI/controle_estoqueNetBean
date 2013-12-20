@@ -5,6 +5,8 @@
 
 package br.smagp.controle.estoque_ti.model;
 
+import br.smagp.controle.estoque_ti.cryptonita.CryptographyGeneric;
+
 /**
  * @author AllexOnRails
  *
