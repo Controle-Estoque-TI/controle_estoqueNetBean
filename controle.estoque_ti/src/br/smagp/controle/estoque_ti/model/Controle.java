@@ -38,10 +38,10 @@ public class Controle {
 
     public void verifica_numero_serie(String serie){
         if (this.equipamento.getNumero_Serie_Equipamento() == serie){
-                System.out.println("O número de série informado Válido");
+            System.out.println("O número de série informado Válido");
         }
         else{
-                System.out.println("O número de série informado é inválido!");
+            System.out.println("O número de série informado é inválido!");
         }
     }
 
@@ -52,26 +52,26 @@ public class Controle {
      */
 
     public int getTecnico(){
-            return this.tecnico.getID();
+        return this.tecnico.getID();
     }
 
     public int getOrgao(){
-            return this.orgao.getId();
+        return this.orgao.getId();
     }
 
     public int getEquipamento(){
-            return this.equipamento.getId();
+        return this.equipamento.getId();
     }
 
     public int getChefia(){
-            return this.chefia.getID();
+        return this.chefia.getID();
     }
 
     public String getSetorOrgao(){
-            return this.setor;
+        return this.setor;
     }
 
     public void setSetorOrgao(String setor_orgao){
-            this.setor = setor_orgao;
+        this.setor = setor_orgao;
     }
 }
