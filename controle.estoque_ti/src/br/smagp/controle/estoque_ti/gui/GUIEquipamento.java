@@ -111,9 +111,18 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.SW_RESIZE_CURSOR));
+        jTable1.setCellSelectionEnabled(true);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable1.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("id");
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("n_serie");
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Equipamento");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Marca");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Patrimônio");
+        }
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Resultado da Busca:");
@@ -142,14 +151,14 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 205, 27));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
-        jButton3.setText("Editar");
+        jButton3.setText("Excluir");
         jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 100, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 100, 40));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         jButton4.setText("Editar");
@@ -159,11 +168,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 100, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Equipamento: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 700, 10));
 
         jTextField2.setEnabled(false);
@@ -178,7 +187,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Marca: ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
         jTextField4.setEnabled(false);
         jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 370, 30));
@@ -187,8 +196,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 370, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Patrimônio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
+        jLabel6.setText("Patrimônio: ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
         jButton5.setText("Novo");
@@ -224,8 +233,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
-        jMenuItem1.setText("Novo Equipamento");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone_lapis.png"))); // NOI18N
+        jMenuItem1.setText("Listar Equipamentos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
