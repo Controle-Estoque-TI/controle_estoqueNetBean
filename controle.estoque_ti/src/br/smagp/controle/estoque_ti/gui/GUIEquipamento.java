@@ -6,15 +6,19 @@
 
 package br.smagp.controle.estoque_ti.gui;
 
+import br.smagp.controle.estoque_ti.dao.DAOFactory;
+import br.smagp.controle.estoque_ti.dao.EquipamentoDAO;
 import br.smagp.controle.estoque_ti.db.ConnectionFactory;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import br.smagp.controle.estoque_ti.gui.GUIMenu;
+import br.smagp.controle.estoque_ti.model.Equipamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -78,6 +82,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -278,6 +283,9 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jMenuItem2.setText("Editar Equipamento");
         jMenu2.add(jMenuItem2);
 
+        jMenuItem5.setText("Novo tipo de equipamento");
+        jMenu2.add(jMenuItem5);
+
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
         jMenuItem3.setText("Excluir Equipamento");
         jMenu2.add(jMenuItem3);
@@ -352,7 +360,22 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        // TODO add your handling code here:
+        // Esta Action [PROCEDIMENTO] é responsável por salvar os equipametos na base de dados.
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNumero_Serie_Equipamento(textNumeroSerie.getText());
+        equipamento.setEquipamento(textEquipamento.getText());
+        equipamento.setMarca_Equipamento(textMarca.getText());
+        equipamento.setTipo_Equipamento(jTipoEquipamento.getSelectedItem().toString());
+        equipamento.setPatrimonio(textPatrimonio.getText());
+        
+        EquipamentoDAO dao = new DAOFactory().getEquipamento(); //Fazer isto na hora de instanciar na interface
+        try {
+            dao.insert(equipamento);
+            System.out.println(dao.findByNumeroDeSerie(equipamento.getNumero_Serie_Equipamento()));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btSalvarActionPerformed
 
     
@@ -435,6 +458,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;

@@ -22,23 +22,10 @@ public class Equipamento implements Serializable
     private int id;
 
     private String n_serie_equipamento;
+    private String equipamento;
     private String tipo_equipamento;
     private String marca_equipamento;
     private String patrimonio;
-
-    public Equipamento(){
-
-    }
-
-    public Equipamento(int _id_, String serie, String tipo, String marca, String patrimonio) 
-    {
-            // TODO Auto-generated constructor stub
-            this.id = _id_;
-            this.n_serie_equipamento = serie;
-            this.tipo_equipamento    = tipo;
-            this.marca_equipamento   = marca;
-            this.patrimonio = patrimonio;
-    }
 
 
 
@@ -60,6 +47,16 @@ public class Equipamento implements Serializable
     public void setNumero_Serie_Equipamento(String serie)
     {
             this.n_serie_equipamento = serie;
+    }
+    
+    public String getEquipamento()
+    {
+            return this.equipamento;
+    }
+
+    public void setEquipamento(String equipamento)
+    {
+            this.equipamento = equipamento;
     }
 
     public String getTipo_Equipamento()
