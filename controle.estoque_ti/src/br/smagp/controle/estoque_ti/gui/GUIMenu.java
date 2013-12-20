@@ -10,6 +10,7 @@ import java.net.URL;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,8 +53,11 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle2 = new javax.swing.JButton();
         jbControle3 = new javax.swing.JButton();
         jbControle4 = new javax.swing.JButton();
-        jbControle5 = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jbControle6 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jbControle7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,11 +75,6 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle1.setRequestFocusEnabled(false);
         jbControle1.setRolloverEnabled(false);
         jbControle1.setVerifyInputWhenFocusTarget(false);
-        jbControle1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControle1ActionPerformed(evt);
-            }
-        });
 
         jbControle2.setBackground(new java.awt.Color(255, 255, 255));
         jbControle2.setForeground(new java.awt.Color(204, 204, 204));
@@ -88,11 +87,6 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle2.setRequestFocusEnabled(false);
         jbControle2.setRolloverEnabled(false);
         jbControle2.setVerifyInputWhenFocusTarget(false);
-        jbControle2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControle2ActionPerformed(evt);
-            }
-        });
 
         jbControle3.setBackground(new java.awt.Color(255, 255, 255));
         jbControle3.setForeground(new java.awt.Color(204, 204, 204));
@@ -105,11 +99,6 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle3.setRequestFocusEnabled(false);
         jbControle3.setRolloverEnabled(false);
         jbControle3.setVerifyInputWhenFocusTarget(false);
-        jbControle3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControle3ActionPerformed(evt);
-            }
-        });
 
         jbControle4.setBackground(new java.awt.Color(255, 255, 255));
         jbControle4.setForeground(new java.awt.Color(204, 204, 204));
@@ -122,30 +111,51 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle4.setRequestFocusEnabled(false);
         jbControle4.setRolloverEnabled(false);
         jbControle4.setVerifyInputWhenFocusTarget(false);
-        jbControle4.addActionListener(new java.awt.event.ActionListener() {
+
+        btSair.setBackground(new java.awt.Color(255, 255, 255));
+        btSair.setForeground(new java.awt.Color(204, 204, 204));
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/exit2.jpg"))); // NOI18N
+        btSair.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btSair.setBorderPainted(false);
+        btSair.setFocusCycleRoot(true);
+        btSair.setFocusable(false);
+        btSair.setOpaque(false);
+        btSair.setRequestFocusEnabled(false);
+        btSair.setRolloverEnabled(false);
+        btSair.setVerifyInputWhenFocusTarget(false);
+        btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControle4ActionPerformed(evt);
+                btSairActionPerformed(evt);
             }
         });
 
-        jbControle5.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle5.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle5.setBorderPainted(false);
-        jbControle5.setFocusCycleRoot(true);
-        jbControle5.setFocusable(false);
-        jbControle5.setOpaque(false);
-        jbControle5.setRequestFocusEnabled(false);
-        jbControle5.setRolloverEnabled(false);
-        jbControle5.setVerifyInputWhenFocusTarget(false);
-        jbControle5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControle5ActionPerformed(evt);
-            }
-        });
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/logoSuporteTI2.png"))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/SuporteTI-2013.png"))); // NOI18N
+        jbControle6.setBackground(new java.awt.Color(255, 255, 255));
+        jbControle6.setForeground(new java.awt.Color(204, 204, 204));
+        jbControle6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbControle6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbControle6.setBorderPainted(false);
+        jbControle6.setFocusCycleRoot(true);
+        jbControle6.setFocusable(false);
+        jbControle6.setOpaque(false);
+        jbControle6.setRequestFocusEnabled(false);
+        jbControle6.setRolloverEnabled(false);
+        jbControle6.setVerifyInputWhenFocusTarget(false);
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jbControle7.setBackground(new java.awt.Color(255, 255, 255));
+        jbControle7.setForeground(new java.awt.Color(204, 204, 204));
+        jbControle7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-relatorio.png"))); // NOI18N
+        jbControle7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbControle7.setBorderPainted(false);
+        jbControle7.setFocusCycleRoot(true);
+        jbControle7.setFocusable(false);
+        jbControle7.setOpaque(false);
+        jbControle7.setRequestFocusEnabled(false);
+        jbControle7.setRolloverEnabled(false);
+        jbControle7.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,27 +170,36 @@ public class GUIMenu extends javax.swing.JFrame {
                 .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbControle4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbControle5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(298, 298, 298))
+                .addGap(30, 30, 30)
+                .addComponent(jbControle6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jbControle7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(209, 209, 209))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(19, 19, 19))
+                .addGap(139, 139, 139))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbControle5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
+                    .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControle6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControle7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(91, 91, 91))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,27 +216,14 @@ public class GUIMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        // TODO add your handling code here:
+       JOptionPane.showMessageDialog(null,"Sistema Encerrado.\nVolte Sempre");
+       dispose();
+       System.exit(0);
+    }//GEN-LAST:event_btSairActionPerformed
+
     	
-    private void jbControle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControle1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbControle1ActionPerformed
-
-    private void jbControle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControle2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbControle2ActionPerformed
-
-    private void jbControle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControle3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbControle3ActionPerformed
-
-    private void jbControle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControle4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbControle4ActionPerformed
-
-    private void jbControle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControle5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbControle5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -254,12 +260,15 @@ public class GUIMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbControle1;
     private javax.swing.JButton jbControle2;
     private javax.swing.JButton jbControle3;
     private javax.swing.JButton jbControle4;
-    private javax.swing.JButton jbControle5;
+    private javax.swing.JButton jbControle6;
+    private javax.swing.JButton jbControle7;
     // End of variables declaration//GEN-END:variables
 }
