@@ -17,6 +17,9 @@ public class GUIShowEquipamentos extends javax.swing.JFrame {
      */
     public GUIShowEquipamentos() {
         initComponents();
+        setResizable(false);
+        setLocation(250, 100);
+        setLocationRelativeTo(null);
     }
 
     /**

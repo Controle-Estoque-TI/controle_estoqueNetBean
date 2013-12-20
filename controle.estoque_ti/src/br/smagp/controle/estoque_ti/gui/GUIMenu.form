@@ -52,7 +52,7 @@
                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                   <Component id="jbControle1" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbControle2" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="jbControle" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jbControle3" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
                       <Component id="jSeparator2" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jbControle4" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jbControle3" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jbControle2" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="jbControle" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jbControle1" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jbControle6" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jbControle7" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbControle2">
+        <Component class="javax.swing.JButton" name="jbControle">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -145,6 +145,9 @@
             <Property name="rolloverEnabled" type="boolean" value="false"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbControleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbControle3">
           <Properties>

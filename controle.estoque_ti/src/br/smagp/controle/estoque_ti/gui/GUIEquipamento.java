@@ -6,6 +6,10 @@
 
 package br.smagp.controle.estoque_ti.gui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author AllexOnRails
@@ -16,7 +20,16 @@ public class GUIEquipamento extends javax.swing.JFrame {
      * Creates new form GUIEquipamento
      */
     public GUIEquipamento() {
-        initComponents();
+        this.initComponents();
+        this.setResizable(false);
+        this.setLocation(250, 100);
+        this.setLocationRelativeTo(null);
+        
+    }
+    
+    public void onExit() {
+        System.err.println("Exit");
+        System.exit(0);
     }
 
     /**

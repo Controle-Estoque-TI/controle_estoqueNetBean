@@ -10,6 +10,7 @@ import java.net.URL;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class GUIMenu extends javax.swing.JFrame {
 
+    private GUIEquipamento guiEquipamento = null;
+    
     
     private JButton createImageButton(String texto, String uriAbsoluta) {
         URL uri = getClass().getResource(uriAbsoluta);
@@ -34,9 +37,10 @@ public class GUIMenu extends javax.swing.JFrame {
      */
     public GUIMenu() {
         dispose();
-        setUndecorated(true);
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        initComponents();
+        this.setUndecorated(true);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.initComponents();
     }
 
     /**
@@ -50,7 +54,7 @@ public class GUIMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jbControle1 = new javax.swing.JButton();
-        jbControle2 = new javax.swing.JButton();
+        jbControle = new javax.swing.JButton();
         jbControle3 = new javax.swing.JButton();
         jbControle4 = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
@@ -76,17 +80,22 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle1.setRolloverEnabled(false);
         jbControle1.setVerifyInputWhenFocusTarget(false);
 
-        jbControle2.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle2.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle2.setBorderPainted(false);
-        jbControle2.setFocusCycleRoot(true);
-        jbControle2.setFocusable(false);
-        jbControle2.setOpaque(false);
-        jbControle2.setRequestFocusEnabled(false);
-        jbControle2.setRolloverEnabled(false);
-        jbControle2.setVerifyInputWhenFocusTarget(false);
+        jbControle.setBackground(new java.awt.Color(255, 255, 255));
+        jbControle.setForeground(new java.awt.Color(204, 204, 204));
+        jbControle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbControle.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbControle.setBorderPainted(false);
+        jbControle.setFocusCycleRoot(true);
+        jbControle.setFocusable(false);
+        jbControle.setOpaque(false);
+        jbControle.setRequestFocusEnabled(false);
+        jbControle.setRolloverEnabled(false);
+        jbControle.setVerifyInputWhenFocusTarget(false);
+        jbControle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbControleActionPerformed(evt);
+            }
+        });
 
         jbControle3.setBackground(new java.awt.Color(255, 255, 255));
         jbControle3.setForeground(new java.awt.Color(204, 204, 204));
@@ -165,7 +174,7 @@ public class GUIMenu extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbControle2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbControle, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -192,7 +201,7 @@ public class GUIMenu extends javax.swing.JFrame {
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,6 +231,15 @@ public class GUIMenu extends javax.swing.JFrame {
        dispose();
        System.exit(0);
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void jbControleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControleActionPerformed
+//        if(this.guiEquipamento != null){
+//            JOptionPane.showMessageDialog(null,"Já se encontra um processo em execução", "Erro", JOptionPane.ERROR_MESSAGE);
+//        }
+            this.guiEquipamento = new GUIEquipamento();
+            this.guiEquipamento.setVisible(true);
+        
+    }//GEN-LAST:event_jbControleActionPerformed
 
     	
     /**
@@ -264,8 +282,8 @@ public class GUIMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton jbControle;
     private javax.swing.JButton jbControle1;
-    private javax.swing.JButton jbControle2;
     private javax.swing.JButton jbControle3;
     private javax.swing.JButton jbControle4;
     private javax.swing.JButton jbControle6;
