@@ -13,13 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import br.smagp.controle.estoque_ti.gui.GUIEquipamento;
 /**
  *
  * @author AllexOnRails
  */
 public class GUIMenu extends javax.swing.JFrame {
 
-    private GUIEquipamento guiEquipamento = null;
+    GUIEquipamento guiEquipamento = null;
     
     
     private JButton createImageButton(String texto, String uriAbsoluta) {
@@ -236,8 +237,8 @@ public class GUIMenu extends javax.swing.JFrame {
 //        if(this.guiEquipamento != null){
 //            JOptionPane.showMessageDialog(null,"Já se encontra um processo em execução", "Erro", JOptionPane.ERROR_MESSAGE);
 //        }
-            this.guiEquipamento = new GUIEquipamento();
-            this.guiEquipamento.setVisible(true);
+          this.guiEquipamento = new GUIEquipamento();
+          this.guiEquipamento.setVisible(true);
         
     }//GEN-LAST:event_jbControleActionPerformed
 

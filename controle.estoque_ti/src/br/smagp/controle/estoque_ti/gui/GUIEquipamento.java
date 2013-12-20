@@ -6,9 +6,16 @@
 
 package br.smagp.controle.estoque_ti.gui;
 
+import br.smagp.controle.estoque_ti.db.ConnectionFactory;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+
+import br.smagp.controle.estoque_ti.gui.GUIMenu;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +23,7 @@ import javax.swing.JFrame;
  */
 public class GUIEquipamento extends javax.swing.JFrame {
 
+    GUIMenu menu;
     /**
      * Creates new form GUIEquipamento
      */
@@ -24,14 +32,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocation(250, 100);
         this.setLocationRelativeTo(null);
-        
+        this.PreencherJTipoEquipamento();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    public void onExit() {
-        System.err.println("Exit");
-        System.exit(0);
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,27 +49,29 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
+        btBuscar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jTextField2 = new javax.swing.JTextField();
+        textEquipamento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        textNumeroSerie = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        textMarca = new javax.swing.JTextField();
+        textPatrimonio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btNovo = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTipoEquipamento = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -87,24 +94,24 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jTextField1.setSelectionColor(new java.awt.Color(204, 204, 204));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 24, 374, 34));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-buscar.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-buscar.png"))); // NOI18N
+        btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 24, -1, 34));
+        jPanel1.add(btBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 24, -1, 34));
 
-        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
-        jbCancelar.setText("Cancelar");
-        jbCancelar.setEnabled(false);
-        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
+        btCancelar.setText("Cancelar");
+        btCancelar.setEnabled(false);
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCancelarActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, 34));
+        jPanel1.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, -1, 34));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -160,76 +167,88 @@ public class GUIEquipamento extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 702, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 504, 722, 10));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 205, 27));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 722, 10));
+        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, 205, 27));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
-        jButton3.setText("Excluir");
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
+        btExcluir.setText("Excluir");
+        btExcluir.setEnabled(false);
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btExcluirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 100, 40));
+        jPanel1.add(btExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 100, 40));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
-        jButton4.setText("Editar");
-        jButton4.setEnabled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
+        btEditar.setText("Editar");
+        btEditar.setEnabled(false);
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, 40));
+        jPanel1.add(btEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Equipamento: ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 700, 10));
 
-        jTextField2.setEnabled(false);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 370, 30));
+        textEquipamento.setEnabled(false);
+        jPanel1.add(textEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 370, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Número de série: ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
-        jTextField3.setEnabled(false);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 370, 30));
+        textNumeroSerie.setEnabled(false);
+        jPanel1.add(textNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 370, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Marca: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
-        jTextField4.setEnabled(false);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 370, 30));
+        textMarca.setEnabled(false);
+        jPanel1.add(textMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 370, 30));
 
-        jTextField5.setEnabled(false);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 370, 30));
+        textPatrimonio.setEnabled(false);
+        jPanel1.add(textPatrimonio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 370, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Patrimônio: ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
-        jButton5.setText("Novo");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
+        btNovo.setText("Novo");
+        btNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btNovoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 24, -1, 34));
+        jPanel1.add(btNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 24, -1, 34));
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
-        jButton6.setText("Salvar");
-        jButton6.setEnabled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.setEnabled(false);
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btSalvarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, 34));
+        jPanel1.add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, -1, 34));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Tipo: ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
+
+        jTipoEquipamento.setEnabled(false);
+        jTipoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTipoEquipamentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTipoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 370, 30));
 
         jMenu1.setText("Arquivo");
 
@@ -275,7 +294,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
         );
 
         pack();
@@ -289,29 +308,76 @@ public class GUIEquipamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        textNumeroSerie.setEnabled(false);
+        textEquipamento.setEnabled(false);
+        textMarca.setEnabled(false);
+        textPatrimonio.setEnabled(false);
+        jTipoEquipamento.setEnabled(false);
+        btSalvar.setEnabled(false);
+        btCancelar.setEnabled(false);
+        btNovo.setEnabled(true);
+    }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbCancelarActionPerformed
+    }//GEN-LAST:event_btCancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btExcluirActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btEditarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        /**
+         * Aqui se encontra o start do formulário de cadastro
+         */
+        textNumeroSerie.setEnabled(true);
+        textEquipamento.setEnabled(true);
+        textMarca.setEnabled(true);
+        textPatrimonio.setEnabled(true);
+        jTipoEquipamento.setEnabled(true);
+        btSalvar.setEnabled(true);
+        btCancelar.setEnabled(true);
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        textNumeroSerie.setText("");
+        textEquipamento.setText("");
+        textMarca.setText("_TM");
+        textPatrimonio.setText("");
+        
+        btNovo.setEnabled(false);
+    }//GEN-LAST:event_btNovoActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    
+    private void PreencherJTipoEquipamento(){
+        try {
+            Connection conecta= ConnectionFactory.getInstance().getConnection();
+            String sql= "SELECT tipo FROM tipo_equipamentos;";
+            PreparedStatement SQL = conecta.prepareStatement(sql);
+            
+            ResultSet result_set = SQL.executeQuery();
+            
+            while(result_set.next()){
+                String tipo= result_set.getString("tipo");
+                jTipoEquipamento.addItem(tipo);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: "+e, "Erro" ,JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+    
+    private void jTipoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTipoEquipamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTipoEquipamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,17 +415,19 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btEditar;
+    private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btNovo;
+    private javax.swing.JButton btSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -375,10 +443,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox jTipoEquipamento;
+    private javax.swing.JTextField textEquipamento;
+    private javax.swing.JTextField textMarca;
+    private javax.swing.JTextField textNumeroSerie;
+    private javax.swing.JTextField textPatrimonio;
     // End of variables declaration//GEN-END:variables
 }
