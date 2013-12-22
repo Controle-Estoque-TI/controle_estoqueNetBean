@@ -249,11 +249,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btApagar.setText("Apagar");
         btApagar.setEnabled(false);
-        btApagar.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                btApagarStateChanged(evt);
-            }
-        });
         btApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btApagarActionPerformed(evt);
@@ -311,25 +306,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         String [] Colunas= new String[]{
           "ID", "Número de Série", "Nome", "Tipo", "Marca", "Patrimônio"
         };
-
-//        ConnectionFactory con= new ConnectionFactory();
-//        try {
-//            con.conexao();
-//            con.executaSQL("SELECT id, n_serie, nome, tipo, marca, patrimonio FROM equipamentos WHERE n_serie='"+numero_de_serie_do_equipamento+"';");
-//            con.result_set.first();
-//            do {                
-//                dados.add(new Object[]{
-//                    con.result_set.getInt("id"), 
-//                    con.result_set.getString("n_serie"), 
-//                    con.result_set.getString("nome"), 
-//                    con.result_set.getString("tipo"), 
-//                    con.result_set.getString("marca"), 
-//                    con.result_set.getString("patrimonio")
-//                });
-//            } while (con.result_set.next());
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao preencher o Array List.", "Erro", JOptionPane.ERROR_MESSAGE);
-//        }
         EquipamentoDAO data= new EquipamentoDAO();
         dados = data.selectByNumeroDeSerie(numero_de_serie_do_equipamento);
         ModeloTabela modelo= new ModeloTabela(dados, Colunas);
@@ -376,6 +352,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jTipoEquipamento.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
+        btApagar.setEnabled(false);
         btNovo.setEnabled(true);
         btBuscar.setEnabled(true);
         
@@ -399,17 +376,18 @@ public class GUIEquipamento extends javax.swing.JFrame {
         textMarca.setEnabled(true);
         textPatrimonio.setEnabled(true);
         jTipoEquipamento.setEnabled(true);
-        btSalvar.setEnabled(true);
-        btApagar.setEnabled(true);
-        btCancelar.setEnabled(true);
-
+        
         textNumeroSerie.setText("");
         textEquipamento.setText("");
         textMarca.setText("_TM");
         textPatrimonio.setText("");
         
         btNovo.setEnabled(false);
+        btSalvar.setEnabled(true);
+        btApagar.setEnabled(true);
+        btCancelar.setEnabled(true);
         btBuscar.setEnabled(false);
+        
         textBuscar.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
 
@@ -488,10 +466,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         textMarca.setText("_TM");
         textPatrimonio.setText("");
     }//GEN-LAST:event_btApagarActionPerformed
-
-    private void btApagarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btApagarStateChanged
-        this.VerificaCampoDeTexto();
-    }//GEN-LAST:event_btApagarStateChanged
 
     /**
      * @param args the command line arguments
