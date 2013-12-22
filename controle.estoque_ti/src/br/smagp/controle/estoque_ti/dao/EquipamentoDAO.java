@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 
 import br.smagp.controle.estoque_ti.db.*;
 import br.smagp.controle.estoque_ti.model.Equipamento;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -45,21 +47,22 @@ public class EquipamentoDAO extends SQLSyntax{
 
     @Override
     public int insert(Object object) throws SQLException {
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            this.equipamento = (Equipamento) object;
-            SQL = conecta.prepareStatement("INSERT INTO equipamentos"+"(n_serie, tipo, marca, patrimonio)"+"VALUES (?, ?, ?, ?);");
+        Connection conecta= ConnectionFactory.getInstance().getConnection();
+        this.equipamento = (Equipamento) object;
+        SQL = conecta.prepareStatement("INSERT INTO equipamentos"+"(n_serie, nome ,tipo, marca, patrimonio)"+"VALUES (?, ?, ?, ?, ?);");
 
-            SQL.setString(1, this.equipamento.getNumero_Serie_Equipamento());
-            SQL.setString(2, this.equipamento.getTipo_Equipamento());
-            SQL.setString(3, this.equipamento.getMarca_Equipamento());
-            SQL.setString(4, this.equipamento.getPatrimonio());
+        SQL.setString(1, this.equipamento.getN_serie_equipamento());
+        SQL.setString(2, this.equipamento.getEquipamento());
+        SQL.setString(3, this.equipamento.getTipo_equipamento());
+        SQL.setString(4, this.equipamento.getMarca_equipamento());
+        SQL.setString(5, this.equipamento.getPatrimonio());
 
-            int updated = SQL.executeUpdate();
-            System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com um novo equipamento.");
-            SQL.close();
-            JOptionPane.showMessageDialog(null, "Equipamento registrado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+        int updated = SQL.executeUpdate();
+        System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com um novo equipamento.");
+        SQL.close();
+        JOptionPane.showMessageDialog(null, "Equipamento registrado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
 
-            return updated;
+        return updated;
     }
 
     /**
@@ -74,33 +77,33 @@ public class EquipamentoDAO extends SQLSyntax{
      */
 
     public Equipamento getEquipamento(String n_serie) throws SQLException{
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            String sql = "select id, n_serie, tipo, marcca, patrimonio from equipamentos where n_serie=? order by id";
-            PreparedStatement selectStatement = conecta.prepareStatement(sql);
-            selectStatement.setString(1, n_serie);
+        Connection conecta= ConnectionFactory.getInstance().getConnection();
+        String sql = "select id, n_serie, nome,tipo, marcca, patrimonio from equipamentos where n_serie=? order by n_serie";
+        PreparedStatement selectStatement = conecta.prepareStatement(sql);
+        selectStatement.setString(1, n_serie);
 
-            ResultSet resultado = selectStatement.executeQuery();
+        ResultSet resultado = selectStatement.executeQuery();
 
-            this.equipamento = null;
+        this.equipamento = null;
 
-            if (resultado.next()) {
-                    int _id_ = resultado.getInt("id");
-                    String _n_serie_ = resultado.getString("n_serie");
-                    String _tipo_ = resultado.getString("tipo");
-                    String _marca_ = resultado.getString("marca");
-                    String _patrimonio_ = resultado.getString("patrimonio");
+        if (resultado.next()) {
+                int _id_ = resultado.getInt("id");
+                String _n_serie_ = resultado.getString("n_serie");
+                String _tipo_ = resultado.getString("tipo");
+                String _marca_ = resultado.getString("marca");
+                String _patrimonio_ = resultado.getString("patrimonio");
 
-                    this.equipamento = new Equipamento();
-                    this.equipamento.setNumero_Serie_Equipamento(_n_serie_);
-                    this.equipamento.setTipo_Equipamento(_tipo_);
-                    this.equipamento.setMarca_Equipamento(_marca_);
-                    this.equipamento.setPatrimonio(_patrimonio_);
-            }
+                this.equipamento = new Equipamento();
+                this.equipamento.setN_serie_equipamento(_n_serie_);
+                this.equipamento.setTipo_equipamento(_tipo_);
+                this.equipamento.setMarca_equipamento(_marca_);
+                this.equipamento.setPatrimonio(_patrimonio_);
+        }
 
-            resultado.close();
-            selectStatement.close();
+        resultado.close();
+        selectStatement.close();
 
-            return this.equipamento;	
+        return this.equipamento;	
     }
 
     /*
@@ -110,71 +113,20 @@ public class EquipamentoDAO extends SQLSyntax{
 
     @Override
     public void update(Object object) throws SQLException {
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            this.equipamento = (Equipamento) object;
-            String queryString = "UPDATE equipamentos SET n_serie=?, tipo=?, marca=? patrimonio=? WHERE id=?";
-            SQL = conecta.prepareStatement(queryString);
-    SQL.setString(1, this.equipamento.getNumero_Serie_Equipamento());
-    SQL.setString(2, this.equipamento.getTipo_Equipamento());
-    SQL.setString(3, this.equipamento.getMarca_Equipamento());
-    SQL.setString(4, this.equipamento.getPatrimonio());
-    SQL.setInt(5, 	 this.equipamento.getId());
-    System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.equipamento);
-    JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-    SQL.executeUpdate();
-    SQL.close();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#select()
-     */
-
-    @Override
-    public Vector select() throws SQLException{
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            Vector lista = new Vector();
-            try {
-                    SQL = conecta.prepareStatement("SELECT * FROM equipamentos t ORDER BY t.n_serie;");
-                    result_set = SQL.executeQuery();
-                    while (result_set.next()) {
-                            Vector listas = new Vector();
-                            listas.add(result_set.getString("id"));
-                            listas.add(result_set.getString("n_serie"));
-                            listas.add(result_set.getString("tipo"));
-                            listas.add(result_set.getString("marca"));
-                            listas.add(result_set.getString("patrimonio"));				
-                            lista.add(listas);
-                    }
-                    return lista;
-            } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Foi encontrado um erro na busca");
-                    e.printStackTrace();
-            }
-            return lista;
-    }
-
-    public Vector findByNumeroDeSerie(String n_serie) throws SQLException{
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            Vector lista = new Vector();
-            try {
-                    SQL = conecta.prepareStatement("SELECT * FROM equipamentos WHERE n_serie = '"+n_serie+"'");
-                    result_set = SQL.executeQuery();
-                    while (result_set.next()) {
-                            Vector listas = new Vector();
-                            listas.add(result_set.getString("id"));
-                            listas.add(result_set.getString("n_serie"));
-                            listas.add(result_set.getString("tipo"));
-                            listas.add(result_set.getString("marca"));
-                            listas.add(result_set.getString("patrimonio"));				
-                            lista.add(listas);
-                    }
-                    return lista;
-            } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Foi encontrado um erro na busca");
-                    e.printStackTrace();
-            }
-            return lista;
+        Connection conecta= ConnectionFactory.getInstance().getConnection();
+        this.equipamento = (Equipamento) object;
+        String queryString = "UPDATE equipamentos SET n_serie=?, nome=?, tipo=?, marca=? patrimonio=? WHERE id=?";
+        SQL = conecta.prepareStatement(queryString);
+        SQL.setString(1, this.equipamento.getN_serie_equipamento());
+        SQL.setString(2, this.equipamento.getEquipamento());
+        SQL.setString(3, this.equipamento.getTipo_equipamento());
+        SQL.setString(4, this.equipamento.getMarca_equipamento());
+        SQL.setString(5, this.equipamento.getPatrimonio());
+        SQL.setInt(6, 	 this.equipamento.getId());
+        System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.equipamento);
+        JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+        SQL.executeUpdate();
+        SQL.close();
     }
 
     /*
@@ -196,31 +148,28 @@ public class EquipamentoDAO extends SQLSyntax{
                     e.printStackTrace();
             }
     }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-
-            Equipamento equipamento= new Equipamento();
-            equipamento.setNumero_Serie_Equipamento("{CCaABdDb#001}");
-            equipamento.setTipo_Equipamento("HP - 4015");
-            equipamento.setMarca_Equipamento("HP");
-            equipamento.setPatrimonio("2013XXDdzw");
-
-            System.out.println("Numero de Serie: "+equipamento.getNumero_Serie_Equipamento()+"\n"
-                                                +"Tipo: "+equipamento.getTipo_Equipamento()+"\n"
-                                                +"Marca: "+equipamento.getMarca_Equipamento()
-            );
-
-
-            EquipamentoDAO dao = new DAOFactory().getEquipamento(); //Fazer isto na hora de instanciar na interface
-            try {
-                    dao.insert(equipamento);
-                    System.out.println(dao.findByNumeroDeSerie(equipamento.getNumero_Serie_Equipamento()));
-            } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-            }
+    
+    public ArrayList selectByNumeroDeSerie(String numero_de_serie_do_equipamento){
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con= new ConnectionFactory();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT id, n_serie, nome, tipo, marca, patrimonio FROM equipamentos WHERE n_serie='"+numero_de_serie_do_equipamento+"';");
+            con.result_set.first();
+            do {                
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("n_serie"), 
+                    con.result_set.getString("nome"), 
+                    con.result_set.getString("tipo"), 
+                    con.result_set.getString("marca"), 
+                    con.result_set.getString("patrimonio")
+                });
+            } while (con.result_set.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher o Array List.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return dados;
+        
     }
 }

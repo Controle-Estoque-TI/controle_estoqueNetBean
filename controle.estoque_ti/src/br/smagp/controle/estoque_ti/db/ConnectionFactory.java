@@ -26,6 +26,8 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 import br.smagp.controle.estoque_ti.interfaces.Conexao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,12 +40,15 @@ public class ConnectionFactory implements Conexao{
      **/
 	
     private static ConnectionFactory instance= new ConnectionFactory();
-    private static Connection conection;
+    
 
-    private static Statement statement;
-    private static ResultSet result_set;
-    private PreparedStatement SQL;
+    public Statement statement;
+    public ResultSet result_set;
+    public PreparedStatement SQL;
+    public static Connection conection;
 
+    private String driver = "com.mysql.jdbc.Driver";
+    private String url    = "jdbc:mysql://localhost:3306/";
     protected String database;
     protected String user;
     protected String password;
@@ -71,20 +76,31 @@ public class ConnectionFactory implements Conexao{
     @Override
     public void conexao() {
         try {
+            System.setProperty("jdbc.Drivers", driver);
             this.status= true;
             if(this.status){
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    this.conection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+this.database, this.user,this.password);
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                this.conection = DriverManager.getConnection(this.url+this.database, this.user,this.password);
             }	
         } catch (InstantiationException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(null, "Não é possível carregar o driver de conexão.", "Mysql error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não é possível carregar o driver de conexão.", "Mysql error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         } 
+    }
+    
+    public void executaSQL(String sql){
+        try {
+            this.statement = conection.createStatement(this.result_set.TYPE_SCROLL_INSENSITIVE, this.result_set.CONCUR_READ_ONLY);
+            this.result_set = this.statement.executeQuery(sql);
+        } catch (SQLException ex) {
+//            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+//            JOptionPane.showMessageDialog(null, "Erro em EXECUTA SQL!", "Executa SQL - ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     /**

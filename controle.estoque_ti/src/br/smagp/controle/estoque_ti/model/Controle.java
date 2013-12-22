@@ -37,7 +37,7 @@ public class Controle {
     }
 
     public void verifica_numero_serie(String serie){
-        if (this.equipamento.getNumero_Serie_Equipamento() == serie){
+        if (this.equipamento.getN_serie_equipamento() == serie){
             System.out.println("O número de série informado Válido");
         }
         else{

@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 /**
@@ -134,7 +135,7 @@ public class ChefiaDAO extends SQLSyntax{
     }
 
     @Override
-    public Vector select() throws SQLException{
+    public List select() throws SQLException{
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         Vector lista = new Vector();
         try {
@@ -155,7 +156,7 @@ public class ChefiaDAO extends SQLSyntax{
     }
 
     @Override
-    public Vector find_by_nome(String nome) throws SQLException{
+    public List find_by_nome(String nome) throws SQLException{
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         Vector lista = new Vector();
         try {
