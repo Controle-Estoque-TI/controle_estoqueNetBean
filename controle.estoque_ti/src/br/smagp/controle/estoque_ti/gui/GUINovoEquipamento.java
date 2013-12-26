@@ -157,6 +157,11 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
         btProximo.setText("Proximo");
         btProximo.setEnabled(false);
+        btProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProximoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("ID:");
@@ -407,18 +412,6 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jtType.setText("ex: memória");
     }//GEN-LAST:event_jMenuSelecionarItemActionPerformed
 
-    private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
-        try {
-            ConnectionFactory conecta= ConnectionFactory.getInstance();
-            conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
-            conecta.result_set.previous();
-            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-            jtType.setText(conecta.result_set.getString("tipo"));
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btAnteriorActionPerformed
-
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
         try {
             ConnectionFactory conecta= ConnectionFactory.getInstance();
@@ -432,8 +425,40 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btPrimeiroActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
-        // TODO add your handling code here:
+        try {
+            ConnectionFactory conecta= ConnectionFactory.getInstance();
+            conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
+            conecta.result_set.last();
+            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
+            jtType.setText(conecta.result_set.getString("tipo"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btUltimoActionPerformed
+
+    private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
+       try {
+            ConnectionFactory conecta= ConnectionFactory.getInstance();
+            result = conecta.result_set.getString("tipo");
+            conecta.result_set.previous();
+            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
+            jtType.setText(conecta.result_set.getString("tipo"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum item encontrado depois de: "+result, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btAnteriorActionPerformed
+
+    private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        try {
+            ConnectionFactory conecta= ConnectionFactory.getInstance();
+            result = conecta.result_set.getString("tipo");
+            conecta.result_set.next();
+            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
+            jtType.setText(conecta.result_set.getString("tipo"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum item encontrado depois de: "+result, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btProximoActionPerformed
 
     /**
      * @param args the command line arguments
