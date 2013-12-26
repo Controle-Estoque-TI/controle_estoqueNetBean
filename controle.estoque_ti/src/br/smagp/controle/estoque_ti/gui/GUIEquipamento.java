@@ -409,10 +409,12 @@ public class GUIEquipamento extends javax.swing.JFrame {
         EquipamentoDAO dao = new DAOFactory().getEquipamento(); //Fazer isto na hora de instanciar na interface
         try {
             dao.insert(equipamento);
-//            System.out.println(dao.findByNumeroDeSerie(equipamento.getN_serie_equipamento()));
-        } catch (SQLException e) {
+            System.out.println(dao.selectByNumeroDeSerie(equipamento.getN_serie_equipamento()));
+            JOptionPane.showMessageDialog(null, "Equipamento registrado.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
         
         /**

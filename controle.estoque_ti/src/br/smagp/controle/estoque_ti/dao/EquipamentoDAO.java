@@ -151,7 +151,7 @@ public class EquipamentoDAO extends SQLSyntax{
     
     public ArrayList selectByNumeroDeSerie(String numero_de_serie_do_equipamento){
         ArrayList dados = new ArrayList();
-        ConnectionFactory con= new ConnectionFactory();
+        ConnectionFactory con= ConnectionFactory.getInstance();
         try {
             con.conexao();
             con.executaSQL("SELECT id, n_serie, nome, tipo, marca, patrimonio FROM equipamentos WHERE n_serie='"+numero_de_serie_do_equipamento+"';");

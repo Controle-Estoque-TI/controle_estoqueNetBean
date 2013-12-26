@@ -66,19 +66,37 @@ public class TipoEquipamentoDAO extends SQLSyntax {
      */
 
     @Override
-    public void delete(int cod_object) throws SQLException {
+    public void delete(int id) throws SQLException {
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         try {
-                SQL = conecta.prepareStatement("DELETE FROM tipo_equipamentos WHERE id = " + cod_object);
-                SQL.executeUpdate();
+                SQL = conecta.prepareStatement("DELETE FROM tipo_equipamentos WHERE tipo = ?");
+                SQL.setInt(1, id);
+                SQL.execute();
                 SQL.close();
-                System.out.println("Nº: "+cod_object+" removido!");
-                JOptionPane.showMessageDialog(null, "Nº: "+cod_object+" removido da tabela!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Nº: "+id+" removido!");
+                JOptionPane.showMessageDialog(null, "Nº: "+id+" removido da tabela!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
                 e.printStackTrace();
         }
     }
+    
+    
+    public void deleteFromType(String type) throws SQLException {
+        Connection conecta= ConnectionFactory.getInstance().getConnection();
+        try {
+                SQL = conecta.prepareStatement("DELETE FROM tipo_equipamentos WHERE tipo=?");
+                SQL.setString(1, type);
+                SQL.execute();
+                SQL.close();
+                System.out.println("Tipo: "+type+" removido!");
+                JOptionPane.showMessageDialog(null, "Nº: "+type+" removido da tabela!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
+                e.printStackTrace();
+        }
+    }
+    
     
     public ArrayList select(){
         ArrayList dados = new ArrayList();
