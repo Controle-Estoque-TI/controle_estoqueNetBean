@@ -30,4 +30,8 @@ public class DAOFactory {
     public static ControleDAO getControleEstoque(){
         return new ControleDAO();	
     }
+
+    public TipoEquipamentoDAO getTipoEquipamento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

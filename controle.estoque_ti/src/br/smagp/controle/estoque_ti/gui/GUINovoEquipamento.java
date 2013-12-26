@@ -6,6 +6,7 @@
 
 package br.smagp.controle.estoque_ti.gui;
 
+import br.smagp.controle.estoque_ti.dao.DAOFactory;
 import br.smagp.controle.estoque_ti.dao.TipoEquipamentoDAO;
 import br.smagp.controle.estoque_ti.model.TipoEquipamento;
 import java.util.ArrayList;
@@ -153,9 +154,9 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
         TipoEquipamento equipamento=new TipoEquipamento();
+        equipamento.setTipo_equipamento(jtType.getText());
         
-        
-        TipoEquipamentoDAO type = new TipoEquipamentoDAO();
+        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento();
     }//GEN-LAST:event_btNovoActionPerformed
 
     /**
