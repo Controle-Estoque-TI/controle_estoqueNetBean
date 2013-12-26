@@ -138,14 +138,14 @@ public class EquipamentoDAO extends SQLSyntax{
     public void delete(int cod_object) throws SQLException {
             Connection conecta= ConnectionFactory.getInstance().getConnection();
             try {
-                    SQL = conecta.prepareStatement("DELETE FROM equipamentos WHERE id = " + cod_object);
-                    SQL.executeUpdate();
-                    SQL.close();
-                    System.out.println("Equipamento: "+cod_object+" removido!");
-                    JOptionPane.showMessageDialog(null, "Equipamento removido!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+                SQL = conecta.prepareStatement("DELETE FROM equipamentos WHERE id = " + cod_object);
+                SQL.executeUpdate();
+                SQL.close();
+                System.out.println("Equipamento: "+cod_object+" removido!");
+                JOptionPane.showMessageDialog(null, "Equipamento removido!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
-                    e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
+                e.printStackTrace();
             }
     }
     

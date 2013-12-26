@@ -90,7 +90,7 @@ public class TipoEquipamentoDAO extends SQLSyntax {
                 SQL.execute();
                 SQL.close();
                 System.out.println("Tipo: "+type+" removido!");
-                JOptionPane.showMessageDialog(null, "Nº: "+type+" removido da tabela!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Item "+type+" Removido. ", "Sucesso", JOptionPane.WARNING_MESSAGE);
         } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
                 e.printStackTrace();

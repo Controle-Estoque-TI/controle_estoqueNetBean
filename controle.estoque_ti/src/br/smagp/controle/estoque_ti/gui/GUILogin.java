@@ -42,11 +42,11 @@ public class GUILogin extends javax.swing.JFrame {
 	
     public void sistema_interno(){
         if(jtNome.getText().equals(this.user) && jtSenha.getText().equals(this.password)){
-                JOptionPane.showMessageDialog(null, "Acesso Permitido", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                new GUIMenu().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Acesso Permitido", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            new GUIMenu().setVisible(true);
         }else{
-                JOptionPane.showMessageDialog(null, "Acesso Negado", "Erro" ,JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Acesso Negado", "Erro" ,JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
