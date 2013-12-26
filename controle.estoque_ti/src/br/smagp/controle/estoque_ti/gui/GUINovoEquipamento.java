@@ -326,13 +326,12 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento();
-        TipoEquipamento tipo=new TipoEquipamento();
+        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
         try {
-            Connection conecta= ConnectionFactory.getInstance().getConnection();
-            SQL = conecta.prepareStatement("SELECT tipo FROM tipo_equipamentos WHERE tipo=?;");
-            SQL.setString(1, jtType.getText());
-            result_set = SQL.executeQuery();
+            Connection conecta= ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
+            SQL = conecta.prepareStatement("SELECT tipo FROM tipo_equipamentos WHERE tipo=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
+            SQL.setString(1, jtType.getText());//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
+            result_set = SQL.executeQuery(); //NESTE MOMENTO ATRIBUIMOS AO RESULT SET A EXECUÇÃO DA QUERY
             
             while( result_set.next() ) { result = result_set.getString("tipo"); } //para cada item retornado pela tabela a variavel result a string correspondente
             
@@ -340,13 +339,17 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                 System.out.println("Erro 404: Impossivel remover\nItem não encontrado.");
                 JOptionPane.showMessageDialog(null, "Impossivel remover\nItem não encontrado. ", "ERRO 404", JOptionPane.ERROR_MESSAGE);
             }else{ 
-                System.out.println("Sucesso: item removido."); //caso a mensagem de erro acima não seja exibida um item da tabela será removido
-                type.deleteFromType(result);
+                System.out.println("Sucesso: item "+result+" removido."); 
+                type.deleteFromType(result);//caso a mensagem de erro acima não seja exibida um item da tabela será removido
             }
             preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
+        
+        /**
+         * As linhas abaixo setam se os determinados campos e botões serão ablitados ou não
+         */
         jtType.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
@@ -359,6 +362,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jMenuNovoItem.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
         jtType.setText("ex: memória");
+        //Fim do método excluir em tipo equipamento
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void jMenuNovoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoItemActionPerformed
