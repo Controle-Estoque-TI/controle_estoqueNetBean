@@ -21,6 +21,7 @@ import br.smagp.controle.estoque_ti.gui.GUIEquipamento;
 public class GUIMenu extends javax.swing.JFrame {
 
     GUIEquipamento guiEquipamento = null;
+    public boolean status;
     
     
     private JButton createImageButton(String texto, String uriAbsoluta) {
@@ -36,12 +37,13 @@ public class GUIMenu extends javax.swing.JFrame {
     /**
      * Creates new form GUIMenu
      */
-    public GUIMenu() {
+    public GUIMenu(boolean status) {
         dispose();
         this.setUndecorated(true);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
+        this.status=status;
     }
 
     /**
@@ -54,32 +56,20 @@ public class GUIMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jbControle1 = new javax.swing.JButton();
         jbControle = new javax.swing.JButton();
-        jbControle3 = new javax.swing.JButton();
-        jbControle4 = new javax.swing.JButton();
+        jbEquipamentos = new javax.swing.JButton();
+        jbTecnicos = new javax.swing.JButton();
+        jbChefias = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jbControle6 = new javax.swing.JButton();
+        jbOrgaos = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jbControle7 = new javax.swing.JButton();
+        jbRelatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jbControle1.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle1.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle1.setBorderPainted(false);
-        jbControle1.setFocusCycleRoot(true);
-        jbControle1.setFocusable(false);
-        jbControle1.setOpaque(false);
-        jbControle1.setRequestFocusEnabled(false);
-        jbControle1.setRolloverEnabled(false);
-        jbControle1.setVerifyInputWhenFocusTarget(false);
 
         jbControle.setBackground(new java.awt.Color(255, 255, 255));
         jbControle.setForeground(new java.awt.Color(204, 204, 204));
@@ -92,35 +82,47 @@ public class GUIMenu extends javax.swing.JFrame {
         jbControle.setRequestFocusEnabled(false);
         jbControle.setRolloverEnabled(false);
         jbControle.setVerifyInputWhenFocusTarget(false);
-        jbControle.addActionListener(new java.awt.event.ActionListener() {
+
+        jbEquipamentos.setBackground(new java.awt.Color(255, 255, 255));
+        jbEquipamentos.setForeground(new java.awt.Color(204, 204, 204));
+        jbEquipamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbEquipamentos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbEquipamentos.setBorderPainted(false);
+        jbEquipamentos.setFocusCycleRoot(true);
+        jbEquipamentos.setFocusable(false);
+        jbEquipamentos.setOpaque(false);
+        jbEquipamentos.setRequestFocusEnabled(false);
+        jbEquipamentos.setRolloverEnabled(false);
+        jbEquipamentos.setVerifyInputWhenFocusTarget(false);
+        jbEquipamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbControleActionPerformed(evt);
+                jbEquipamentosActionPerformed(evt);
             }
         });
 
-        jbControle3.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle3.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle3.setBorderPainted(false);
-        jbControle3.setFocusCycleRoot(true);
-        jbControle3.setFocusable(false);
-        jbControle3.setOpaque(false);
-        jbControle3.setRequestFocusEnabled(false);
-        jbControle3.setRolloverEnabled(false);
-        jbControle3.setVerifyInputWhenFocusTarget(false);
+        jbTecnicos.setBackground(new java.awt.Color(255, 255, 255));
+        jbTecnicos.setForeground(new java.awt.Color(204, 204, 204));
+        jbTecnicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbTecnicos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbTecnicos.setBorderPainted(false);
+        jbTecnicos.setFocusCycleRoot(true);
+        jbTecnicos.setFocusable(false);
+        jbTecnicos.setOpaque(false);
+        jbTecnicos.setRequestFocusEnabled(false);
+        jbTecnicos.setRolloverEnabled(false);
+        jbTecnicos.setVerifyInputWhenFocusTarget(false);
 
-        jbControle4.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle4.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle4.setBorderPainted(false);
-        jbControle4.setFocusCycleRoot(true);
-        jbControle4.setFocusable(false);
-        jbControle4.setOpaque(false);
-        jbControle4.setRequestFocusEnabled(false);
-        jbControle4.setRolloverEnabled(false);
-        jbControle4.setVerifyInputWhenFocusTarget(false);
+        jbChefias.setBackground(new java.awt.Color(255, 255, 255));
+        jbChefias.setForeground(new java.awt.Color(204, 204, 204));
+        jbChefias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbChefias.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbChefias.setBorderPainted(false);
+        jbChefias.setFocusCycleRoot(true);
+        jbChefias.setFocusable(false);
+        jbChefias.setOpaque(false);
+        jbChefias.setRequestFocusEnabled(false);
+        jbChefias.setRolloverEnabled(false);
+        jbChefias.setVerifyInputWhenFocusTarget(false);
 
         btSair.setBackground(new java.awt.Color(255, 255, 255));
         btSair.setForeground(new java.awt.Color(204, 204, 204));
@@ -141,31 +143,31 @@ public class GUIMenu extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/logoSuporteTI2.png"))); // NOI18N
 
-        jbControle6.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle6.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
-        jbControle6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle6.setBorderPainted(false);
-        jbControle6.setFocusCycleRoot(true);
-        jbControle6.setFocusable(false);
-        jbControle6.setOpaque(false);
-        jbControle6.setRequestFocusEnabled(false);
-        jbControle6.setRolloverEnabled(false);
-        jbControle6.setVerifyInputWhenFocusTarget(false);
+        jbOrgaos.setBackground(new java.awt.Color(255, 255, 255));
+        jbOrgaos.setForeground(new java.awt.Color(204, 204, 204));
+        jbOrgaos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-plano.png"))); // NOI18N
+        jbOrgaos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbOrgaos.setBorderPainted(false);
+        jbOrgaos.setFocusCycleRoot(true);
+        jbOrgaos.setFocusable(false);
+        jbOrgaos.setOpaque(false);
+        jbOrgaos.setRequestFocusEnabled(false);
+        jbOrgaos.setRolloverEnabled(false);
+        jbOrgaos.setVerifyInputWhenFocusTarget(false);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jbControle7.setBackground(new java.awt.Color(255, 255, 255));
-        jbControle7.setForeground(new java.awt.Color(204, 204, 204));
-        jbControle7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-relatorio.png"))); // NOI18N
-        jbControle7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jbControle7.setBorderPainted(false);
-        jbControle7.setFocusCycleRoot(true);
-        jbControle7.setFocusable(false);
-        jbControle7.setOpaque(false);
-        jbControle7.setRequestFocusEnabled(false);
-        jbControle7.setRolloverEnabled(false);
-        jbControle7.setVerifyInputWhenFocusTarget(false);
+        jbRelatorio.setBackground(new java.awt.Color(255, 255, 255));
+        jbRelatorio.setForeground(new java.awt.Color(204, 204, 204));
+        jbRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-relatorio.png"))); // NOI18N
+        jbRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbRelatorio.setBorderPainted(false);
+        jbRelatorio.setFocusCycleRoot(true);
+        jbRelatorio.setFocusable(false);
+        jbRelatorio.setOpaque(false);
+        jbRelatorio.setRequestFocusEnabled(false);
+        jbRelatorio.setRolloverEnabled(false);
+        jbRelatorio.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,19 +175,19 @@ public class GUIMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jbControle, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbControle4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbTecnicos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbChefias, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jbControle6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbOrgaos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(jbControle7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(209, 209, 209))
@@ -200,12 +202,12 @@ public class GUIMenu extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbChefias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbTecnicos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControle7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbOrgaos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -233,14 +235,14 @@ public class GUIMenu extends javax.swing.JFrame {
        System.exit(0);
     }//GEN-LAST:event_btSairActionPerformed
 
-    private void jbControleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbControleActionPerformed
-//        if(this.guiEquipamento != null){
-//            JOptionPane.showMessageDialog(null,"Já se encontra um processo em execução", "Erro", JOptionPane.ERROR_MESSAGE);
-//        }
-          this.guiEquipamento = new GUIEquipamento();
-          this.guiEquipamento.setVisible(true);
-        
-    }//GEN-LAST:event_jbControleActionPerformed
+    private void jbEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEquipamentosActionPerformed
+        ViewStatus viewport= new ViewStatus();
+        viewport.setSTATUS(true);
+        this.status = viewport.getSTATUS();
+        this.guiEquipamento = new GUIEquipamento(this.status);
+        this.guiEquipamento.setVisible(true);
+        viewport.verificaStatus();
+    }//GEN-LAST:event_jbEquipamentosActionPerformed
 
     	
     /**
@@ -272,8 +274,9 @@ public class GUIMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            boolean status = false;
             public void run() {
-                new GUIMenu().setVisible(true);
+                new GUIMenu(status).setVisible(true);
             }
         });
     }
@@ -283,11 +286,11 @@ public class GUIMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton jbChefias;
     private javax.swing.JButton jbControle;
-    private javax.swing.JButton jbControle1;
-    private javax.swing.JButton jbControle3;
-    private javax.swing.JButton jbControle4;
-    private javax.swing.JButton jbControle6;
-    private javax.swing.JButton jbControle7;
+    private javax.swing.JButton jbEquipamentos;
+    private javax.swing.JButton jbOrgaos;
+    private javax.swing.JButton jbRelatorio;
+    private javax.swing.JButton jbTecnicos;
     // End of variables declaration//GEN-END:variables
 }

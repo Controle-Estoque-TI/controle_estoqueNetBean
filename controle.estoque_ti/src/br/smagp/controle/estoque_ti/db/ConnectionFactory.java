@@ -41,7 +41,6 @@ public class ConnectionFactory implements Conexao{
 	
     private static ConnectionFactory instance= new ConnectionFactory();
     
-
     public Statement statement;
     public ResultSet result_set;
     public PreparedStatement SQL;

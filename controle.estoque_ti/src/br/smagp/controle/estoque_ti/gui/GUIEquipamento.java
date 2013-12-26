@@ -39,20 +39,21 @@ import net.proteanit.sql.DbUtils;
 public class GUIEquipamento extends javax.swing.JFrame {
 
 
-    
+    GUIMenu menu_return= null;
+    boolean instance_menu;
     /**
      * Creates new form GUIEquipamento
      */
-    public GUIEquipamento() {
+    public GUIEquipamento( boolean status) {
         this.initComponents();
         this.setResizable(false);
         this.setLocation(250, 100);
         this.setLocationRelativeTo(null);
         this.PreencherJTipoEquipamento();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.instance_menu = status;
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +92,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btApagar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -258,9 +259,14 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-sair.png"))); // NOI18N
-        jMenuItem4.setText("Sair");
-        jMenu1.add(jMenuItem4);
+        jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-sair.png"))); // NOI18N
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
 
         jMenuBar1.add(jMenu1);
 
@@ -411,8 +417,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
         
         /**
          * Logo abaixo todos os campos e botões do formulario
-         * são desabilitados devido a inserção dos dados na
-         * base de dados.
+         * são desabilitados devido a inserção com sucesso dos
+         * dados na base de dados.
          */
         
         textNumeroSerie.setEnabled(false);
@@ -467,6 +473,14 @@ public class GUIEquipamento extends javax.swing.JFrame {
         textPatrimonio.setText("");
     }//GEN-LAST:event_btApagarActionPerformed
 
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        dispose();
+        ViewStatus viewport= new ViewStatus();
+        viewport.setSTATUS(false);
+        this.instance_menu = viewport.getSTATUS();
+        new GUIMenu(this.instance_menu).guiEquipamento.setVisible(false);
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,14 +510,13 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            public boolean status = false;
             public void run() {
-                new GUIEquipamento().setVisible(true);
+                new GUIEquipamento(status).setVisible(true);
             }
         });
     }
-    
-    
-    
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btApagar;
     private javax.swing.JButton btBuscar;
@@ -525,8 +538,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
