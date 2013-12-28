@@ -65,7 +65,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textBuscar = new javax.swing.JTextField();
+        jtBuscar = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -78,12 +78,12 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btEditar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        textEquipamento = new javax.swing.JTextField();
+        jtEquipamento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textNumeroSerie = new javax.swing.JTextField();
+        jtNumeroSerie = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        textMarca = new javax.swing.JTextField();
-        textPatrimonio = new javax.swing.JTextField();
+        jtMarca = new javax.swing.JTextField();
+        jtPatrimonio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btNovo = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
@@ -94,10 +94,9 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuListarTodosOsEquipamentos = new javax.swing.JMenuItem();
+        jMenuNovoItemDeEquipamento = new javax.swing.JMenuItem();
+        jMenuExcluirEquipamento = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,10 +107,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jLabel1.setText("Número de Série:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, -1, -1));
 
-        textBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        textBuscar.setHighlighter(null);
-        textBuscar.setSelectionColor(new java.awt.Color(204, 204, 204));
-        jPanel1.add(textBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 24, 374, 34));
+        jtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtBuscar.setHighlighter(null);
+        jtBuscar.setSelectionColor(new java.awt.Color(204, 204, 204));
+        jPanel1.add(jtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 24, 374, 34));
 
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-buscar.png"))); // NOI18N
         btBuscar.setText("Buscar");
@@ -130,7 +129,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, -1, 34));
+        jPanel1.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 510, -1, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -164,13 +163,13 @@ public class GUIEquipamento extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 702, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 722, 10));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, 205, 27));
+        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 580, 205, 27));
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
         btExcluir.setText("Excluir");
@@ -180,7 +179,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btExcluirActionPerformed(evt);
             }
         });
-        jPanel1.add(btExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 100, 40));
+        jPanel1.add(btExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 90, 40));
 
         btEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btEditar.setText("Editar");
@@ -190,32 +189,32 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 100, 40));
+        jPanel1.add(btEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 80, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Equipamento: ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 700, 10));
 
-        textEquipamento.setEnabled(false);
-        jPanel1.add(textEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 370, 30));
+        jtEquipamento.setEnabled(false);
+        jPanel1.add(jtEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 380, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Número de série: ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
-        textNumeroSerie.setEnabled(false);
-        jPanel1.add(textNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 370, 30));
+        jtNumeroSerie.setEnabled(false);
+        jPanel1.add(jtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 380, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Marca: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
-        textMarca.setEnabled(false);
-        jPanel1.add(textMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 370, 30));
+        jtMarca.setEnabled(false);
+        jPanel1.add(jtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 380, 30));
 
-        textPatrimonio.setEnabled(false);
-        jPanel1.add(textPatrimonio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 370, 30));
+        jtPatrimonio.setEnabled(false);
+        jPanel1.add(jtPatrimonio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 380, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Patrimônio: ");
@@ -238,14 +237,14 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btSalvarActionPerformed(evt);
             }
         });
-        jPanel1.add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, -1, 34));
+        jPanel1.add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Tipo: ");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
 
         jTipoEquipamento.setEnabled(false);
-        jPanel1.add(jTipoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 370, 30));
+        jPanel1.add(jTipoEquipamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 380, 30));
 
         btApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btApagar.setText("Apagar");
@@ -255,7 +254,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btApagarActionPerformed(evt);
             }
         });
-        jPanel1.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, -1, 34));
+        jPanel1.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, -1, 40));
 
         jMenu1.setText("Arquivo");
 
@@ -272,20 +271,22 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone_lapis.png"))); // NOI18N
-        jMenuItem1.setText("Listar Equipamentos");
-        jMenu2.add(jMenuItem1);
+        jMenuListarTodosOsEquipamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone_lapis.png"))); // NOI18N
+        jMenuListarTodosOsEquipamentos.setText("Listar Equipamentos");
+        jMenu2.add(jMenuListarTodosOsEquipamentos);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
-        jMenuItem2.setText("Editar Equipamento");
-        jMenu2.add(jMenuItem2);
+        jMenuNovoItemDeEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
+        jMenuNovoItemDeEquipamento.setText("Novo tipo de equipamento");
+        jMenuNovoItemDeEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuNovoItemDeEquipamentoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuNovoItemDeEquipamento);
 
-        jMenuItem5.setText("Novo tipo de equipamento");
-        jMenu2.add(jMenuItem5);
-
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
-        jMenuItem3.setText("Excluir Equipamento");
-        jMenu2.add(jMenuItem3);
+        jMenuExcluirEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
+        jMenuExcluirEquipamento.setText("Excluir Equipamento");
+        jMenu2.add(jMenuExcluirEquipamento);
 
         jMenuBar1.add(jMenu2);
 
@@ -299,7 +300,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -335,26 +336,26 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }
     
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        textNumeroSerie.setEnabled(false);
-        textEquipamento.setEnabled(false);
-        textMarca.setEnabled(false);
-        textPatrimonio.setEnabled(false);
+        jtNumeroSerie.setEnabled(false);
+        jtEquipamento.setEnabled(false);
+        jtMarca.setEnabled(false);
+        jtPatrimonio.setEnabled(false);
         jTipoEquipamento.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btNovo.setEnabled(true);
         
-        if (textBuscar.getText().isEmpty()) {
+        if (jtBuscar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, digite o número de série que deseja buscar.");
         }
-        else{ preencherTabela(textBuscar.getText()); }    
+        else{ preencherTabela(jtBuscar.getText()); }    
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        textNumeroSerie.setEnabled(false);
-        textEquipamento.setEnabled(false);
-        textMarca.setEnabled(false);
-        textPatrimonio.setEnabled(false);
+        jtNumeroSerie.setEnabled(false);
+        jtEquipamento.setEnabled(false);
+        jtMarca.setEnabled(false);
+        jtPatrimonio.setEnabled(false);
         jTipoEquipamento.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
@@ -362,7 +363,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btNovo.setEnabled(true);
         btBuscar.setEnabled(true);
         
-        textBuscar.setEnabled(true);
+        jtBuscar.setEnabled(true);
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -377,16 +378,16 @@ public class GUIEquipamento extends javax.swing.JFrame {
         /**
          * Aqui se encontra o start do formulário de cadastro
          */
-        textNumeroSerie.setEnabled(true);
-        textEquipamento.setEnabled(true);
-        textMarca.setEnabled(true);
-        textPatrimonio.setEnabled(true);
+        jtNumeroSerie.setEnabled(true);
+        jtEquipamento.setEnabled(true);
+        jtMarca.setEnabled(true);
+        jtPatrimonio.setEnabled(true);
         jTipoEquipamento.setEnabled(true);
         
-        textNumeroSerie.setText("");
-        textEquipamento.setText("");
-        textMarca.setText("_TM");
-        textPatrimonio.setText("");
+        jtNumeroSerie.setText("");
+        jtEquipamento.setText("");
+        jtMarca.setText("_TM");
+        jtPatrimonio.setText("");
         
         btNovo.setEnabled(false);
         btSalvar.setEnabled(true);
@@ -394,17 +395,17 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btCancelar.setEnabled(true);
         btBuscar.setEnabled(false);
         
-        textBuscar.setEnabled(false);
+        jtBuscar.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // Esta Action [PROCEDIMENTO] é responsável por salvar os equipametos na base de dados.
         Equipamento equipamento = new Equipamento();
-        equipamento.setN_serie_equipamento(textNumeroSerie.getText());
-        equipamento.setEquipamento(textEquipamento.getText());
-        equipamento.setMarca_equipamento(textMarca.getText());
+        equipamento.setN_serie_equipamento(jtNumeroSerie.getText());
+        equipamento.setEquipamento(jtEquipamento.getText());
+        equipamento.setMarca_equipamento(jtMarca.getText());
         equipamento.setTipo_equipamento(jTipoEquipamento.getSelectedItem().toString());
-        equipamento.setPatrimonio(textPatrimonio.getText());
+        equipamento.setPatrimonio(jtPatrimonio.getText());
         
         EquipamentoDAO dao = new DAOFactory().getEquipamento(); //Fazer isto na hora de instanciar na interface
         try {
@@ -423,28 +424,28 @@ public class GUIEquipamento extends javax.swing.JFrame {
          * dados na base de dados.
          */
         
-        textNumeroSerie.setEnabled(false);
-        textEquipamento.setEnabled(false);
-        textMarca.setEnabled(false);
-        textPatrimonio.setEnabled(false);
+        jtNumeroSerie.setEnabled(false);
+        jtEquipamento.setEnabled(false);
+        jtMarca.setEnabled(false);
+        jtPatrimonio.setEnabled(false);
         jTipoEquipamento.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
         btNovo.setEnabled(true);
         
-        textNumeroSerie.setText("");
-        textEquipamento.setText("");
-        textMarca.setText("_TM");
-        textPatrimonio.setText("");
+        jtNumeroSerie.setText("");
+        jtEquipamento.setText("");
+        jtMarca.setText("_TM");
+        jtPatrimonio.setText("");
         
         btBuscar.setEnabled(true);
-        textBuscar.setEnabled(true);
+        jtBuscar.setEnabled(true);
     }//GEN-LAST:event_btSalvarActionPerformed
 
     
     private void VerificaCampoDeTexto(){
-        if(textNumeroSerie.getText().length() > 0){
+        if(jtNumeroSerie.getText().length() > 0){
             btApagar.setEnabled(true);
         } else {
             btApagar.setEnabled(false);
@@ -469,10 +470,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }
     
     private void btApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarActionPerformed
-        textNumeroSerie.setText("");
-        textEquipamento.setText("");
-        textMarca.setText("_TM");
-        textPatrimonio.setText("");
+        jtNumeroSerie.setText("");
+        jtEquipamento.setText("");
+        jtMarca.setText("_TM");
+        jtPatrimonio.setText("");
     }//GEN-LAST:event_btApagarActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
@@ -482,6 +483,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
         this.instance_menu = viewport.getSTATUS();
         new GUIMenu(this.instance_menu).guiEquipamento.setVisible(false);
     }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuNovoItemDeEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoItemDeEquipamentoActionPerformed
+        new GUINovoEquipamento().setVisible(true);
+    }//GEN-LAST:event_jMenuNovoItemDeEquipamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -537,10 +542,9 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuExcluirEquipamento;
+    private javax.swing.JMenuItem jMenuListarTodosOsEquipamentos;
+    private javax.swing.JMenuItem jMenuNovoItemDeEquipamento;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -549,11 +553,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox jTipoEquipamento;
+    private javax.swing.JTextField jtBuscar;
+    private javax.swing.JTextField jtEquipamento;
+    private javax.swing.JTextField jtMarca;
+    private javax.swing.JTextField jtNumeroSerie;
+    private javax.swing.JTextField jtPatrimonio;
     private javax.swing.JTable jtableFindEquipamento;
-    private javax.swing.JTextField textBuscar;
-    private javax.swing.JTextField textEquipamento;
-    private javax.swing.JTextField textMarca;
-    private javax.swing.JTextField textNumeroSerie;
-    private javax.swing.JTextField textPatrimonio;
     // End of variables declaration//GEN-END:variables
 }
