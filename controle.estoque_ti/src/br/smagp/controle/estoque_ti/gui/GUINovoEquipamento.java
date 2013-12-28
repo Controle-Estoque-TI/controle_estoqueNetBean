@@ -338,7 +338,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
             equipamento.setTipo_equipamento(jtType.getText().toUpperCase()); //COLETA O CONTEUDO DESCRITO NO CAMPO DE TEXTO E SETA EM SET_TIPO_EQUIPAMENTO
 
             TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INSTANCIA UM NOVO TIPO_EQUIPAMENTO_DAO
-            type.insert(equipamento); //INSERE UM NOVO TIPO DE EQUIPAMENTO NA BASE DE DADOS
+            type.create(equipamento); //INSERE UM NOVO TIPO DE EQUIPAMENTO NA BASE DE DADOS
         } catch (SQLException ex) {
             ex.printStackTrace(); //SE OCORRER ALGUM ERRO A JANELA DESCRITA ABAIXO SERÁ EXIBIDDA
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
@@ -512,8 +512,15 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btProximoActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
-        type.update(jtType.getText().toUpperCase(), Integer.parseInt(jtID.getText()));
+        try {
+            TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
+            TipoEquipamento equipamento=new TipoEquipamento(); //INSTANCIA UM NOVO TIPO_EQUIPAMENTO
+            equipamento.setId(Integer.parseInt(jtID.getText())); // ATRIBUI O VALOR DO CAMPO DE TEXTO ID EM SET ID
+            equipamento.setTipo_equipamento(jtType.getText().toUpperCase()); // ATRIBUI O VALOR DO CAMPO DE TEXTO TIPO EM SET TIPO EQUIPAMENTO
+            type.update(equipamento); // EXECUTA O METODO UPDATE CONTIDO EM TIPO_EQUIPAMENTO_DAO
+        } catch (SQLException ex) {
+            Logger.getLogger(GUINovoEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
 
         /**
