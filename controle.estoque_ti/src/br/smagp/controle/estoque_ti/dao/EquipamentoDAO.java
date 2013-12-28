@@ -49,7 +49,7 @@ public class EquipamentoDAO extends SQLSyntax{
     public int insert(Object object) throws SQLException {
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         this.equipamento = (Equipamento) object;
-        SQL = conecta.prepareStatement("INSERT INTO equipamentos"+"(n_serie, nome ,tipo, marca, patrimonio)"+"VALUES (?, ?, ?, ?, ?);");
+        SQL = conecta.prepareStatement("INSERT INTO equipamentos"+"(n_serie, descricao ,tipo, marca, patrimonio)"+"VALUES (?, ?, ?, ?, ?);");
 
         SQL.setString(1, this.equipamento.getN_serie_equipamento());
         SQL.setString(2, this.equipamento.getEquipamento());
@@ -60,8 +60,6 @@ public class EquipamentoDAO extends SQLSyntax{
         int updated = SQL.executeUpdate();
         System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com um novo equipamento.");
         SQL.close();
-        JOptionPane.showMessageDialog(null, "Equipamento registrado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-
         return updated;
     }
 
@@ -78,7 +76,7 @@ public class EquipamentoDAO extends SQLSyntax{
 
     public Equipamento getEquipamento(String n_serie) throws SQLException{
         Connection conecta= ConnectionFactory.getInstance().getConnection();
-        String sql = "select id, n_serie, nome,tipo, marcca, patrimonio from equipamentos where n_serie=? order by n_serie";
+        String sql = "select id, n_serie, descricao,tipo, marcca, patrimonio from equipamentos where n_serie=? order by n_serie";
         PreparedStatement selectStatement = conecta.prepareStatement(sql);
         selectStatement.setString(1, n_serie);
 
@@ -115,7 +113,7 @@ public class EquipamentoDAO extends SQLSyntax{
     public void update(Object object) throws SQLException {
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         this.equipamento = (Equipamento) object;
-        String queryString = "UPDATE equipamentos SET n_serie=?, nome=?, tipo=?, marca=? patrimonio=? WHERE id=?";
+        String queryString = "UPDATE equipamentos SET n_serie=?, descricao=?, tipo=?, marca=? patrimonio=? WHERE id=?";
         SQL = conecta.prepareStatement(queryString);
         SQL.setString(1, this.equipamento.getN_serie_equipamento());
         SQL.setString(2, this.equipamento.getEquipamento());
@@ -154,22 +152,44 @@ public class EquipamentoDAO extends SQLSyntax{
         ConnectionFactory con= ConnectionFactory.getInstance();
         try {
             con.conexao();
-            con.executaSQL("SELECT id, n_serie, nome, tipo, marca, patrimonio FROM equipamentos WHERE n_serie='"+numero_de_serie_do_equipamento+"';");
+            con.executaSQL("SELECT id, n_serie, descricao, tipo, marca, patrimonio FROM equipamentos WHERE n_serie='"+numero_de_serie_do_equipamento+"';");
             con.result_set.first();
             do {                
                 dados.add(new Object[]{
                     con.result_set.getInt("id"), 
                     con.result_set.getString("n_serie"), 
-                    con.result_set.getString("nome"), 
+                    con.result_set.getString("descricao"), 
                     con.result_set.getString("tipo"), 
                     con.result_set.getString("marca"), 
                     con.result_set.getString("patrimonio")
                 });
             } while (con.result_set.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao preencher o Array List.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nElemento não encontrado.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
-        return dados;
-        
+        return dados; 
+    }
+    
+    public ArrayList select(){
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con= ConnectionFactory.getInstance();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT id, n_serie, descricao, tipo, marca, patrimonio FROM equipamentos;");
+            con.result_set.first();
+            do {                
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("n_serie"), 
+                    con.result_set.getString("descricao"), 
+                    con.result_set.getString("tipo"), 
+                    con.result_set.getString("marca"), 
+                    con.result_set.getString("patrimonio")
+                });
+            } while (con.result_set.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhum equipamento encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        return dados; 
     }
 }
