@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/**
+ * GUI RESPONSAVÉL POR MANTER TODOS OS TIPOS DE EQUIPAMENTOS
+ * ENCONTRADOS NO SETOR DE TI DA SECRETARIA MUNICIPAL E GESTÃO
+ * DE PESSOAS
+ **/
 package br.smagp.controle.estoque_ti.gui;
 
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
@@ -32,12 +31,16 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
      * CRIA UM NOVO FORMULÁRIO GUINovoEquipamento
      */
     
+    //@atributoss necessários para relizar qualquer operação 
+    //com a base de dados MYSQL 
+    //-> statement -result_set - SQL - conecta
     private static Statement statement;
     private static ResultSet result_set;
     private PreparedStatement SQL;
     private String result;
-    
-    
+    ConnectionFactory conecta = ConnectionFactory.getInstance();
+
+    //INICIALIZA OS COMPONENTES PARA CRIAR O FORMULÁRIO
     public GUINovoEquipamento() {
         initComponents();
         this.setResizable(false);
@@ -46,21 +49,28 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         preencherTabela();
     }
-    
-    public void preencherTabela(){
-        ArrayList dados = new ArrayList();
-        String [] Colunas= new String[]{
-          "ID", "Tipo do Equipamento"
+
+   /**
+    * 
+    * @author AllexOnRails
+    * 
+    * Este metodo abaixo montado na mao serve para criar e exibir os dados 
+    * encontrados na tabela correspondente
+    */
+    public void preencherTabela() {
+        ArrayList dados = new ArrayList(); //Cria uma Lista dados do tipo Array
+        String[] Colunas = new String[]{ //Cria e Inicializa um Array do tipo String
+            "ID", "Tipo do Equipamento"
         };
-        TipoEquipamentoDAO data= new TipoEquipamentoDAO();
-        dados = data.select();
-        ModeloTabela modelo= new ModeloTabela(dados, Colunas);
+        TipoEquipamentoDAO data = new TipoEquipamentoDAO(); //instancia um novo tipo de equipamento
+        dados = data.select(); //colecta todos os campos da tabela
+        ModeloTabela modelo = new ModeloTabela(dados, Colunas); // Cria um novo modelo baseado nos parametros passados
         jTableTipoEquipamentos.setModel(modelo);
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120);
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false);
-        jTableTipoEquipamentos.getColumnModel().getColumn(1).setPreferredWidth(444);
+        jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
+        jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
+        jTableTipoEquipamentos.getColumnModel().getColumn(1).setPreferredWidth(494);
         jTableTipoEquipamentos.getColumnModel().getColumn(1).setResizable(false);
-        
+
         jTableTipoEquipamentos.getTableHeader().setReorderingAllowed(false);
         jTableTipoEquipamentos.setAutoResizeMode(jTableTipoEquipamentos.AUTO_RESIZE_OFF);
         jTableTipoEquipamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -146,6 +156,11 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btAlterar.setText("Alterar");
         btAlterar.setEnabled(false);
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         btAnterior.setText("Anterior");
         btAnterior.setEnabled(false);
@@ -199,9 +214,13 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(207, 207, 207)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -217,25 +236,20 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btSalvar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btCancelar)))
-                        .addContainerGap())
+                                .addComponent(btCancelar))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(166, 166, 166))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btPrimeiro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btUltimo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAnterior)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btProximo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btExcluir)
+                        .addContainerGap(123, Short.MAX_VALUE)
+                        .addComponent(btAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btPrimeiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btUltimo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAnterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btProximo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btExcluir)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -244,9 +258,9 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,14 +325,14 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         // ex: impressora, copiadora, nobreak
         // Apenas o tipo para que possam ser acessados na hora de cadastrar novo equipamento
         try {
-            TipoEquipamento equipamento=new TipoEquipamento();//INSTANCIA UM NOVO TIPO DE EQUIPAMENTO
-            equipamento.setTipo_equipamento(jtType.getText()); //COLETA O CONTEUDO DESCRITO NO CAMPO DE TEXTO E SETA EM SET_TIPO_EQUIPAMENTO
-            
+            TipoEquipamento equipamento = new TipoEquipamento();//INSTANCIA UM NOVO TIPO DE EQUIPAMENTO
+            equipamento.setTipo_equipamento(jtType.getText().toUpperCase()); //COLETA O CONTEUDO DESCRITO NO CAMPO DE TEXTO E SETA EM SET_TIPO_EQUIPAMENTO
+
             TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INSTANCIA UM NOVO TIPO_EQUIPAMENTO_DAO
             type.insert(equipamento); //INSERE UM NOVO TIPO DE EQUIPAMENTO NA BASE DE DADOS
         } catch (SQLException ex) {
             ex.printStackTrace(); //SE OCORRER ALGUM ERRO A JANELA DESCRITA ABAIXO SERÁ EXIBIDDA
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
         preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
         jtType.setEnabled(false);
@@ -333,27 +347,30 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
         try {
-            Connection conecta= ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
+            Connection conecta = ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
             SQL = conecta.prepareStatement("SELECT tipo FROM tipo_equipamentos WHERE tipo=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
             SQL.setString(1, jtType.getText());//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
             result_set = SQL.executeQuery(); //NESTE MOMENTO ATRIBUIMOS AO RESULT SET A EXECUÇÃO DA QUERY
-            
-            while( result_set.next() ) { result = result_set.getString("tipo"); } //para cada item retornado pela tabela a variavel result a string correspondente
-            
-            if(!jtType.getText().equals(result)){ // caso o que esta sendo informado no campo de texto não seja compativel com o que se encontra na base de dados a mensagem de erro abaixo será exibida.
+
+            while (result_set.next()) {
+                result = result_set.getString("tipo");
+            } //para cada item retornado pela tabela a variavel result a string correspondente
+
+            if (!jtType.getText().equals(result)) { // caso o que esta sendo informado no campo de texto não seja compativel com o que se encontra na base de dados a mensagem de erro abaixo será exibida.
                 System.out.println("Erro 404: Impossivel remover\nItem não encontrado.");
                 JOptionPane.showMessageDialog(null, "Impossivel remover\nItem não encontrado. ", "ERRO 404", JOptionPane.ERROR_MESSAGE);
-            }else{ 
-                System.out.println("Sucesso: item "+result+" removido."); 
+            } else {
+                System.out.println("Sucesso: item " + result + " removido.");
                 type.deleteFromType(result);//caso a mensagem de erro acima não seja exibida um item da tabela será removido
             }
             preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         /**
-         * As linhas abaixo setam se os determinados campos e botões serão ablitados ou não
+         * As linhas abaixo setam se os determinados campos e botões serão
+         * ablitados ou não
          */
         jtType.setEnabled(false);
         btSalvar.setEnabled(false);
@@ -401,64 +418,99 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     private void jMenuSelecionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSelecionarItemActionPerformed
         jtType.setEnabled(true);
         btCancelar.setEnabled(true);
-        btExcluir.setEnabled(true);
-        btAlterar.setEnabled(true);
+
         jMenuNovoItem.setEnabled(false);
         jMenuSelecionarItem.setEnabled(false);
+
         btPrimeiro.setEnabled(true);
         btUltimo.setEnabled(true);
         btAnterior.setEnabled(true);
         btProximo.setEnabled(true);
+
+        btExcluir.setEnabled(false);
+        btAlterar.setEnabled(false);
+
         jtType.setText("ex: memória");
     }//GEN-LAST:event_jMenuSelecionarItemActionPerformed
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
         try {
-            ConnectionFactory conecta= ConnectionFactory.getInstance();
             conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
             conecta.result_set.first();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btPrimeiroActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
         try {
-            ConnectionFactory conecta= ConnectionFactory.getInstance();
+            conecta = ConnectionFactory.getInstance();
             conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
             conecta.result_set.last();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btUltimoActionPerformed
 
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
-       try {
-            ConnectionFactory conecta= ConnectionFactory.getInstance();
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
+        try {
+            conecta = ConnectionFactory.getInstance();
             result = conecta.result_set.getString("tipo");
             conecta.result_set.previous();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum item encontrado depois de: "+result, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btAnteriorActionPerformed
 
     private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
         try {
-            ConnectionFactory conecta= ConnectionFactory.getInstance();
-            result = conecta.result_set.getString("tipo");
+            conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
             conecta.result_set.next();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum item encontrado depois de: "+result, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btProximoActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
+        type.update(jtType.getText().toUpperCase(), Integer.parseInt(jtID.getText()));
+        preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+        
+        /**
+         * As linhas abaixo setam se os determinados campos e botões serão
+         * ablitados ou não
+         */
+        jtType.setEnabled(false);
+        btSalvar.setEnabled(false);
+        btCancelar.setEnabled(false);
+        btExcluir.setEnabled(false);
+        btAlterar.setEnabled(false);
+        btPrimeiro.setEnabled(false);
+        btUltimo.setEnabled(false);
+        btAnterior.setEnabled(false);
+        btProximo.setEnabled(false);
+        jMenuNovoItem.setEnabled(true);
+        jMenuSelecionarItem.setEnabled(true);
+        jtType.setText("ex: memória");
+        //Fim do método excluir em tipo equipamento
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     /**
      * @param args the command line arguments

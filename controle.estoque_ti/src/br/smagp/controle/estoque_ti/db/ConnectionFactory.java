@@ -120,6 +120,14 @@ public class ConnectionFactory implements Conexao{
        }
    }
 
+   public void shutdown(){
+        try {
+            getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao desconectar.", "Mysql error", JOptionPane.ERROR_MESSAGE);
+        }
+   }
    /**
     * Teste de conexao
     * @param args

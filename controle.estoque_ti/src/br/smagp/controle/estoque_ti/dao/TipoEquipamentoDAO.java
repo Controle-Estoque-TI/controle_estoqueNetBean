@@ -54,7 +54,7 @@ public class TipoEquipamentoDAO extends SQLSyntax {
         
         int updated = SQL.executeUpdate();
         System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com um novo equipamento.");
-        SQL.close();
+        conecta.close();
         JOptionPane.showMessageDialog(null, "Novo tipo de equipamento registrado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
 
         return updated;
@@ -82,18 +82,31 @@ public class TipoEquipamentoDAO extends SQLSyntax {
     }
     
     
+    public void update(String tipo, int id){
+        try {
+            Connection conecta = ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
+            SQL = conecta.prepareStatement("UPDATE tipo_equipamentos SET tipo=? WHERE id=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
+            SQL.setString(1, tipo);//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
+            SQL.setInt(2, id);
+            
+            SQL.execute(); //NESTE MOMENTO EXECUTAMOS A QUERY UPDATE
+            JOptionPane.showMessageDialog(null, "Item "+id+" atualizado com sucesso. ", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public void deleteFromType(String type) throws SQLException {
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         try {
-                SQL = conecta.prepareStatement("DELETE FROM tipo_equipamentos WHERE tipo=?");
-                SQL.setString(1, type);
-                SQL.execute();
-                SQL.close();
-                System.out.println("Tipo: "+type+" removido!");
-                JOptionPane.showMessageDialog(null, "Item "+type+" Removido. ", "Sucesso", JOptionPane.WARNING_MESSAGE);
+            SQL = conecta.prepareStatement("DELETE FROM tipo_equipamentos WHERE tipo=?");
+            SQL.setString(1, type);
+            SQL.execute();
+            SQL.close();
+            JOptionPane.showMessageDialog(null, "Item "+type+" Removido. ", "Sucesso", JOptionPane.WARNING_MESSAGE);
         } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
-                e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
+            e.printStackTrace();
         }
     }
     
@@ -112,7 +125,7 @@ public class TipoEquipamentoDAO extends SQLSyntax {
                 });
             } while (con.result_set.next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao preencher o Array List.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nenhum item encontrado.\nCadastre um novo tipo para preencher a tabela", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
         return dados;  
     }
