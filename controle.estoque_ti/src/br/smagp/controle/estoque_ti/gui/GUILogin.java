@@ -31,14 +31,14 @@ public class GUILogin extends javax.swing.JFrame {
     }
     
     
-    private JButton createImageButton(String texto, String uriAbsoluta) {
-        URL uri = getClass().getResource(uriAbsoluta);
-        JButton button = new JButton(texto, new ImageIcon(uri));
-        button.setVerticalTextPosition(AbstractButton.BOTTOM);
-        button.setHorizontalTextPosition(AbstractButton.CENTER);
-
-        return button;
-    }
+//    private JButton createImageButton(String texto, String uriAbsoluta) {
+//        URL uri = getClass().getResource(uriAbsoluta);
+//        JButton button = new JButton(texto, new ImageIcon(uri));
+//        button.setVerticalTextPosition(AbstractButton.BOTTOM);
+//        button.setHorizontalTextPosition(AbstractButton.CENTER);
+//
+//        return button;
+//    }
 	
     public void sistema_interno(){
         if(jtNome.getText().equals(this.user) && jtSenha.getText().equals(this.password)){

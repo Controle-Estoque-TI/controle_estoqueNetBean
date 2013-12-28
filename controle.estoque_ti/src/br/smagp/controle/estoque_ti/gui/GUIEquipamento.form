@@ -244,10 +244,10 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btSalvar" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btEditar" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btExcluir" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btApagar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btEditar" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btExcluir" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="btCancelar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>

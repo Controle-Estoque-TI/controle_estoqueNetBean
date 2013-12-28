@@ -24,20 +24,20 @@ public class GUIMenu extends javax.swing.JFrame {
     public boolean status;
     
     
-    private JButton createImageButton(String texto, String uriAbsoluta) {
-        URL uri = getClass().getResource(uriAbsoluta);
-        JButton button = new JButton(texto, new ImageIcon(uri));
-        button.setVerticalTextPosition(AbstractButton.BOTTOM);
-        button.setHorizontalTextPosition(AbstractButton.CENTER);
-
-        return button;
-    }
+//    private JButton createImageButton(String texto, String uriAbsoluta) {
+//        URL uri = getClass().getResource(uriAbsoluta);
+//        JButton button = new JButton(texto, new ImageIcon(uri));
+//        button.setVerticalTextPosition(AbstractButton.BOTTOM);
+//        button.setHorizontalTextPosition(AbstractButton.CENTER);
+//
+//        return button;
+//    }
     
     
     /**
      * Creates new form GUIMenu
      */
-    public GUIMenu(boolean status) {
+    public GUIMenu() {
         dispose();
         this.setUndecorated(true);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -239,9 +239,8 @@ public class GUIMenu extends javax.swing.JFrame {
         ViewStatus viewport= new ViewStatus();
         viewport.setSTATUS(true);
         this.status = viewport.getSTATUS();
-        this.guiEquipamento = new GUIEquipamento(this.status);
+        this.guiEquipamento = new GUIEquipamento();
         this.guiEquipamento.setVisible(true);
-        viewport.verificaStatus();
     }//GEN-LAST:event_jbEquipamentosActionPerformed
 
     	
@@ -276,7 +275,7 @@ public class GUIMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             boolean status = false;
             public void run() {
-                new GUIMenu(status).setVisible(true);
+                new GUIMenu().setVisible(true);
             }
         });
     }
