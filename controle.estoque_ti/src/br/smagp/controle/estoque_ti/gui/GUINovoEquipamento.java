@@ -384,6 +384,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
          * ablitados ou não
          */
         jtType.setEnabled(false);
+        
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btExcluir.setEnabled(false);
@@ -392,9 +393,13 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btUltimo.setEnabled(false);
         btAnterior.setEnabled(false);
         btProximo.setEnabled(false);
+        btBuscar.setEnabled(false);
+        
         jMenuNovoItem.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
         jtType.setText("ex: memória");
+        jtID.setText("");
+        
         //Fim do método excluir em tipo equipamento
     }//GEN-LAST:event_btExcluirActionPerformed
 
@@ -527,8 +532,9 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btBuscar.setEnabled(false);
         jMenuNovoItem.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
+        jtID.setText("");
         jtType.setText("ex: memória");
-        //Fim do método excluir em tipo equipamento
+        //Fim do método aletrar em tipo equipamento
     }//GEN-LAST:event_btAlterarActionPerformed
 
     public void preencherTabelaPeloBotaoBuscar(String type) {
@@ -574,6 +580,18 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
+            
+            jtType.setEnabled(true);
+            btSalvar.setEnabled(false);
+            btCancelar.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btAlterar.setEnabled(true);
+            btPrimeiro.setEnabled(true);
+            btUltimo.setEnabled(true);
+            btAnterior.setEnabled(true);
+            btProximo.setEnabled(true);
+            jMenuNovoItem.setEnabled(false);
+            jMenuSelecionarItem.setEnabled(false);
 
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);

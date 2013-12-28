@@ -38,7 +38,14 @@ import net.proteanit.sql.DbUtils;
 public class GUIEquipamento extends javax.swing.JFrame {
 
     GUIMenu menu_return = null;
-    boolean instance_menu;
+
+    //@atributoss necessários para relizar qualquer operação 
+    //com a base de dados MYSQL 
+    //-> statement -result_set - SQL - conecta
+    private static Statement statement;
+    private static ResultSet result_set;
+    private PreparedStatement SQL;
+    private String result;
 
     /**
      * Creates new form GUIEquipamento
@@ -96,7 +103,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuListarTodosOsEquipamentos = new javax.swing.JMenuItem();
         jMenuNovoItemDeEquipamento = new javax.swing.JMenuItem();
-        jMenuExcluirEquipamento = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,6 +169,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
         btExcluir.setText("Excluir");
         btExcluir.setEnabled(false);
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         btEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btEditar.setText("Editar");
@@ -402,10 +413,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuNovoItemDeEquipamento);
 
-        jMenuExcluirEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
-        jMenuExcluirEquipamento.setText("Excluir Equipamento");
-        jMenu2.add(jMenuExcluirEquipamento);
-
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -525,6 +532,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        /**
+         * Abaixo setamos se os determinados componentes estarão abilitados ou
+         * não
+         */
         jtNumeroSerie.setEnabled(false);
         jtEquipamento.setEnabled(false);
         jtMarca.setEnabled(false);
@@ -533,10 +544,19 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
-        btNovo.setEnabled(true);
-        btBuscar.setEnabled(true);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
 
+        btNovo.setEnabled(true);
+
+        jtNumeroSerie.setText("");
+        jtEquipamento.setText("");
+        jtMarca.setText("_TM");
+        jtPatrimonio.setText("");
+
+        btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
+        this.preencherTabela();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
@@ -574,7 +594,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         EquipamentoDAO dao = new DAOFactory().getEquipamento();
         try {
-            dao.insert(equipamento);
+            dao.create(equipamento);
             System.out.println(dao.selectByNumeroDeSerie(equipamento.getN_serie_equipamento()));
             JOptionPane.showMessageDialog(null, equipamento.getEquipamento() + " registrado.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
@@ -596,6 +616,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
+
         btNovo.setEnabled(true);
 
         jtNumeroSerie.setText("");
@@ -603,10 +624,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jtMarca.setText("_TM");
         jtPatrimonio.setText("");
 
-        //btBuscar.setEnabled(true);
+        btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
     }//GEN-LAST:event_btSalvarActionPerformed
-    
+
     private void PreencherJTipoEquipamento() {
         try {
             Connection conecta = ConnectionFactory.getInstance().getConnection();
@@ -640,15 +661,64 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuNovoItemDeEquipamentoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        // TODO add your handling code here:
+        Equipamento equipamentoModel = new Equipamento();
+        EquipamentoDAO equipamento = new DAOFactory().getEquipamento(); //INICIA UMA NOVA INSTANCIA DE EQUIPAMENTO DAO
+
+        /**
+         * Abaixo estamos coletando os dados contidos no formulário estando
+         * estes alterados ou não e ao mesmo tempo estamos jogando estes no
+         * metodo update em EquipamentoDAO
+         */
+        equipamentoModel.setId(Integer.parseInt(jtID.getText()));
+        equipamentoModel.setN_serie_equipamento(jtNumeroSerie.getText());
+        equipamentoModel.setEquipamento(jtEquipamento.getText());
+        equipamentoModel.setTipo_equipamento(jTipoEquipamento.getSelectedItem().toString());
+        equipamentoModel.setMarca_equipamento(jtMarca.getText());
+        equipamentoModel.setPatrimonio(jtPatrimonio.getText());
+
+        try {
+            equipamento.update(equipamentoModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+
+        /**
+         * As linhas abaixo setam se os determinados campos e botões serão
+         * ablitados ou não
+         */
+        jtNumeroSerie.setEnabled(false);
+        jtEquipamento.setEnabled(false);
+        jtMarca.setEnabled(false);
+        jtPatrimonio.setEnabled(false);
+        jTipoEquipamento.setEnabled(false);
+
+        btSalvar.setEnabled(false);
+        btCancelar.setEnabled(false);
+        btApagar.setEnabled(false);
+
+        btNovo.setEnabled(true);
+
+        jtNumeroSerie.setText("");
+        jtEquipamento.setText("");
+        jtMarca.setText("_TM");
+        jtPatrimonio.setText("");
+
+        btBuscar.setEnabled(true);
+        jtBuscarNumeroDeSerie.setEnabled(true);
+
+        //Fim do método alterar em equipamento
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         try {
-            ConnectionFactory conecta = ConnectionFactory.getInstance();
-            conecta.executaSQL("SELECT * FROM equipamentos WHERE n_serie='" + jtBuscarNumeroDeSerie.getText() + "';");
-            conecta.result_set.first();
+            ConnectionFactory conecta = ConnectionFactory.getInstance(); //UMA INSTANCIA DA CONEXAO COM A BASE DE DADOS É CRIADA
+            conecta.executaSQL("SELECT * FROM equipamentos WHERE n_serie='" + jtBuscarNumeroDeSerie.getText() + "';"); // EXECUTAMOS O METODO EXECUTA SQL PASSANDO O SEGUINTE SQL
+            conecta.result_set.first();// COLETAMOS OS DADOS RETORNANDOS PELO SQL
 
+            /**
+             * ATRIBUIMOS
+             */
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtNumeroSerie.setText(conecta.result_set.getString("n_serie"));
             jtEquipamento.setText(conecta.result_set.getString("descricao"));
@@ -678,6 +748,30 @@ public class GUIEquipamento extends javax.swing.JFrame {
             preencherTabelaByNumeroDeSerie(jtBuscarNumeroDeSerie.getText());
         }
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        EquipamentoDAO equipamento = new DAOFactory().getEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
+        try {
+            Connection conecta = ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
+            SQL = conecta.prepareStatement("SELECT * FROM equipamentos WHERE n_serie=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
+            SQL.setString(1, jtBuscarNumeroDeSerie.getText());//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
+            result_set = SQL.executeQuery(); //NESTE MOMENTO ATRIBUIMOS AO RESULT SET A EXECUÇÃO DA QUERY
+
+            while (result_set.next()) {
+                result = result_set.getString("n_serie");
+            }
+
+            equipamento.delete(result);//caso a mensagem de erro acima não seja exibida um item da tabela será removido
+            preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+
+        /**
+         * As linhas abaixo setam se os determinados campos e botões serão
+         * ablitados ou não
+         */
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -738,7 +832,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuExcluirEquipamento;
     private javax.swing.JMenuItem jMenuListarTodosOsEquipamentos;
     private javax.swing.JMenuItem jMenuNovoItemDeEquipamento;
     private javax.swing.JMenuItem jMenuSair;
