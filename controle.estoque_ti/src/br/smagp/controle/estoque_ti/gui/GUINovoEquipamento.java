@@ -101,6 +101,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btCancelar = new javax.swing.JButton();
         btPrimeiro = new javax.swing.JButton();
         btUltimo = new javax.swing.JButton();
+        btBuscar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuNovoItem = new javax.swing.JMenuItem();
@@ -209,6 +210,15 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
             }
         });
 
+        btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-buscar.png"))); // NOI18N
+        btBuscar.setText("Buscar");
+        btBuscar.setEnabled(false);
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,27 +228,26 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jtType))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btCancelar))))
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(123, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtType)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btCancelar))
+                            .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 159, Short.MAX_VALUE)
                         .addComponent(btAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btPrimeiro)
@@ -266,7 +275,8 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                     .addComponent(jtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btSalvar)
-                    .addComponent(btCancelar))
+                    .addComponent(btCancelar)
+                    .addComponent(btBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btExcluir)
@@ -337,6 +347,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
         jtType.setEnabled(false);
         btSalvar.setEnabled(false);
+        btBuscar.setEnabled(false);
         btCancelar.setEnabled(false);
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
@@ -399,6 +410,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         jtType.setEnabled(false);
         btSalvar.setEnabled(false);
+        btBuscar.setEnabled(false);
         btCancelar.setEnabled(false);
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
@@ -427,6 +439,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btAnterior.setEnabled(true);
         btProximo.setEnabled(true);
 
+        btBuscar.setEnabled(true);
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
 
@@ -437,10 +450,12 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
             conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
             conecta.result_set.first();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
+            this.preencherTabela();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
@@ -450,11 +465,12 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            conecta = ConnectionFactory.getInstance();
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
             conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
             conecta.result_set.last();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
+            this.preencherTabela();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
@@ -464,13 +480,14 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            conecta = ConnectionFactory.getInstance();
-            result = conecta.result_set.getString("tipo");
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
             conecta.result_set.previous();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
+            this.preencherTabela();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btAnteriorActionPerformed
 
@@ -478,20 +495,21 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            conecta = ConnectionFactory.getInstance();
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
             //result = conecta.result_set.getString("tipo");
             conecta.result_set.next();
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
+            this.preencherTabela();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Não foi avançar a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btProximoActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
         type.update(jtType.getText().toUpperCase(), Integer.parseInt(jtID.getText()));
-        preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+        this.preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
         
         /**
          * As linhas abaixo setam se os determinados campos e botões serão
@@ -506,11 +524,65 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btUltimo.setEnabled(false);
         btAnterior.setEnabled(false);
         btProximo.setEnabled(false);
+        btBuscar.setEnabled(false);
         jMenuNovoItem.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
         jtType.setText("ex: memória");
         //Fim do método excluir em tipo equipamento
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    
+    public void preencherTabelaPeloBotaoBuscar(String type){
+        ArrayList dados = new ArrayList();
+        String [] Colunas= new String[]{
+          "ID", "Tipo"
+        };
+        TipoEquipamentoDAO data= new TipoEquipamentoDAO();
+        dados = data.selectByType(type);
+        ModeloTabela modelo= new ModeloTabela(dados, Colunas);
+        jTableTipoEquipamentos.setModel(modelo);
+        jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
+        jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
+        jTableTipoEquipamentos.getColumnModel().getColumn(1).setPreferredWidth(494);
+        jTableTipoEquipamentos.getColumnModel().getColumn(1).setResizable(false);
+
+        jTableTipoEquipamentos.getTableHeader().setReorderingAllowed(false);
+        jTableTipoEquipamentos.setAutoResizeMode(jTableTipoEquipamentos.AUTO_RESIZE_OFF);
+        jTableTipoEquipamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        try {
+            ConnectionFactory conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
+            conecta.executaSQL("SELECT id, tipo FROM tipo_equipamentos WHERE tipo='"+jtType.getText()+"';");
+            conecta.result_set.first();
+                    
+            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
+            jtType.setText(conecta.result_set.getString("tipo"));
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (jtType.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, digite o número de série que deseja buscar.");
+        }
+        else{ preencherTabelaPeloBotaoBuscar(jtType.getText()); }
+       
+        jtType.setEnabled(true);
+        btSalvar.setEnabled(false);
+        btCancelar.setEnabled(true);
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
+        btPrimeiro.setEnabled(true);
+        btUltimo.setEnabled(true);
+        btAnterior.setEnabled(true);
+        btProximo.setEnabled(true);
+        jMenuNovoItem.setEnabled(false);
+        jMenuSelecionarItem.setEnabled(false);
+    }//GEN-LAST:event_btBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,6 +622,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btAnterior;
+    private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btPrimeiro;

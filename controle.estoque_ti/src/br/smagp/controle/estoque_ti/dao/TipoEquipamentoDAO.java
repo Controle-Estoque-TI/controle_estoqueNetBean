@@ -111,6 +111,25 @@ public class TipoEquipamentoDAO extends SQLSyntax {
     }
     
     
+    public ArrayList selectByType(String type){
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con= new ConnectionFactory();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT id, tipo FROM tipo_equipamentos WHERE tipo='"+type+"';");
+            con.result_set.first();
+            do {                
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("tipo")
+                });
+            } while (con.result_set.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum item encontrado.\nCadastre um novo tipo para preencher a tabela", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        return dados;
+    }
+    
     public ArrayList select(){
         ArrayList dados = new ArrayList();
         ConnectionFactory con= new ConnectionFactory();
