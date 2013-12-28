@@ -1,8 +1,8 @@
 /**
- * GUI RESPONSAVÉL POR MANTER TODOS OS TIPOS DE EQUIPAMENTOS
- * ENCONTRADOS NO SETOR DE TI DA SECRETARIA MUNICIPAL E GESTÃO
- * DE PESSOAS
- **/
+ * GUI RESPONSAVÉL POR MANTER TODOS OS TIPOS DE EQUIPAMENTOS ENCONTRADOS NO
+ * SETOR DE TI DA SECRETARIA MUNICIPAL E GESTÃO DE PESSOAS
+ *
+ */
 package br.smagp.controle.estoque_ti.gui;
 
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
@@ -30,7 +30,6 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     /**
      * CRIA UM NOVO FORMULÁRIO GUINovoEquipamento
      */
-    
     //@atributoss necessários para relizar qualquer operação 
     //com a base de dados MYSQL 
     //-> statement -result_set - SQL - conecta
@@ -50,13 +49,13 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         preencherTabela();
     }
 
-   /**
-    * 
-    * @author AllexOnRails
-    * 
-    * Este metodo abaixo montado na mao serve para criar e exibir os dados 
-    * encontrados na tabela correspondente
-    */
+    /**
+     *
+     * @author AllexOnRails
+     *
+     * Este metodo abaixo montado na mao serve para criar e exibir os dados
+     * encontrados na tabela correspondente
+     */
     public void preencherTabela() {
         ArrayList dados = new ArrayList(); //Cria uma Lista dados do tipo Array
         String[] Colunas = new String[]{ //Cria e Inicializa um Array do tipo String
@@ -114,7 +113,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastrar Novo tipo");
+        jLabel1.setText("Tipo de Equipamentos");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Tipo:");
@@ -224,10 +223,6 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
@@ -260,6 +255,10 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btExcluir)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(223, 223, 223))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,6 +352,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btAlterar.setEnabled(false);
         jMenuNovoItem.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
+        jtType.setText("Informe aqui o novo tipo.");
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -510,7 +510,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
         type.update(jtType.getText().toUpperCase(), Integer.parseInt(jtID.getText()));
         this.preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
-        
+
         /**
          * As linhas abaixo setam se os determinados campos e botões serão
          * ablitados ou não
@@ -531,15 +531,28 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         //Fim do método excluir em tipo equipamento
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    
-    public void preencherTabelaPeloBotaoBuscar(String type){
+    public void preencherTabelaPeloBotaoBuscar(String type) {
         ArrayList dados = new ArrayList();
-        String [] Colunas= new String[]{
-          "ID", "Tipo"
+        String[] Colunas = new String[]{
+            "ID", "Tipo"
         };
-        TipoEquipamentoDAO data= new TipoEquipamentoDAO();
+        TipoEquipamentoDAO data = new TipoEquipamentoDAO();
         dados = data.selectByType(type);
-        ModeloTabela modelo= new ModeloTabela(dados, Colunas);
+        if (dados.isEmpty()) {
+            jtType.setText("Informe o novo tipo aqui.");
+            jtType.setEnabled(true);
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btExcluir.setEnabled(false);
+            btAlterar.setEnabled(false);
+            btPrimeiro.setEnabled(false);
+            btUltimo.setEnabled(false);
+            btAnterior.setEnabled(false);
+            btProximo.setEnabled(false);
+            jMenuNovoItem.setEnabled(false);
+            jMenuSelecionarItem.setEnabled(false);
+        }
+        ModeloTabela modelo = new ModeloTabela(dados, Colunas);
         jTableTipoEquipamentos.setModel(modelo);
         jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
         jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
@@ -550,38 +563,28 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jTableTipoEquipamentos.setAutoResizeMode(jTableTipoEquipamentos.AUTO_RESIZE_OFF);
         jTableTipoEquipamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         try {
             ConnectionFactory conecta = ConnectionFactory.getInstance();
             //result = conecta.result_set.getString("tipo");
-            conecta.executaSQL("SELECT id, tipo FROM tipo_equipamentos WHERE tipo='"+jtType.getText()+"';");
+            conecta.executaSQL("SELECT id, tipo FROM tipo_equipamentos WHERE tipo='" + jtType.getText() + "';");
             conecta.result_set.first();
-                    
+
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtType.setText(conecta.result_set.getString("tipo"));
-            this.preencherTabela();
+
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         if (jtType.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, digite o número de série que deseja buscar.");
+        } else {
+            preencherTabelaPeloBotaoBuscar(jtType.getText());
         }
-        else{ preencherTabelaPeloBotaoBuscar(jtType.getText()); }
-       
-        jtType.setEnabled(true);
-        btSalvar.setEnabled(false);
-        btCancelar.setEnabled(true);
-        btExcluir.setEnabled(true);
-        btAlterar.setEnabled(true);
-        btPrimeiro.setEnabled(true);
-        btUltimo.setEnabled(true);
-        btAnterior.setEnabled(true);
-        btProximo.setEnabled(true);
-        jMenuNovoItem.setEnabled(false);
-        jMenuSelecionarItem.setEnabled(false);
+
     }//GEN-LAST:event_btBuscarActionPerformed
 
     /**
