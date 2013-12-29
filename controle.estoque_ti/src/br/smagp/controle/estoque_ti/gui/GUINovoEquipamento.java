@@ -386,23 +386,20 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
          * As linhas abaixo setam se os determinados campos e botões serão
          * ablitados ou não
          */
-        jtType.setEnabled(false);
+        jtType.setEnabled(true);
 
         btSalvar.setEnabled(false);
-        btCancelar.setEnabled(false);
-        btExcluir.setEnabled(false);
-        btAlterar.setEnabled(false);
-        btPrimeiro.setEnabled(false);
-        btUltimo.setEnabled(false);
-        btAnterior.setEnabled(false);
-        btProximo.setEnabled(false);
-        btBuscar.setEnabled(false);
+        btCancelar.setEnabled(true);
+        btExcluir.setEnabled(true);
+        btAlterar.setEnabled(true);
+        btPrimeiro.setEnabled(true);
+        btUltimo.setEnabled(true);
+        btAnterior.setEnabled(true);
+        btProximo.setEnabled(true);
+        btBuscar.setEnabled(true);
 
-        jMenuNovoItem.setEnabled(true);
+        jMenuNovoItem.setEnabled(false);
         jMenuSelecionarItem.setEnabled(true);
-        jtType.setText("ex: memória");
-        jtID.setText("");
-
         //Fim do método excluir em tipo equipamento
     }//GEN-LAST:event_btExcluirActionPerformed
 
