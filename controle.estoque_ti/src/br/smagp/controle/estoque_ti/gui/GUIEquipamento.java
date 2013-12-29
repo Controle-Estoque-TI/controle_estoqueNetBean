@@ -38,16 +38,14 @@ import net.proteanit.sql.DbUtils;
  */
 public class GUIEquipamento extends javax.swing.JFrame {
 
-    GUIMenu menu_return = null;
-
-    //atributoss necessários para relizar qualquer operação 
+    //@atributoss necessários para relizar qualquer operação 
+    //com a base de dados MYSQL 
     //-> statement -result_set - SQL - conecta
     private static Statement statement;
     private static ResultSet result_set;
     private PreparedStatement SQL;
     private String result;
-
-    private ConnectionFactory con = ConnectionFactory.getInstance();
+    Connection conecta = ConnectionFactory.getInstance().getConnection();
 
     /**
      * INICIALIZA O FORMULARIO
@@ -876,16 +874,17 @@ public class GUIEquipamento extends javax.swing.JFrame {
         this.PreencherJTipoEquipamento();
     }//GEN-LAST:event_btAtualizarComboBoxActionPerformed
 
+
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            con.executaSQL("SELECT * FROM equipamentos;");
-            if (con.result_set.first()) {
-                jtID.setText(String.valueOf(con.result_set.getInt("id")));
-                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
-                jtEquipamento.setText(con.result_set.getString("descricao"));
-                jtMarca.setText(con.result_set.getString("marca"));
-                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+            result_set = SQL.executeQuery();
+            if (result_set.first()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNumeroSerie.setText(result_set.getString("n_serie"));
+                jtEquipamento.setText(result_set.getString("descricao"));
+                jtMarca.setText(result_set.getString("marca"));
+                jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
             this.preencherTabela();
         } catch (SQLException ex) {
@@ -894,58 +893,50 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btPrimeiroActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
-        
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            con.executaSQL("SELECT * FROM equipamentos;");
-            if (con.result_set.last()) {
-                jtID.setText(String.valueOf(con.result_set.getInt("id")));
-                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
-                jtEquipamento.setText(con.result_set.getString("descricao"));
-                jtMarca.setText(con.result_set.getString("marca"));
-                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+            result_set = SQL.executeQuery();
+            if (result_set.last()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNumeroSerie.setText(result_set.getString("n_serie"));
+                jtEquipamento.setText(result_set.getString("descricao"));
+                jtMarca.setText(result_set.getString("marca"));
+                jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
-            this.preencherTabela();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btUltimoActionPerformed
 
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
-        
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            //result = conecta.result_set.getString("tipo");
-            //con.executaSQL("SELECT * FROM equipamentos;");
-            if (con.result_set.previous()) {
-                jtID.setText(String.valueOf(con.result_set.getInt("id")));
-                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
-                jtEquipamento.setText(con.result_set.getString("descricao"));
-                jtMarca.setText(con.result_set.getString("marca"));
-                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+            result_set = SQL.executeQuery();
+            if (result_set.previous()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNumeroSerie.setText(result_set.getString("n_serie"));
+                jtEquipamento.setText(result_set.getString("descricao"));
+                jtMarca.setText(result_set.getString("marca"));
+                jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
-            this.preencherTabela();
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btAnteriorActionPerformed
 
     private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
-        
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            //result = conecta.result_set.getString("tipo");
-            //con.executaSQL("SELECT * FROM equipamentos;");
-            if (con.result_set.next()) {
-                jtID.setText(String.valueOf(con.result_set.getInt("id")));
-                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
-                jtEquipamento.setText(con.result_set.getString("descricao"));
-                jtMarca.setText(con.result_set.getString("marca"));
-                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+            result_set = SQL.executeQuery();
+            if (result_set.next()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNumeroSerie.setText(result_set.getString("n_serie"));
+                jtEquipamento.setText(result_set.getString("descricao"));
+                jtMarca.setText(result_set.getString("marca"));
+                jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
-            this.preencherTabela();
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Não foi avançar a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btProximoActionPerformed
 
