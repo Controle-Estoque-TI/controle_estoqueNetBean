@@ -36,10 +36,7 @@ public class TipoEquipamentoDAO implements CRUD {
     private TipoEquipamento equipamento;
 
     /**
-     * TUDO QUE POSSUIR #{
-     *
-     * @Override} Herda da Super classe neste caso #{
-     * @SQLSyntax}
+     * TUDO QUE POSSUIR #{ @Override} Herda da Super classe neste caso a interface #{ @CRUD }
      */
     @Override
     public int create(Object object) throws SQLException {

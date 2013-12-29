@@ -110,6 +110,7 @@ public class EquipamentoDAO implements CRUD{
                     con.result_set.getString("patrimonio")
                 });
             } while (con.result_set.next());
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nElemento não encontrado.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
@@ -134,9 +135,37 @@ public class EquipamentoDAO implements CRUD{
                     con.result_set.getString("patrimonio")
                 });
             } while (con.result_set.next());
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhum equipamento encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
         return dados; 
+    }
+    
+    public ArrayList selectByType(String type) {
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con = new ConnectionFactory();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT id, n_serie, descricao, tipo, marca, patrimonio FROM equipamentos WHERE tipo='" + type + "';");
+            con.result_set.first();
+            do {
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("n_serie"), 
+                    con.result_set.getString("descricao"), 
+                    con.result_set.getString("tipo"), 
+                    con.result_set.getString("marca"), 
+                    con.result_set.getString("patrimonio")
+                });
+            } while (con.result_set.next());
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum item encontrado.\nCadastre um novo tipo para preencher a tabela", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            if(dados.isEmpty()){
+                return dados;
+            }
+        }
+        return dados;
     }
 }

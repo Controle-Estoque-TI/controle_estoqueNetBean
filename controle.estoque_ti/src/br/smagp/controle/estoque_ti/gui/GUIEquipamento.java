@@ -1,8 +1,8 @@
 /**
- * ESTA GUI ESTÁ RESPONSÁVEL POR MANTER E EXIBIR
- * OS EQUIPAMENTOS ENCONTRADOS NO ESTOQUE DO 
- * SUPORTE DE TI
- **/
+ * ESTA GUI ESTÁ RESPONSÁVEL POR MANTER E EXIBIR OS EQUIPAMENTOS ENCONTRADOS NO
+ * ESTOQUE DO SUPORTE DE TI
+ *
+ */
 package br.smagp.controle.estoque_ti.gui;
 
 //IMPORTES OBRIGATÓRIOS PARA REALIZAR AS TAREFAS CONTIDAS NESTE FORMULÁRIO
@@ -47,6 +47,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private PreparedStatement SQL;
     private String result;
 
+    private ConnectionFactory con = ConnectionFactory.getInstance();
+
     /**
      * INICIALIZA O FORMULARIO
      */
@@ -59,7 +61,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.preencherTabela();
     }
-    
+
     //COMPONENTES INICIALIZADOS PELO NET-BEANS
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,6 +96,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btApagar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jtID = new javax.swing.JTextField();
+        btAtualizarComboBox = new javax.swing.JButton();
         btPrimeiro = new javax.swing.JButton();
         btUltimo = new javax.swing.JButton();
         btAnterior = new javax.swing.JButton();
@@ -124,7 +127,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             }
         });
 
-        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/cancel2.png"))); // NOI18N
         btCancelar.setText("Cancelar");
         btCancelar.setEnabled(false);
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +230,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jTipoEquipamento.setEnabled(false);
 
-        btApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
+        btApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Reset.png"))); // NOI18N
         btApagar.setText("Apagar");
         btApagar.setEnabled(false);
         btApagar.addActionListener(new java.awt.event.ActionListener() {
@@ -241,54 +244,49 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jtID.setEnabled(false);
 
-        btPrimeiro.setText("Primeiro");
+        btAtualizarComboBox.setBackground(new java.awt.Color(204, 204, 255));
+        btAtualizarComboBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
+        btAtualizarComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btAtualizarComboBox.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        btAtualizarComboBox.setEnabled(false);
+        btAtualizarComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarComboBoxActionPerformed(evt);
+            }
+        });
 
-        btUltimo.setText("Ultimo");
+        btPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/First.png"))); // NOI18N
+        btPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrimeiroActionPerformed(evt);
+            }
+        });
 
-        btAnterior.setText("Anterior");
+        btUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Last.png"))); // NOI18N
+        btUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUltimoActionPerformed(evt);
+            }
+        });
 
-        btProximo.setText("Próximo");
+        btAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Previous.png"))); // NOI18N
+        btAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnteriorActionPerformed(evt);
+            }
+        });
+
+        btProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Next.png"))); // NOI18N
+        btProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProximoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7)
-                            .addComponent(jtEquipamento)
-                            .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btCancelar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -304,27 +302,66 @@ public class GUIEquipamento extends javax.swing.JFrame {
                                 .addComponent(btNovo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(520, 520, 520)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btPrimeiro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btUltimo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btAnterior)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btProximo)))
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(121, 121, 121)
+                                        .addComponent(jLabel3))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jtEquipamento)
+                                            .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btAtualizarComboBox))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btCancelar)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,13 +376,13 @@ public class GUIEquipamento extends javax.swing.JFrame {
                     .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btPrimeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -366,7 +403,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAtualizarComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -374,14 +412,14 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -403,6 +441,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         jMenuListarTodosOsEquipamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone_lapis.png"))); // NOI18N
         jMenuListarTodosOsEquipamentos.setText("Listar Equipamentos");
+        jMenuListarTodosOsEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListarTodosOsEquipamentosActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuListarTodosOsEquipamentos);
 
         jMenuNovoItemDeEquipamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
@@ -497,6 +540,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             btNovo.setEnabled(false);
             btBuscar.setEnabled(true);
 
+            jtID.setText("");
             jtNumeroSerie.setText("Informe o nº de Série.");
             jtEquipamento.setText("Informe o equipamento.");
             jtMarca.setText("Informe a marca.");
@@ -552,6 +596,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btApagar.setEnabled(false);
         btEditar.setEnabled(false);
         btExcluir.setEnabled(false);
+        btAtualizarComboBox.setEnabled(false);
 
         btNovo.setEnabled(true);
 
@@ -586,6 +631,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btApagar.setEnabled(true);
         btCancelar.setEnabled(true);
         btBuscar.setEnabled(false);
+        btAtualizarComboBox.setEnabled(true);
 
         jtBuscarNumeroDeSerie.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
@@ -636,7 +682,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
     }//GEN-LAST:event_btSalvarActionPerformed
-    
+
     //METODO RESPONSAVEL POR PREENCHER O COMBO-BOX UTILIZADO
     private void PreencherJTipoEquipamento() {
         try {
@@ -656,6 +702,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
     //EVENTO GERADO PELO BOTAO APAGAR
     private void btApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarActionPerformed
+        jtID.setText("");
         jtNumeroSerie.setText("");
         jtEquipamento.setText("");
         jtMarca.setText("_TM");
@@ -683,10 +730,10 @@ public class GUIEquipamento extends javax.swing.JFrame {
          * metodo update em EquipamentoDAO
          */
         equipamentoModel.setId(Integer.parseInt(jtID.getText()));
-        equipamentoModel.setN_serie_equipamento(jtNumeroSerie.getText());
-        equipamentoModel.setEquipamento(jtEquipamento.getText());
+        equipamentoModel.setN_serie_equipamento(jtNumeroSerie.getText().toUpperCase());
+        equipamentoModel.setEquipamento(jtEquipamento.getText().toUpperCase());
         equipamentoModel.setTipo_equipamento(jTipoEquipamento.getSelectedItem().toString());
-        equipamentoModel.setMarca_equipamento(jtMarca.getText());
+        equipamentoModel.setMarca_equipamento(jtMarca.getText().toUpperCase());
         equipamentoModel.setPatrimonio(jtPatrimonio.getText());
 
         try {
@@ -709,9 +756,13 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
+        btAtualizarComboBox.setEnabled(false);
 
         btNovo.setEnabled(true);
 
+        jtID.setText("");
         jtNumeroSerie.setText("");
         jtEquipamento.setText("");
         jtMarca.setText("_TM");
@@ -731,7 +782,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
             conecta.result_set.first();// COLETAMOS OS DADOS RETORNANDOS PELO SQL
 
             /**
-             * ATRIBUIMOS AOS CAMPOS DE TEXTO OS VALORES COLETADO PELA EXECUÇÃO DO DO EXECUTA_SQL
+             * ATRIBUIMOS AOS CAMPOS DE TEXTO OS VALORES COLETADO PELA EXECUÇÃO
+             * DO DO EXECUTA_SQL
              */
             jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
             jtNumeroSerie.setText(conecta.result_set.getString("n_serie"));
@@ -751,6 +803,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             btCancelar.setEnabled(true);
             btExcluir.setEnabled(true);
             btNovo.setEnabled(false);
+            btAtualizarComboBox.setEnabled(true);
 
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
@@ -786,26 +839,115 @@ public class GUIEquipamento extends javax.swing.JFrame {
          * As linhas abaixo setam se os determinados campos e botões serão
          * ablitados ou não
          */
+        //campos de textos e combo box
         jtID.setEnabled(false);
         jtNumeroSerie.setEnabled(false);
         jtEquipamento.setEnabled(false);
         jtMarca.setEnabled(false);
         jtPatrimonio.setEnabled(false);
         jTipoEquipamento.setEnabled(false);
+
+        //botoes em false
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
+        btAtualizarComboBox.setEnabled(false);
+        btExcluir.setEnabled(false);
+        btEditar.setEnabled(false);
 
+        //resetando o conteudo dos campos de texto
         jtID.setText("");
         jtNumeroSerie.setText("");
         jtEquipamento.setText("");
         jtMarca.setText("_TM");
         jtPatrimonio.setText("");
 
+        //botoes em true
         btNovo.setEnabled(true);
         btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
     }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void jMenuListarTodosOsEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarTodosOsEquipamentosActionPerformed
+        new ListEquipamentos().setVisible(true);
+    }//GEN-LAST:event_jMenuListarTodosOsEquipamentosActionPerformed
+
+    private void btAtualizarComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarComboBoxActionPerformed
+        this.PreencherJTipoEquipamento();
+    }//GEN-LAST:event_btAtualizarComboBoxActionPerformed
+
+    private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
+        try {
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
+            con.executaSQL("SELECT * FROM equipamentos;");
+            if (con.result_set.first()) {
+                jtID.setText(String.valueOf(con.result_set.getInt("id")));
+                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
+                jtEquipamento.setText(con.result_set.getString("descricao"));
+                jtMarca.setText(con.result_set.getString("marca"));
+                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            }
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btPrimeiroActionPerformed
+
+    private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
+        
+        try {
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
+            con.executaSQL("SELECT * FROM equipamentos;");
+            if (con.result_set.last()) {
+                jtID.setText(String.valueOf(con.result_set.getInt("id")));
+                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
+                jtEquipamento.setText(con.result_set.getString("descricao"));
+                jtMarca.setText(con.result_set.getString("marca"));
+                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            }
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btUltimoActionPerformed
+
+    private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
+        
+        try {
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
+            //con.executaSQL("SELECT * FROM equipamentos;");
+            if (con.result_set.previous()) {
+                jtID.setText(String.valueOf(con.result_set.getInt("id")));
+                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
+                jtEquipamento.setText(con.result_set.getString("descricao"));
+                jtMarca.setText(con.result_set.getString("marca"));
+                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            }
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btAnteriorActionPerformed
+
+    private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        
+        try {
+            //ConnectionFactory conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
+            //con.executaSQL("SELECT * FROM equipamentos;");
+            if (con.result_set.next()) {
+                jtID.setText(String.valueOf(con.result_set.getInt("id")));
+                jtNumeroSerie.setText(con.result_set.getString("n_serie"));
+                jtEquipamento.setText(con.result_set.getString("descricao"));
+                jtMarca.setText(con.result_set.getString("marca"));
+                jtPatrimonio.setText(con.result_set.getString("patrimonio"));
+            }
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Não foi avançar a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btProximoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -846,6 +988,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnterior;
     private javax.swing.JButton btApagar;
+    private javax.swing.JButton btAtualizarComboBox;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btEditar;
