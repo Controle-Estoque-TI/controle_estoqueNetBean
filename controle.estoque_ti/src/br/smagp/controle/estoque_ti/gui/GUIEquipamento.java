@@ -41,7 +41,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
     //@atributoss necessários para relizar qualquer operação 
     //com a base de dados MYSQL 
     //-> statement -result_set - SQL - conecta
-    private static Statement statement;
     private static ResultSet result_set;
     private PreparedStatement SQL;
     private String result;
