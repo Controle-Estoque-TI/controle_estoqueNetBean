@@ -61,8 +61,16 @@ public class ConnectionFactory implements Conexao{
     //VERIFICA UMA CONEXAO
     @Override
     public Connection getConnection() {
-       System.out.println("Conexao status: aberta com sucesso ao Usuário: suporte \n");
+       System.out.println("Conexao aberta: Usuário: "+this.user+" em "+this.url);
        return conection;
+    }
+    
+    public String getUser(){
+        return this.user;
+    }
+    
+    public String getUrl(){
+        return this.url;
     }
     
     /**

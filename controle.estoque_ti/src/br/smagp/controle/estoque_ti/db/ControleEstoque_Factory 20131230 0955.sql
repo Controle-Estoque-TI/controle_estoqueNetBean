@@ -22,11 +22,11 @@ CREATE DATABASE IF NOT EXISTS controle_estoque;
 USE controle_estoque;
 
 --
--- Definition of table `chefia`
+-- Definition of table `chefias`
 --
 
-DROP TABLE IF EXISTS `chefia`;
-CREATE TABLE `chefia` (
+DROP TABLE IF EXISTS `chefias`;
+CREATE TABLE `chefias` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `nome` varchar(256) NOT NULL,
   `matricula` varchar(45) NOT NULL,
@@ -34,15 +34,15 @@ CREATE TABLE `chefia` (
   `setor` varchar(256) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `FK_chefia_orgao` (`cod_orgao`),
-  CONSTRAINT `FK_chefia_orgao` FOREIGN KEY (`cod_orgao`) REFERENCES `orgao` (`id`)
+  CONSTRAINT `FK_chefia_orgao` FOREIGN KEY (`cod_orgao`) REFERENCES `orgaos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `chefia`
+-- Dumping data for table `chefias`
 --
 
-/*!40000 ALTER TABLE `chefia` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chefia` ENABLE KEYS */;
+/*!40000 ALTER TABLE `chefias` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chefias` ENABLE KEYS */;
 
 
 --
@@ -62,9 +62,9 @@ CREATE TABLE `controle` (
   KEY `FK_controle_tecnico` (`cod_tecnico`),
   KEY `FK_controle_orgao` (`cod_orgao`),
   KEY `FK_controle_chefia` (`cod_chefia`),
-  CONSTRAINT `FK_controle_chefia` FOREIGN KEY (`cod_chefia`) REFERENCES `chefia` (`id`),
-  CONSTRAINT `FK_controle_orgao` FOREIGN KEY (`cod_orgao`) REFERENCES `orgao` (`id`),
-  CONSTRAINT `FK_controle_tecnico` FOREIGN KEY (`cod_tecnico`) REFERENCES `tecnico` (`id`)
+  CONSTRAINT `FK_controle_chefia` FOREIGN KEY (`cod_chefia`) REFERENCES `chefias` (`id`),
+  CONSTRAINT `FK_controle_orgao` FOREIGN KEY (`cod_orgao`) REFERENCES `orgaos` (`id`),
+  CONSTRAINT `FK_controle_tecnico` FOREIGN KEY (`cod_tecnico`) REFERENCES `tecnicos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -99,30 +99,30 @@ CREATE TABLE `equipamentos` (
 
 
 --
--- Definition of table `orgao`
+-- Definition of table `orgaos`
 --
 
-DROP TABLE IF EXISTS `orgao`;
-CREATE TABLE `orgao` (
+DROP TABLE IF EXISTS `orgaos`;
+CREATE TABLE `orgaos` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `nome_orgao` varchar(45) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `orgao`
+-- Dumping data for table `orgaos`
 --
 
-/*!40000 ALTER TABLE `orgao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orgao` ENABLE KEYS */;
+/*!40000 ALTER TABLE `orgaos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orgaos` ENABLE KEYS */;
 
 
 --
--- Definition of table `tecnico`
+-- Definition of table `tecnicos`
 --
 
-DROP TABLE IF EXISTS `tecnico`;
-CREATE TABLE `tecnico` (
+DROP TABLE IF EXISTS `tecnicos`;
+CREATE TABLE `tecnicos` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `nome` varchar(45) NOT NULL,
   `matricula` varchar(45) NOT NULL,
@@ -132,11 +132,11 @@ CREATE TABLE `tecnico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tecnico`
+-- Dumping data for table `tecnicos`
 --
 
-/*!40000 ALTER TABLE `tecnico` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tecnico` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
 
 
 --
@@ -148,24 +148,13 @@ CREATE TABLE `tipo_equipamentos` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `tipo` varchar(45) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tipo_equipamentos`
 --
 
 /*!40000 ALTER TABLE `tipo_equipamentos` DISABLE KEYS */;
-INSERT INTO `tipo_equipamentos` (`id`,`tipo`) VALUES 
- (1,'IMPRESSORA'),
- (2,'MONITOR'),
- (6,'HD EXTERNO'),
- (7,'MEMÓRIA'),
- (8,'PLACA-MÃE'),
- (9,'TECLADO/MOUSE'),
- (11,'MOUSE PAD'),
- (12,'TONER'),
- (13,'TV DIGITAL'),
- (14,'LEITOR DE CODIGO DE BARRAS');
 /*!40000 ALTER TABLE `tipo_equipamentos` ENABLE KEYS */;
 
 

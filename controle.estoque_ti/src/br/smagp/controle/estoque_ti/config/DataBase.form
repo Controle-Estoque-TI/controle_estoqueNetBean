@@ -67,11 +67,11 @@
                   <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" pref="113" max="-2" attributes="0"/>
+                          <Component id="btVerificaConexao" min="-2" pref="113" max="-2" attributes="0"/>
                           <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jButton2" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="btCreateDatabase" min="-2" pref="113" max="-2" attributes="0"/>
                                   <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                                   <Component id="jButton3" min="-2" pref="113" max="-2" attributes="0"/>
                                   <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
@@ -128,8 +128,8 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" min="-2" pref="126" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="126" max="-2" attributes="0"/>
+                      <Component id="btVerificaConexao" min="-2" pref="126" max="-2" attributes="0"/>
+                      <Component id="btCreateDatabase" min="-2" pref="126" max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" pref="126" max="-2" attributes="0"/>
                       <Component id="jButton4" min="-2" pref="126" max="-2" attributes="0"/>
                   </Group>
@@ -169,12 +169,15 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btVerificaConexao">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/database_Connection.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVerificaConexaoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -186,12 +189,15 @@
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btCreateDatabase">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/Createdatabase.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCreateDatabaseActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>

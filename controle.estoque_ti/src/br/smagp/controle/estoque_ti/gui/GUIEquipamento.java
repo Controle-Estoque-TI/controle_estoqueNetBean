@@ -287,9 +287,9 @@ public class GUIEquipamento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtBuscarNumeroDeSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,12 +297,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
                                 .addComponent(btBuscar)
                                 .addGap(10, 10, 10)
                                 .addComponent(btNovo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -350,11 +346,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
                                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
+                .addContainerGap()
                 .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,7 +483,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
             jtNumeroSerie.setText("Informe o nº de Série.");
             jtEquipamento.setText("Informe o equipamento.");
-            jtMarca.setText("Informe a marca.");
+            jtMarca.setText("_TM");
             jtPatrimonio.setText("Informe o patrimonio.");
 
             jtBuscarNumeroDeSerie.setEnabled(false);
@@ -497,12 +493,16 @@ public class GUIEquipamento extends javax.swing.JFrame {
             jtPatrimonio.setEnabled(true);
             jTipoEquipamento.setEnabled(true);
 
+            
             btSalvar.setEnabled(true);
             btApagar.setEnabled(true);
             btCancelar.setEnabled(true);
+            btNovo.setEnabled(false);
             btExcluir.setEnabled(false);
             btEditar.setEnabled(false);
             btExcluir.setEnabled(false);
+            btAtualizarComboBox.setEnabled(true);
+            
         }
         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
         jtableFindEquipamento.setModel(modelo);
@@ -540,7 +540,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             jtID.setText("");
             jtNumeroSerie.setText("Informe o nº de Série.");
             jtEquipamento.setText("Informe o equipamento.");
-            jtMarca.setText("Informe a marca.");
+            jtMarca.setText("_TM");
             jtPatrimonio.setText("Informe o patrimonio.");
 
             jtBuscarNumeroDeSerie.setEnabled(false);
@@ -909,8 +909,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
         try {
-            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
-            result_set = SQL.executeQuery();
+//            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+//            result_set = SQL.executeQuery();
             if (result_set.previous()) {
                 jtID.setText(String.valueOf(result_set.getInt("id")));
                 jtNumeroSerie.setText(result_set.getString("n_serie"));
@@ -925,8 +925,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
     private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
         try {
-            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
-            result_set = SQL.executeQuery();
+//            SQL = conecta.prepareStatement("SELECT * FROM equipamentos;");
+//            result_set = SQL.executeQuery();
             if (result_set.next()) {
                 jtID.setText(String.valueOf(result_set.getInt("id")));
                 jtNumeroSerie.setText(result_set.getString("n_serie"));
