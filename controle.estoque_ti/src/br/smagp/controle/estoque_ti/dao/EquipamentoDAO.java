@@ -71,7 +71,6 @@ public class EquipamentoDAO implements CRUD{
         SQL.setString(4, this.equipamento.getMarca_equipamento());
         SQL.setString(5, this.equipamento.getPatrimonio());
         SQL.setInt(6, 	 this.equipamento.getId());
-        System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.equipamento);
         JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
         int updated = SQL.executeUpdate();
         SQL.close();
@@ -82,7 +81,7 @@ public class EquipamentoDAO implements CRUD{
     public void delete(String numero_de_serie) throws SQLException {
             Connection conecta= ConnectionFactory.getInstance().getConnection();
             try {
-                SQL = conecta.prepareStatement("DELETE FROM equipamentos WHERE n_serie= " + numero_de_serie);
+                SQL = conecta.prepareStatement("DELETE FROM equipamentos WHERE n_serie='" + numero_de_serie+"';");
                 SQL.executeUpdate();
                 SQL.close();
                 System.out.println("Equipamento: "+numero_de_serie+" removido!");

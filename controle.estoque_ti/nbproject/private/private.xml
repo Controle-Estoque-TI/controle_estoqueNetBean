@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/gui/GUINovoEquipamento.java</file>
-            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/dao/TipoEquipamentoDAO.java</file>
-            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/gui/GUIEquipamento.java</file>
+            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/dao/ChefiaDAO.java</file>
+            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/gui/GUIOrgao.java</file>
+            <file>file:/C:/Users/AllexOnRails/Documents/GitHub/controle_estoqueNetBean/controle.estoque_ti/src/br/smagp/controle/estoque_ti/gui/GUIChefia.java</file>
         </group>
     </open-files>
 </project-private>

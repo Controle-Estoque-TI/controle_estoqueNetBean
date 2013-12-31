@@ -475,7 +475,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         String[] Colunas = new String[]{
             "ID", "Número de Série", "Descrição", "Tipo", "Marca", "Patrimônio"
         };
-        EquipamentoDAO data = new EquipamentoDAO();
+        EquipamentoDAO data = new DAOFactory().getEquipamento();
         dados = data.select();
         if (dados.isEmpty()) {
 //            btNovo.setEnabled(false);
@@ -493,7 +493,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
             jtPatrimonio.setEnabled(true);
             jTipoEquipamento.setEnabled(true);
 
-            
             btSalvar.setEnabled(true);
             btApagar.setEnabled(true);
             btCancelar.setEnabled(true);
@@ -502,7 +501,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             btEditar.setEnabled(false);
             btExcluir.setEnabled(false);
             btAtualizarComboBox.setEnabled(true);
-            
+
         }
         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
         jtableFindEquipamento.setModel(modelo);
@@ -531,7 +530,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         String[] Colunas = new String[]{
             "ID", "Número de Série", "Descrição", "Tipo", "Marca", "Patrimônio"
         };
-        EquipamentoDAO data = new EquipamentoDAO();
+        EquipamentoDAO data = new DAOFactory().getEquipamento();
         dados = data.selectByNumeroDeSerie(numero_de_serie_do_equipamento);
         if (dados.isEmpty()) {
             btNovo.setEnabled(false);
@@ -885,7 +884,24 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
-            this.preencherTabela();
+
+            //campos de textos e combo box
+            jtID.setEnabled(false);
+            jtNumeroSerie.setEnabled(true);
+            jtEquipamento.setEnabled(true);
+            jtMarca.setEnabled(true);
+            jtPatrimonio.setEnabled(true);
+            jTipoEquipamento.setEnabled(true);
+
+            //botoes em false
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btApagar.setEnabled(true);
+            btAtualizarComboBox.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btEditar.setEnabled(true);
+
+            //this.preencherTabela();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
@@ -902,6 +918,21 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
+            //campos de textos e combo box
+            jtID.setEnabled(false);
+            jtNumeroSerie.setEnabled(true);
+            jtEquipamento.setEnabled(true);
+            jtMarca.setEnabled(true);
+            jtPatrimonio.setEnabled(true);
+            jTipoEquipamento.setEnabled(true);
+
+            //botoes em false
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btApagar.setEnabled(true);
+            btAtualizarComboBox.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btEditar.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -918,6 +949,21 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
+            //campos de textos e combo box
+            jtID.setEnabled(false);
+            jtNumeroSerie.setEnabled(true);
+            jtEquipamento.setEnabled(true);
+            jtMarca.setEnabled(true);
+            jtPatrimonio.setEnabled(true);
+            jTipoEquipamento.setEnabled(true);
+
+            //botoes em false
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btApagar.setEnabled(true);
+            btAtualizarComboBox.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btEditar.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -934,6 +980,21 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
             }
+            //campos de textos e combo box
+            jtID.setEnabled(false);
+            jtNumeroSerie.setEnabled(true);
+            jtEquipamento.setEnabled(true);
+            jtMarca.setEnabled(true);
+            jtPatrimonio.setEnabled(true);
+            jTipoEquipamento.setEnabled(true);
+
+            //botoes em false
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btApagar.setEnabled(true);
+            btAtualizarComboBox.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btEditar.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }

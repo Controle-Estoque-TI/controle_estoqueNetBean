@@ -6,8 +6,10 @@
 package br.smagp.controle.estoque_ti.gui;
 
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
+import br.smagp.controle.estoque_ti.dao.OrgaoDAO;
 import br.smagp.controle.estoque_ti.dao.TipoEquipamentoDAO;
 import br.smagp.controle.estoque_ti.db.ConnectionFactory;
+import br.smagp.controle.estoque_ti.model.Orgao;
 import br.smagp.controle.estoque_ti.model.TipoEquipamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,11 +27,8 @@ import javax.swing.ListSelectionModel;
  *
  * @author AllexOnRails
  */
-public class GUINovoEquipamento extends javax.swing.JFrame {
+public class GUIOrgao extends javax.swing.JFrame {
 
-    /**
-     * CRIA UM NOVO FORMULÁRIO GUINovoEquipamento
-     */
     //@atributoss necessários para relizar qualquer operação 
     //com a base de dados MYSQL 
     //-> statement -result_set - SQL - conecta
@@ -37,16 +36,16 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     private static ResultSet result_set;
     private PreparedStatement SQL;
     private String result;
-    ConnectionFactory conecta = ConnectionFactory.getInstance();
+    Connection conecta = ConnectionFactory.getInstance().getConnection();  //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
 
     //INICIALIZA OS COMPONENTES PARA CRIAR O FORMULÁRIO
-    public GUINovoEquipamento() {
+    public GUIOrgao() {
         initComponents();
         this.setResizable(false);
         this.setLocation(250, 100);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        preencherTabela();
+        this.preencherTabela();
     }
 
     /**
@@ -59,20 +58,20 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     public void preencherTabela() {
         ArrayList dados = new ArrayList(); //Cria uma Lista dados do tipo Array
         String[] Colunas = new String[]{ //Cria e Inicializa um Array do tipo String
-            "ID", "Tipo do Equipamento"
+            "ID", "Nome"
         };
-        TipoEquipamentoDAO data = new DAOFactory().getTipoEquipamento(); //instancia um novo tipo de equipamento
+        OrgaoDAO data = new DAOFactory().getOrgao(); //instancia um novo tipo de equipamento
         dados = data.select(); //colecta todos os campos da tabela
         ModeloTabela modelo = new ModeloTabela(dados, Colunas); // Cria um novo modelo baseado nos parametros passados
-        jTableTipoEquipamentos.setModel(modelo);
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
-        jTableTipoEquipamentos.getColumnModel().getColumn(1).setPreferredWidth(494);
-        jTableTipoEquipamentos.getColumnModel().getColumn(1).setResizable(false);
+        jTableOrgaos.setModel(modelo);
+        jTableOrgaos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
+        jTableOrgaos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
+        jTableOrgaos.getColumnModel().getColumn(1).setPreferredWidth(494);
+        jTableOrgaos.getColumnModel().getColumn(1).setResizable(false);
 
-        jTableTipoEquipamentos.getTableHeader().setReorderingAllowed(false);
-        jTableTipoEquipamentos.setAutoResizeMode(jTableTipoEquipamentos.AUTO_RESIZE_OFF);
-        jTableTipoEquipamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTableOrgaos.getTableHeader().setReorderingAllowed(false);
+        jTableOrgaos.setAutoResizeMode(jTableOrgaos.AUTO_RESIZE_OFF);
+        jTableOrgaos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")
@@ -82,11 +81,11 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtType = new javax.swing.JTextField();
+        jtNomeOrgao = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableTipoEquipamentos = new javax.swing.JTable();
+        jTableOrgaos = new javax.swing.JTable();
         btAlterar = new javax.swing.JButton();
         btAnterior = new javax.swing.JButton();
         btProximo = new javax.swing.JButton();
@@ -99,7 +98,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuNovoItem = new javax.swing.JMenuItem();
+        jMenuNovoOrgao = new javax.swing.JMenuItem();
         jMenuSelecionarItem = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
 
@@ -109,14 +108,13 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setText("Tipo de Equipamentos");
+        jLabel1.setText("Orgãos");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Tipo:");
+        jLabel2.setText("Nome:");
 
-        jtType.setText("(ex: Impressora)");
-        jtType.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jtType.setEnabled(false);
+        jtNomeOrgao.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jtNomeOrgao.setEnabled(false);
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
         btSalvar.setText("Salvar");
@@ -136,7 +134,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
             }
         });
 
-        jTableTipoEquipamentos.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOrgaos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -147,7 +145,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTableTipoEquipamentos);
+        jScrollPane1.setViewportView(jTableOrgaos);
 
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btAlterar.setText("Alterar");
@@ -232,7 +230,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                                 .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtType)
+                                .addComponent(jtNomeOrgao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -256,10 +254,10 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(293, 293, 293)
                 .addComponent(jLabel1)
-                .addGap(231, 231, 231))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +271,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtType, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtNomeOrgao, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,17 +295,17 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
         jMenu1.setText("Iniciar");
 
-        jMenuNovoItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
-        jMenuNovoItem.setText("Novo item");
-        jMenuNovoItem.addActionListener(new java.awt.event.ActionListener() {
+        jMenuNovoOrgao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
+        jMenuNovoOrgao.setText("Novo Orgão");
+        jMenuNovoOrgao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuNovoItemActionPerformed(evt);
+                jMenuNovoOrgaoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuNovoItem);
+        jMenu1.add(jMenuNovoOrgao);
 
         jMenuSelecionarItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
-        jMenuSelecionarItem.setText("Selecionar item");
+        jMenuSelecionarItem.setText("Selecionar Orgão");
         jMenuSelecionarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuSelecionarItemActionPerformed(evt);
@@ -331,100 +329,31 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        // Esta Action [PROCEDIMENTO] é responsável por salvar novos tipos de equipametos na base de dados.
-        // ex: impressora, copiadora, nobreak
-        // Apenas o tipo para que possam ser acessados na hora de cadastrar novo equipamento
-        try {
-            TipoEquipamento equipamento = new TipoEquipamento();//INSTANCIA UM NOVO TIPO DE EQUIPAMENTO
-            equipamento.setTipo_equipamento(jtType.getText().toUpperCase()); //COLETA O CONTEUDO DESCRITO NO CAMPO DE TEXTO E SETA EM SET_TIPO_EQUIPAMENTO
-
-            TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INSTANCIA UM NOVO TIPO_EQUIPAMENTO_DAO
-            type.create(equipamento); //INSERE UM NOVO TIPO DE EQUIPAMENTO NA BASE DE DADOS
-        } catch (SQLException ex) {
-            ex.printStackTrace(); //SE OCORRER ALGUM ERRO A JANELA DESCRITA ABAIXO SERÁ EXIBIDDA
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
-        }
-        preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
-        jtType.setEnabled(false);
-        btSalvar.setEnabled(false);
-        btBuscar.setEnabled(false);
-        btCancelar.setEnabled(false);
-        btExcluir.setEnabled(false);
-        btAlterar.setEnabled(false);
-        jMenuNovoItem.setEnabled(true);
-        jMenuSelecionarItem.setEnabled(true);
-        jtType.setText("Informe aqui o novo tipo.");
-    }//GEN-LAST:event_btSalvarActionPerformed
-
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
-        try {
-            Connection conecta = ConnectionFactory.getInstance().getConnection(); //INICIA UMA NOVA CONEXAO COM A BASE DE DADOS
-            SQL = conecta.prepareStatement("SELECT tipo FROM tipo_equipamentos WHERE tipo=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
-            SQL.setString(1, jtType.getText());//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
-            result_set = SQL.executeQuery(); //NESTE MOMENTO ATRIBUIMOS AO RESULT SET A EXECUÇÃO DA QUERY
-
-            while (result_set.next()) {
-                result = result_set.getString("tipo");
-            } //para cada item retornado pela tabela a variavel result a string correspondente
-
-            if (!jtType.getText().equals(result)) { // caso o que esta sendo informado no campo de texto não seja compativel com o que se encontra na base de dados a mensagem de erro abaixo será exibida.
-                System.out.println("Erro 404: Impossivel remover\nItem não encontrado.");
-                JOptionPane.showMessageDialog(null, "Impossivel remover\nItem não encontrado. ", "ERRO 404", JOptionPane.ERROR_MESSAGE);
-            } else {
-                System.out.println("Sucesso: item " + result + " removido.");
-                type.deleteFromType(result);//caso a mensagem de erro acima não seja exibida um item da tabela será removido
-            }
-            preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
-        }
-
-        /**
-         * As linhas abaixo setam se os determinados campos e botões serão
-         * ablitados ou não
-         */
-        jtType.setEnabled(true);
-
-        btSalvar.setEnabled(false);
-        btCancelar.setEnabled(true);
-        btExcluir.setEnabled(true);
-        btAlterar.setEnabled(true);
-        btPrimeiro.setEnabled(true);
-        btUltimo.setEnabled(true);
-        btAnterior.setEnabled(true);
-        btProximo.setEnabled(true);
-        btBuscar.setEnabled(true);
-
-        jMenuNovoItem.setEnabled(false);
-        jMenuSelecionarItem.setEnabled(true);
-        //Fim do método excluir em tipo equipamento
-    }//GEN-LAST:event_btExcluirActionPerformed
-
-    private void jMenuNovoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoItemActionPerformed
-        jtType.setEnabled(true);
+    //EVENTO GERADO PELO MENU NOVO
+    private void jMenuNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoOrgaoActionPerformed
+        jtNomeOrgao.setEnabled(true);
         btSalvar.setEnabled(true);
         btCancelar.setEnabled(true);
-        jMenuNovoItem.setEnabled(false);
+        jMenuNovoOrgao.setEnabled(false);
         jMenuSelecionarItem.setEnabled(false);
-        jtType.setText("");
-    }//GEN-LAST:event_jMenuNovoItemActionPerformed
+        jtNomeOrgao.setText("");
+    }//GEN-LAST:event_jMenuNovoOrgaoActionPerformed
 
+    //EVENTO GERADO PELO BOTAO CANCELAR
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        jtType.setEnabled(false);
+        jtNomeOrgao.setEnabled(false);
         btSalvar.setEnabled(false);
         btBuscar.setEnabled(false);
         btCancelar.setEnabled(false);
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
-        jMenuNovoItem.setEnabled(true);
+        jMenuNovoOrgao.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
         btPrimeiro.setEnabled(false);
         btUltimo.setEnabled(false);
         btAnterior.setEnabled(false);
         btProximo.setEnabled(false);
-        jtType.setText("ex: memória");
+        jtNomeOrgao.setText("");
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
@@ -432,10 +361,10 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuSelecionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSelecionarItemActionPerformed
-        jtType.setEnabled(true);
+        jtNomeOrgao.setEnabled(true);
         btCancelar.setEnabled(true);
 
-        jMenuNovoItem.setEnabled(false);
+        jMenuNovoOrgao.setEnabled(false);
         jMenuSelecionarItem.setEnabled(false);
 
         btPrimeiro.setEnabled(true);
@@ -447,18 +376,19 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
 
-        jtType.setText("ex: memória");
+        jtNomeOrgao.setText("");
     }//GEN-LAST:event_jMenuSelecionarItemActionPerformed
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
-            if (conecta.result_set.first()) {
-                jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-                jtType.setText(conecta.result_set.getString("tipo"));
+            SQL = conecta.prepareStatement("SELECT * FROM orgaos;");
+            result_set = SQL.executeQuery();
+
+            if (result_set.first()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNomeOrgao.setText(result_set.getString("nome_orgao"));
             }
             this.preencherTabela();
         } catch (SQLException ex) {
@@ -470,11 +400,12 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            conecta.executaSQL("SELECT * FROM tipo_equipamentos;");
-            if (conecta.result_set.last()) {
-                jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-                jtType.setText(conecta.result_set.getString("tipo"));
+            SQL = conecta.prepareStatement("SELECT * FROM orgaos;");
+            result_set = SQL.executeQuery();
+
+            if (result_set.last()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNomeOrgao.setText(result_set.getString("nome_orgao"));
             }
             this.preencherTabela();
         } catch (SQLException ex) {
@@ -486,15 +417,16 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            //result = conecta.result_set.getString("tipo");
-            if (conecta.result_set.previous()) {
-                jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-                jtType.setText(conecta.result_set.getString("tipo"));
+//            SQL = conecta.prepareStatement("SELECT * FROM orgaos;");
+//            result_set = SQL.executeQuery();
+
+            if (result_set.previous()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNomeOrgao.setText(result_set.getString("nome_orgao"));
             }
             this.preencherTabela();
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btAnteriorActionPerformed
 
@@ -502,11 +434,9 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btExcluir.setEnabled(true);
         btAlterar.setEnabled(true);
         try {
-            //ConnectionFactory conecta = ConnectionFactory.getInstance();
-            //result = conecta.result_set.getString("tipo");
-            if (conecta.result_set.next()) {
-                jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-                jtType.setText(conecta.result_set.getString("tipo"));
+            if (result_set.next()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNomeOrgao.setText(result_set.getString("nome_orgao"));
             }
             this.preencherTabela();
         } catch (SQLException ex) {
@@ -514,13 +444,78 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btProximoActionPerformed
 
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        try {
+            Orgao orgao = new Orgao();
+            orgao.setNomeOrgao(jtNomeOrgao.getText().toUpperCase());
+            OrgaoDAO data = new DAOFactory().getOrgao();
+            data.create(orgao);
+            JOptionPane.showMessageDialog(null, orgao.getNomeOrgao() + " registrado.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+            /**
+             * As linhas abaixo setam se os determinados campos e botões serão
+             * ablitados ou não
+             */
+            jtNomeOrgao.setEnabled(true);
+            btSalvar.setEnabled(true);
+            btCancelar.setEnabled(true);
+            btExcluir.setEnabled(false);
+            btAlterar.setEnabled(false);
+            btPrimeiro.setEnabled(false);
+            btUltimo.setEnabled(false);
+            btAnterior.setEnabled(false);
+            btProximo.setEnabled(false);
+            btBuscar.setEnabled(false);
+
+            jMenuNovoOrgao.setEnabled(false);
+            jMenuSelecionarItem.setEnabled(true);
+
+            this.preencherTabela();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504 - SQL ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        try {
+            ConnectionFactory conecta = ConnectionFactory.getInstance();
+            //result = conecta.result_set.getString("tipo");
+            conecta.executaSQL("SELECT id, nome_orgao FROM orgaos WHERE nome_orgao='" + jtNomeOrgao.getText() + "';");
+            conecta.result_set.first();
+
+            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
+            jtNomeOrgao.setText(conecta.result_set.getString("nome_orgao"));
+
+            jtNomeOrgao.setEnabled(true);
+            btSalvar.setEnabled(false);
+            btCancelar.setEnabled(true);
+            btExcluir.setEnabled(true);
+            btAlterar.setEnabled(true);
+            btPrimeiro.setEnabled(true);
+            btUltimo.setEnabled(true);
+            btAnterior.setEnabled(true);
+            btProximo.setEnabled(true);
+            jMenuNovoOrgao.setEnabled(false);
+            jMenuSelecionarItem.setEnabled(false);
+
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (jtNomeOrgao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, digite o nome do orgão que deseja buscar.");
+        } else {
+            preencherTabelaPeloBotaoBuscar(jtNomeOrgao.getText());
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
+
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         try {
-            TipoEquipamentoDAO type = new DAOFactory().getTipoEquipamento(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
-            TipoEquipamento equipamento = new TipoEquipamento(); //INSTANCIA UM NOVO TIPO_EQUIPAMENTO
-            equipamento.setId(Integer.parseInt(jtID.getText())); // ATRIBUI O VALOR DO CAMPO DE TEXTO ID EM SET ID
-            equipamento.setTipo_equipamento(jtType.getText().toUpperCase()); // ATRIBUI O VALOR DO CAMPO DE TEXTO TIPO EM SET TIPO EQUIPAMENTO
-            type.update(equipamento); // EXECUTA O METODO UPDATE CONTIDO EM TIPO_EQUIPAMENTO_DAO
+            OrgaoDAO data = new DAOFactory().getOrgao(); //INICIA UMA NOVA INSTANCIA DE ORGAO DAO
+            Orgao orgao = new Orgao(); //INSTANCIA UM NOVO ORGAO
+            orgao.setId(Integer.parseInt(jtID.getText())); // ATRIBUI O VALOR DO CAMPO DE TEXTO ID EM SET ID
+            orgao.setNomeOrgao(jtNomeOrgao.getText().toUpperCase()); // ATRIBUI O VALOR DO CAMPO DE TEXTO TIPO EM SET NOME ORGAO
+            data.update(orgao); // EXECUTA O METODO UPDATE CONTIDO EM TIPO_EQUIPAMENTO_DAO
         } catch (SQLException ex) {
             Logger.getLogger(GUINovoEquipamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -530,7 +525,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
          * As linhas abaixo setam se os determinados campos e botões serão
          * ablitados ou não
          */
-        jtType.setEnabled(false);
+        jtNomeOrgao.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btExcluir.setEnabled(false);
@@ -540,23 +535,70 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         btAnterior.setEnabled(false);
         btProximo.setEnabled(false);
         btBuscar.setEnabled(false);
-        jMenuNovoItem.setEnabled(true);
+        jMenuNovoOrgao.setEnabled(true);
         jMenuSelecionarItem.setEnabled(true);
         jtID.setText("");
-        jtType.setText("ex: memória");
+        jtNomeOrgao.setText("");
         //Fim do método aletrar em tipo equipamento
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        OrgaoDAO data = new DAOFactory().getOrgao(); //INICIA UMA NOVA INSTANCIA DE TIPO EQUIPAMENTO DAO
+        try {
+            SQL = conecta.prepareStatement("SELECT id FROM orgaos WHERE nome_orgao=?;"); //INICIA UM PREPARE STATEMENT COM O CODIGO SQL
+            SQL.setString(1, jtNomeOrgao.getText());//NESTE PONTO COLETAMOS O CONTEUDO DO CAMPO DE TEXTO E ATRIBUIMOS O MESMO AO PREPARED STATEMENT
+            result_set = SQL.executeQuery(); //NESTE MOMENTO ATRIBUIMOS AO RESULT SET A EXECUÇÃO DA QUERY
+
+            while (result_set.next()) {
+                result = result_set.getString("id");
+            } //para cada item retornado pela tabela a variavel result a string correspondente
+
+            if (!jtID.getText().equals(result)) { // caso o que esta sendo informado no campo de texto não seja compativel com o que se encontra na base de dados a mensagem de erro abaixo será exibida.
+                JOptionPane.showMessageDialog(null, "Impossivel remover\nOrgão não encontrado. ", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                data.delete(result);//caso a mensagem de erro acima não seja exibida um item da tabela será removido
+                JOptionPane.showMessageDialog(null, "Orgão removido. ", "Mysql Message", JOptionPane.INFORMATION_MESSAGE);
+                /**
+                 * As linhas abaixo setam se os determinados campos e botões
+                 * serão ablitados ou não
+                 */
+                jtNomeOrgao.setEnabled(true);
+
+                btSalvar.setEnabled(false);
+                btCancelar.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btAlterar.setEnabled(true);
+                btPrimeiro.setEnabled(true);
+                btUltimo.setEnabled(true);
+                btAnterior.setEnabled(true);
+                btProximo.setEnabled(true);
+                btBuscar.setEnabled(true);
+
+                jtID.setText("");
+                jtNomeOrgao.setText("");
+
+                jMenuNovoOrgao.setEnabled(false);
+                jMenuSelecionarItem.setEnabled(true);
+                
+                preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+        //Fim do método excluir
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     public void preencherTabelaPeloBotaoBuscar(String type) {
         ArrayList dados = new ArrayList();
         String[] Colunas = new String[]{
-            "ID", "Tipo"
+            "ID", "Nome"
         };
-        TipoEquipamentoDAO data = new DAOFactory().getTipoEquipamento();
-        dados = data.selectByType(type);
+        OrgaoDAO data = new DAOFactory().getOrgao();
+        dados = data.selectByName(type);
         if (dados.isEmpty()) {
-            jtType.setText("Informe o novo tipo aqui.");
-            jtType.setEnabled(true);
+            jtNomeOrgao.setText("Informe o novo orgão aqui.");
+            jtNomeOrgao.setEnabled(true);
             btSalvar.setEnabled(true);
             btCancelar.setEnabled(true);
             btExcluir.setEnabled(false);
@@ -565,54 +607,20 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
             btUltimo.setEnabled(false);
             btAnterior.setEnabled(false);
             btProximo.setEnabled(false);
-            jMenuNovoItem.setEnabled(false);
+            jMenuNovoOrgao.setEnabled(false);
             jMenuSelecionarItem.setEnabled(false);
         }
         ModeloTabela modelo = new ModeloTabela(dados, Colunas);
-        jTableTipoEquipamentos.setModel(modelo);
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
-        jTableTipoEquipamentos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
-        jTableTipoEquipamentos.getColumnModel().getColumn(1).setPreferredWidth(494);
-        jTableTipoEquipamentos.getColumnModel().getColumn(1).setResizable(false);
+        jTableOrgaos.setModel(modelo);
+        jTableOrgaos.getColumnModel().getColumn(0).setPreferredWidth(120); //seta o tamanho da coluna em pixels
+        jTableOrgaos.getColumnModel().getColumn(0).setResizable(false); // seta se a coluna pode ou não ser redimensionavel
+        jTableOrgaos.getColumnModel().getColumn(1).setPreferredWidth(494);
+        jTableOrgaos.getColumnModel().getColumn(1).setResizable(false);
 
-        jTableTipoEquipamentos.getTableHeader().setReorderingAllowed(false);
-        jTableTipoEquipamentos.setAutoResizeMode(jTableTipoEquipamentos.AUTO_RESIZE_OFF);
-        jTableTipoEquipamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTableOrgaos.getTableHeader().setReorderingAllowed(false);
+        jTableOrgaos.setAutoResizeMode(jTableOrgaos.AUTO_RESIZE_OFF);
+        jTableOrgaos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-
-
-    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        try {
-            ConnectionFactory conecta = ConnectionFactory.getInstance();
-            //result = conecta.result_set.getString("tipo");
-            conecta.executaSQL("SELECT id, tipo FROM tipo_equipamentos WHERE tipo='" + jtType.getText() + "';");
-            conecta.result_set.first();
-
-            jtID.setText(String.valueOf(conecta.result_set.getInt("id")));
-            jtType.setText(conecta.result_set.getString("tipo"));
-
-            jtType.setEnabled(true);
-            btSalvar.setEnabled(false);
-            btCancelar.setEnabled(true);
-            btExcluir.setEnabled(true);
-            btAlterar.setEnabled(true);
-            btPrimeiro.setEnabled(true);
-            btUltimo.setEnabled(true);
-            btAnterior.setEnabled(true);
-            btProximo.setEnabled(true);
-            jMenuNovoItem.setEnabled(false);
-            jMenuSelecionarItem.setEnabled(false);
-
-        } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (jtType.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, digite o número de série que deseja buscar.");
-        } else {
-            preencherTabelaPeloBotaoBuscar(jtType.getText());
-        }
-    }//GEN-LAST:event_btBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -644,7 +652,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUINovoEquipamento().setVisible(true);
+                new GUIOrgao().setVisible(true);
             }
         });
     }
@@ -664,14 +672,14 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuNovoItem;
+    private javax.swing.JMenuItem jMenuNovoOrgao;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JMenuItem jMenuSelecionarItem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableTipoEquipamentos;
+    private javax.swing.JTable jTableOrgaos;
     private javax.swing.JTextField jtID;
-    private javax.swing.JTextField jtType;
+    private javax.swing.JTextField jtNomeOrgao;
     // End of variables declaration//GEN-END:variables
 }

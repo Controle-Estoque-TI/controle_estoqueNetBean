@@ -100,7 +100,7 @@ public class ChefiaDAO implements CRUD{
             } while (con.result_set.next());
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhum equipamento encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhuma chefia encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
         return dados; 
     }

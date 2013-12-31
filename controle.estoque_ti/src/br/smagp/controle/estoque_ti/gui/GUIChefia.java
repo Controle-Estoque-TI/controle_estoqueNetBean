@@ -49,7 +49,7 @@ public class GUIChefia extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocation(250, 100);
         this.setLocationRelativeTo(null);
-        this.PreencherJTipoEquipamento();
+        this.PreencherComboBoxOrgao();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.preencherTabela();
     }
@@ -400,7 +400,7 @@ public class GUIChefia extends javax.swing.JFrame {
 
     //METODO REPONSAVEL POR COLETAR TODOS OS ITENS DA BASE DE DADOS E 
     //PREENCHER A TABELA COM BASE NO NUMERO DE SERIE
-    public void preencherTabelaByNumeroDeSerie(String numero_de_serie_do_equipamento) {
+    public void preencherTabelaByMatricula(String matricula) {
         ArrayList dados = new ArrayList();
         String[] Colunas = new String[]{
             "ID", "Nome", "Matricula", "Orgão", "Setor"
@@ -432,23 +432,23 @@ public class GUIChefia extends javax.swing.JFrame {
     //EVENTO GERADO PELO BOTAO NOVO
     //EVENTO GERADO PELO BOTAO SALVAR
     //METODO RESPONSAVEL POR PREENCHER O COMBO-BOX UTILIZADO
-    private void PreencherJTipoEquipamento() {
+    private void PreencherComboBoxOrgao() {
         try {
             Connection conecta = ConnectionFactory.getInstance().getConnection(); //INICIALIZA UM NOVA CONEXAO COM A BASE DE DADOS
-            PreparedStatement SQL = conecta.prepareStatement("SELECT tipo FROM tipo_equipamentos;"); //CRIA UM PREPARED STATEMENT COM O SQL
+            PreparedStatement SQL = conecta.prepareStatement("SELECT nome_orgao FROM orgaos;"); //CRIA UM PREPARED STATEMENT COM O SQL
 
             ResultSet result_set = SQL.executeQuery(); //EXECUTA O SQL GERADO PELO PREPARED STATEMENT
 
             while (result_set.next()) { //COLETA O ITEM SELECIONADO  E ATRIBUI AO COMBO-BOX
-                String tipo = result_set.getString("tipo");
+                String tipo = result_set.getString("nome_orgao");
                 jTipoEquipamento.addItem(tipo);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Nehum item encontrado em: tipo_equipamentos", "Erro 404 - NOT FOUND", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nehum orgao na tabela: orgaos", "Erro 404 - NOT FOUND", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    //EVENTO GERADO PELO BOTAO APAGAR
+   
     //EVENTO GERADO PELO BOTAO SAIR
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         dispose();
@@ -456,7 +456,7 @@ public class GUIChefia extends javax.swing.JFrame {
 
     //EVENTO GERADO PELO MENU NOVO ITEM DE EQUIPAMENTO
     private void jMenuNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoOrgaoActionPerformed
-        new GUINovoEquipamento().setVisible(true);
+        new GUIOrgao().setVisible(true);
     }//GEN-LAST:event_jMenuNovoOrgaoActionPerformed
 
 
