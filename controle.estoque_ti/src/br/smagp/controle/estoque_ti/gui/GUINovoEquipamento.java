@@ -346,13 +346,17 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
         preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
-        jtType.setEnabled(false);
-        btSalvar.setEnabled(false);
+        jtType.setEnabled(true);
+        btSalvar.setEnabled(true);
         btBuscar.setEnabled(false);
-        btCancelar.setEnabled(false);
+        btCancelar.setEnabled(true);
         btExcluir.setEnabled(false);
         btAlterar.setEnabled(false);
-        jMenuNovoItem.setEnabled(true);
+        btPrimeiro.setEnabled(false);
+        btProximo.setEnabled(false);
+        btAnterior.setEnabled(false);
+        btUltimo.setEnabled(false);
+        jMenuNovoItem.setEnabled(false);
         jMenuSelecionarItem.setEnabled(true);
         jtType.setText("Informe aqui o novo tipo.");
     }//GEN-LAST:event_btSalvarActionPerformed
@@ -433,6 +437,7 @@ public class GUINovoEquipamento extends javax.swing.JFrame {
 
     private void jMenuSelecionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSelecionarItemActionPerformed
         jtType.setEnabled(true);
+        btSalvar.setEnabled(false);
         btCancelar.setEnabled(true);
 
         jMenuNovoItem.setEnabled(false);
