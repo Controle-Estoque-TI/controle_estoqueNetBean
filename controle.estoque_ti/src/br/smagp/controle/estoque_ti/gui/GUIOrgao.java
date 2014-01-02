@@ -447,10 +447,10 @@ public class GUIOrgao extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         try {
             Orgao orgao = new Orgao();
-            orgao.setNomeOrgao(jtNomeOrgao.getText().toUpperCase());
+            orgao.setNome_orgao(jtNomeOrgao.getText().toUpperCase());
             OrgaoDAO data = new DAOFactory().getOrgao();
             data.create(orgao);
-            JOptionPane.showMessageDialog(null, orgao.getNomeOrgao() + " registrado.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, orgao.getNome_orgao()+ " registrado.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             /**
              * As linhas abaixo setam se os determinados campos e botões serão
@@ -514,7 +514,7 @@ public class GUIOrgao extends javax.swing.JFrame {
             OrgaoDAO data = new DAOFactory().getOrgao(); //INICIA UMA NOVA INSTANCIA DE ORGAO DAO
             Orgao orgao = new Orgao(); //INSTANCIA UM NOVO ORGAO
             orgao.setId(Integer.parseInt(jtID.getText())); // ATRIBUI O VALOR DO CAMPO DE TEXTO ID EM SET ID
-            orgao.setNomeOrgao(jtNomeOrgao.getText().toUpperCase()); // ATRIBUI O VALOR DO CAMPO DE TEXTO TIPO EM SET NOME ORGAO
+            orgao.setNome_orgao(jtNomeOrgao.getText().toUpperCase()); // ATRIBUI O VALOR DO CAMPO DE TEXTO TIPO EM SET NOME ORGAO
             data.update(orgao); // EXECUTA O METODO UPDATE CONTIDO EM TIPO_EQUIPAMENTO_DAO
         } catch (SQLException ex) {
             Logger.getLogger(GUINovoEquipamento.class.getName()).log(Level.SEVERE, null, ex);

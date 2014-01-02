@@ -32,7 +32,7 @@ public class ChefiaDAO implements CRUD{
     public int create(Object object) throws SQLException{
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         this.chefia= (Chefia) object;
-        SQL = conecta.prepareStatement("INSERT INTO chefias"+"(nome, matricula, orgao ,setor)"+"VALUES (?, ?, ?, ?);");
+        SQL = conecta.prepareStatement("INSERT INTO chefias"+"(nome, matricula, cod_orgao ,setor)"+"VALUES (?, ?, ?, ?);");
 
         SQL.setString(1, this.chefia.getNome());
         SQL.setString(2, this.chefia.getMatricula());
@@ -57,7 +57,7 @@ public class ChefiaDAO implements CRUD{
         SQL.setObject(3, this.chefia.getOrgao());
         SQL.setString(4, this.chefia.getSetor());
         
-        SQL.setInt(5, this.chefia.getID());
+        SQL.setInt(5, this.chefia.getId());
         
         System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.chefia);
         JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
@@ -73,7 +73,6 @@ public class ChefiaDAO implements CRUD{
             SQL = conecta.prepareStatement("DELETE FROM chefias WHERE id='" + cod_object+"';");
             SQL.executeUpdate();
             SQL.close();
-            System.out.println("Chefia: "+cod_object+" removida!");
             JOptionPane.showMessageDialog(null, "Chefia removida!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
@@ -87,15 +86,18 @@ public class ChefiaDAO implements CRUD{
         ConnectionFactory con= ConnectionFactory.getInstance();
         try {
             con.conexao();
-            con.executaSQL("SELECT * FROM chefias;");
+            /**
+             * Select c.nome, (o.nome_orgao) as orgao FROM chefias c, orgaos o Where c.matricula='120' AND c.cod_orgao= o.id;
+             */
+            con.executaSQL("SELECT c.id, c.nome, c.matricula, (o.nome_orgao) as orgao, c.setor FROM chefias c, orgaos o WHERE c.cod_orgao=o.id;");
             con.result_set.first();
             do {                
                 dados.add(new Object[]{
-                    con.result_set.getInt("id"), 
-                    con.result_set.getString("nome_chefia"),
-                    con.result_set.getString("matricula"),
+                    con.result_set.getInt("c.id"), 
+                    con.result_set.getString("c.nome"),
+                    con.result_set.getString("c.matricula"),
                     con.result_set.getString("orgao"),
-                    con.result_set.getString("setor"),
+                    con.result_set.getString("c.setor"),
                 });
             } while (con.result_set.next());
             
@@ -103,5 +105,31 @@ public class ChefiaDAO implements CRUD{
             JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhuma chefia encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
         return dados; 
+    }
+
+    public ArrayList selectByMatricula(String matricula) {
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con = new ConnectionFactory();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT c.id, c.nome, c.matricula ,(o.nome_orgao) as orgao, c.setor FROM chefias c, orgaos o" + " WHERE c.cod_orgao=o.id AND c.matricula='" + matricula + "';");
+            con.result_set.first();
+            do {
+                dados.add(new Object[]{
+                    con.result_set.getInt("c.id"), 
+                    con.result_set.getString("c.nome"), 
+                    con.result_set.getString("c.matricula"), 
+                    con.result_set.getString("orgao"), 
+                    con.result_set.getString("c.setor")
+                });
+            } while (con.result_set.next());
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Matricula não encontrada.\nCadastre uma nova chefia.", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            if(dados.isEmpty()){
+                return dados;
+            }
+        }
+        return dados;
     }
 }

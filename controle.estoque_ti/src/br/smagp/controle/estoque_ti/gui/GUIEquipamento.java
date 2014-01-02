@@ -69,10 +69,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
         jtBuscarNumeroDeSerie = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtableFindEquipamento = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jProgressBar1 = new javax.swing.JProgressBar();
         btExcluir = new javax.swing.JButton();
@@ -98,6 +94,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btUltimo = new javax.swing.JButton();
         btAnterior = new javax.swing.JButton();
         btProximo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtableFindEquipamento = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
@@ -132,40 +130,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 btCancelarActionPerformed(evt);
             }
         });
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Resultado da Busca:");
-
-        jtableFindEquipamento.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jtableFindEquipamento);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-excluir.png"))); // NOI18N
         btExcluir.setText("Excluir");
@@ -280,80 +244,80 @@ public class GUIEquipamento extends javax.swing.JFrame {
             }
         });
 
+        jtableFindEquipamento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jtableFindEquipamento);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtBuscarNumeroDeSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscar)
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtBuscarNumeroDeSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btBuscar)
-                                .addGap(10, 10, 10)
-                                .addComponent(btNovo))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btNovo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(121, 121, 121)
-                                        .addComponent(jLabel3))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jtEquipamento)
-                                            .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btAtualizarComboBox))
-                                    .addComponent(jLabel6)
-                                    .addComponent(jtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btCancelar)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(10, 10, 10)
+                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(195, 195, 195)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btAtualizarComboBox))
+                    .addComponent(jLabel6)
+                    .addComponent(jtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btCancelar))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jSeparator2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -367,54 +331,55 @@ public class GUIEquipamento extends javax.swing.JFrame {
                     .addComponent(jtBuscarNumeroDeSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btPrimeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel8))
                     .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3))
                 .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAtualizarComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(btApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jMenu1.setText("Arquivo");
@@ -458,7 +423,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,6 +465,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
             btExcluir.setEnabled(false);
             btEditar.setEnabled(false);
             btExcluir.setEnabled(false);
+
             btAtualizarComboBox.setEnabled(true);
 
         }
@@ -596,6 +562,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         btNovo.setEnabled(true);
 
+        jtID.setText("");
         jtNumeroSerie.setText("");
         jtEquipamento.setText("");
         jtMarca.setText("_TM");
@@ -603,6 +570,12 @@ public class GUIEquipamento extends javax.swing.JFrame {
 
         btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
+
+        btPrimeiro.setEnabled(true);
+        btUltimo.setEnabled(true);
+        btAnterior.setEnabled(true);
+        btProximo.setEnabled(true);
+
         this.preencherTabela();
     }//GEN-LAST:event_btCancelarActionPerformed
 
@@ -628,6 +601,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btCancelar.setEnabled(true);
         btBuscar.setEnabled(false);
         btAtualizarComboBox.setEnabled(true);
+
+        btPrimeiro.setEnabled(false);
+        btUltimo.setEnabled(false);
+        btAnterior.setEnabled(false);
+        btProximo.setEnabled(false);
 
         jtBuscarNumeroDeSerie.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
@@ -677,6 +655,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btNovo.setEnabled(false);
         btBuscar.setEnabled(false);
         jtBuscarNumeroDeSerie.setEnabled(false);
+
+        btPrimeiro.setEnabled(false);
+        btUltimo.setEnabled(false);
+        btAnterior.setEnabled(false);
+        btProximo.setEnabled(false);
     }//GEN-LAST:event_btSalvarActionPerformed
 
     //METODO RESPONSAVEL POR PREENCHER O COMBO-BOX UTILIZADO
@@ -767,6 +750,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
 
+        btPrimeiro.setEnabled(true);
+        btUltimo.setEnabled(true);
+        btAnterior.setEnabled(true);
+        btProximo.setEnabled(true);
+
         //Fim do método alterar em equipamento
     }//GEN-LAST:event_btEditarActionPerformed
 
@@ -800,6 +788,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
             btExcluir.setEnabled(true);
             btNovo.setEnabled(false);
             btAtualizarComboBox.setEnabled(true);
+
+            btPrimeiro.setEnabled(true);
+            btUltimo.setEnabled(true);
+            btAnterior.setEnabled(true);
+            btProximo.setEnabled(true);
 
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Não foi retroceder a exibição do dado.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
@@ -862,6 +855,11 @@ public class GUIEquipamento extends javax.swing.JFrame {
         btNovo.setEnabled(true);
         btBuscar.setEnabled(true);
         jtBuscarNumeroDeSerie.setEnabled(true);
+
+        btPrimeiro.setEnabled(true);
+        btUltimo.setEnabled(true);
+        btAnterior.setEnabled(true);
+        btProximo.setEnabled(true);
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void jMenuListarTodosOsEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarTodosOsEquipamentosActionPerformed
@@ -883,30 +881,30 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtEquipamento.setText(result_set.getString("descricao"));
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
+
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNumeroSerie.setEnabled(true);
+                jtEquipamento.setEnabled(true);
+                jtMarca.setEnabled(true);
+                jtPatrimonio.setEnabled(true);
+                jTipoEquipamento.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+                this.preencherTabela();
             }
-
-            //campos de textos e combo box
-            jtID.setEnabled(false);
-            jtNumeroSerie.setEnabled(true);
-            jtEquipamento.setEnabled(true);
-            jtMarca.setEnabled(true);
-            jtPatrimonio.setEnabled(true);
-            jTipoEquipamento.setEnabled(true);
-
-            //botoes desativados
-            btSalvar.setEnabled(false);
-            
-            //botoes abilitados
-            btCancelar.setEnabled(true);
-            btApagar.setEnabled(true);
-            btAtualizarComboBox.setEnabled(true);
-            btExcluir.setEnabled(true);
-            btEditar.setEnabled(true);
-            this.preencherTabela();
-
-            //this.preencherTabela();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btPrimeiroActionPerformed
 
@@ -920,62 +918,70 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtEquipamento.setText(result_set.getString("descricao"));
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
-            }
-            //campos de textos e combo box
-            jtID.setEnabled(false);
-            jtNumeroSerie.setEnabled(true);
-            jtEquipamento.setEnabled(true);
-            jtMarca.setEnabled(true);
-            jtPatrimonio.setEnabled(true);
-            jTipoEquipamento.setEnabled(true);
 
-            //botoes desativados
-            btSalvar.setEnabled(false);
-            
-            //botoes abilitados
-            btCancelar.setEnabled(true);
-            btApagar.setEnabled(true);
-            btAtualizarComboBox.setEnabled(true);
-            btExcluir.setEnabled(true);
-            btEditar.setEnabled(true);
-            
-            this.preencherTabela();
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNumeroSerie.setEnabled(true);
+                jtEquipamento.setEnabled(true);
+                jtMarca.setEnabled(true);
+                jtPatrimonio.setEnabled(true);
+                jTipoEquipamento.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+
+                this.preencherTabela();
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btUltimoActionPerformed
 
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
         try {
+
             if (result_set.previous()) {
                 jtID.setText(String.valueOf(result_set.getInt("id")));
                 jtNumeroSerie.setText(result_set.getString("n_serie"));
                 jtEquipamento.setText(result_set.getString("descricao"));
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
-            }
-            
-            //campos de textos e combo box
-            jtID.setEnabled(false);
-            jtNumeroSerie.setEnabled(true);
-            jtEquipamento.setEnabled(true);
-            jtMarca.setEnabled(true);
-            jtPatrimonio.setEnabled(true);
-            jTipoEquipamento.setEnabled(true);
 
-            //botoes desativados
-            btSalvar.setEnabled(false);
-            
-            //botoes abilitados
-            btCancelar.setEnabled(true);
-            btApagar.setEnabled(true);
-            btAtualizarComboBox.setEnabled(true);
-            btExcluir.setEnabled(true);
-            btEditar.setEnabled(true);
-            
-            this.preencherTabela();
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNumeroSerie.setEnabled(true);
+                jtEquipamento.setEnabled(true);
+                jtMarca.setEnabled(true);
+                jtPatrimonio.setEnabled(true);
+                jTipoEquipamento.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+
+                this.preencherTabela();
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btAnteriorActionPerformed
 
@@ -987,28 +993,30 @@ public class GUIEquipamento extends javax.swing.JFrame {
                 jtEquipamento.setText(result_set.getString("descricao"));
                 jtMarca.setText(result_set.getString("marca"));
                 jtPatrimonio.setText(result_set.getString("patrimonio"));
-            }
-            //campos de textos e combo box
-            jtID.setEnabled(false);
-            jtNumeroSerie.setEnabled(true);
-            jtEquipamento.setEnabled(true);
-            jtMarca.setEnabled(true);
-            jtPatrimonio.setEnabled(true);
-            jTipoEquipamento.setEnabled(true);
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNumeroSerie.setEnabled(true);
+                jtEquipamento.setEnabled(true);
+                jtMarca.setEnabled(true);
+                jtPatrimonio.setEnabled(true);
+                jTipoEquipamento.setEnabled(true);
 
-            //botoes desativados
-            btSalvar.setEnabled(false);
-            
-            //botoes abilitados
-            btCancelar.setEnabled(true);
-            btApagar.setEnabled(true);
-            btAtualizarComboBox.setEnabled(true);
-            btExcluir.setEnabled(true);
-            btEditar.setEnabled(true);
-            
-            this.preencherTabela();
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+
+                this.preencherTabela();
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btProximoActionPerformed
 
@@ -1062,7 +1070,6 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btUltimo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1076,9 +1083,8 @@ public class GUIEquipamento extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuNovoItemDeEquipamento;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox jTipoEquipamento;
