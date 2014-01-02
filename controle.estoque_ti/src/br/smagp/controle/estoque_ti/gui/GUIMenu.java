@@ -236,9 +236,6 @@ public class GUIMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void jbEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEquipamentosActionPerformed
-        ViewStatus viewport= new ViewStatus();
-        viewport.setSTATUS(true);
-        this.status = viewport.getSTATUS();
         this.guiEquipamento = new GUIEquipamento();
         this.guiEquipamento.setVisible(true);
     }//GEN-LAST:event_jbEquipamentosActionPerformed

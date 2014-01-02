@@ -44,7 +44,7 @@ public class OrgaoDAO implements CRUD {
         Connection conecta = ConnectionFactory.getInstance().getConnection();
         this.orgao = (Orgao) object;
         SQL = conecta.prepareStatement("INSERT INTO orgaos" + "(nome_orgao)" + "VALUES (?);");
-        SQL.setString(1, this.orgao.getNomeOrgao());
+        SQL.setString(1, this.orgao.getNome_orgao());
         int updated = SQL.executeUpdate();
         SQL.close();
         return updated;
@@ -56,17 +56,13 @@ public class OrgaoDAO implements CRUD {
         this.orgao = (Orgao) object;
         String queryString = "UPDATE orgaos SET nome_orgao=? WHERE id=?";
         SQL = conecta.prepareStatement(queryString);
-        SQL.setString(1, this.orgao.getNomeOrgao());
+        SQL.setString(1, this.orgao.getNome_orgao());
         SQL.setInt(2, this.orgao.getId());
         int updated = SQL.executeUpdate();
         SQL.close();
         return updated;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#delete(int)
-     */
     @Override
     public void delete(String cod_object) throws SQLException {
         Connection conecta = new ConnectionFactory().getInstance().getConnection();

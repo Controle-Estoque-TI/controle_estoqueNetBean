@@ -133,5 +133,4 @@ public abstract class Funcionario extends CryptographyGeneric {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
-
 }

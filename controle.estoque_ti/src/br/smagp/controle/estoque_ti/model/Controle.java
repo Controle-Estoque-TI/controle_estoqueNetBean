@@ -64,7 +64,7 @@ public class Controle {
     }
 
     public int getChefia(){
-        return this.chefia.getID();
+        return this.chefia.getId();
     }
 
     public String getSetorOrgao(){

@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.smagp.controle.estoque_ti.dao;
 
 import br.smagp.controle.estoque_ti.db.ConnectionFactory;
-import br.smagp.controle.estoque_ti.db.SQLSyntax;
+import br.smagp.controle.estoque_ti.interfaces.CRUD;
 import br.smagp.controle.estoque_ti.model.Tecnico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -22,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author AllexOnRails
  */
-public class TecnicoDAO extends SQLSyntax{
+public class TecnicoDAO implements CRUD{
 
     /**
      * PARAMETROS PARA CONTROLAR A VIEW DO
@@ -35,17 +30,12 @@ public class TecnicoDAO extends SQLSyntax{
 
     /**
      * TUDO QUE POSSUIR #{@Override}
-     * Herda da Super classe neste 
-     * caso #{@SQLSyntax}
-     */
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#insert(java.lang.Object)
+     * é implementado da INTERFACE 
+     * neste caso #{@CRUD}
      */
 
     @Override
-    public int insert(Object object) throws SQLException {
+    public int create(Object object) throws SQLException {
         Connection conecta= new ConnectionFactory().getInstance().getConnection();
         this.tecnico = (Tecnico) object;
 
@@ -58,62 +48,13 @@ public class TecnicoDAO extends SQLSyntax{
         SQL.setString(5, this.tecnico.getCelular());
 
         int updated = SQL.executeUpdate();
-        System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com um novo equipamento.");
         SQL.close();
-        JOptionPane.showMessageDialog(null, "Tecnico registrado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-
         return updated;
     }
 
-    /**
-     * ESTE MÉTHODO A BAIXO TENTA
-     * RETORNAR UM OBJETO DO TIPO
-     * TECNICO PELO NUMERO DE
-     * SÉRIE!
-     * 
-     * @param matricula
-     * @return
-     * @throws SQLException
-     */
-
-    public Tecnico getTecnico(String matricula) throws SQLException{
-        Connection conecta= ConnectionFactory.getInstance().getConnection();
-        String sql = "select id, nome, matricula, setor, celular from tecnicos where matricula=? order by id";
-        PreparedStatement selectStatement = conecta.prepareStatement(sql);
-        selectStatement.setString(1, matricula);
-
-        ResultSet resultado = selectStatement.executeQuery();
-
-        this.tecnico = null;
-
-        if (resultado.next()) {
-            int _id_ = resultado.getInt("id");
-            String _nome_ = resultado.getString("nome");
-            String _matricula_ = resultado.getString("matricula");
-            String _setor_ = resultado.getString("setor");
-            String _cel_ = resultado.getString("celular");
-
-            this.tecnico = new Tecnico();
-            this.tecnico.setID(_id_);
-            this.tecnico.setNome(_nome_);
-            this.tecnico.setMatricula(_matricula_);
-            this.tecnico.setSetor(_setor_);
-            this.tecnico.setCelular(_cel_);
-        }
-
-        resultado.close();
-        selectStatement.close();
-
-        return this.tecnico;	
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#update(java.lang.Object)
-     */
-
+    
     @Override
-    public void update(Object object) throws SQLException {
+    public int update(Object object) throws SQLException {
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         this.tecnico = (Tecnico) object;
         String queryString = "UPDATE tecnicos SET nome=?, matricula=?, setor=? celular=? WHERE id="+this.tecnico.getID()+";";
@@ -124,122 +65,68 @@ public class TecnicoDAO extends SQLSyntax{
         SQL.setString(4, this.tecnico.getCelular());
         SQL.setInt(5, this.tecnico.getID());
 
-        System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.tecnico);
-        JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-        SQL.executeUpdate();
+        int updated = SQL.executeUpdate();
         SQL.close();
+        return updated;
     }
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#select()
-     */
 
     @Override
-    public List select() throws SQLException{
-        Connection conecta= ConnectionFactory.getInstance().getConnection();
-        Vector lista = new Vector();
+    public ArrayList select(){
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con= ConnectionFactory.getInstance();
         try {
-            SQL = conecta.prepareStatement("SELECT * FROM tecnicos t ORDER BY t.matricula;");
-            result_set = SQL.executeQuery();
-            while (result_set.next()) {
-                Vector listas = new Vector();
-                listas.add(result_set.getString("id"));
-                listas.add(result_set.getString("matricula"));
-                listas.add(result_set.getString("nome"));
-                listas.add(result_set.getString("setor"));
-                listas.add(result_set.getString("celular"));
-                lista.add(listas);
-            }
-            return lista;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Foi encontrado um erro na busca");
-            e.printStackTrace();
+            con.conexao();
+            con.executaSQL("SELECT * FROM tecnicos;");
+            con.result_set.first();
+            do {                
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("nome"),
+                    con.result_set.getString("matricula"),
+                    con.result_set.getString("setor")
+                });
+            } while (con.result_set.next());
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a Tabela.\nNenhum tecnico encontrado na base de dados.", "Erro 404 - Not Found", JOptionPane.ERROR_MESSAGE);
         }
-        return lista;
+        return dados; 
     }
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#find_by_nome(java.lang.String)
-     */
-
+    
+    public ArrayList selectByMatricula(String matricula) {
+        ArrayList dados = new ArrayList();
+        ConnectionFactory con = new ConnectionFactory();
+        try {
+            con.conexao();
+            con.executaSQL("SELECT id, nome, matricula, setor FROM tecnicos " + " WHERE matricula='" + matricula + "';");
+            con.result_set.first();
+            do {
+                dados.add(new Object[]{
+                    con.result_set.getInt("id"), 
+                    con.result_set.getString("nome"), 
+                    con.result_set.getString("matricula"), 
+                    con.result_set.getString("setor")
+                });
+            } while (con.result_set.next());
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Matricula não encontrada.\nCadastre um novo tecnico.", "ERRO 404 - Not Found", JOptionPane.ERROR_MESSAGE);
+            if(dados.isEmpty()){
+                return dados;
+            }
+        }
+        return dados;
+    }
+    
     @Override
-    public List find_by_nome(String nome) throws SQLException{
-        Connection conecta= ConnectionFactory.getInstance().getConnection();
-        Vector lista = new Vector();
+    public void delete(String cod_object) throws SQLException {
+        Connection conecta = new ConnectionFactory().getInstance().getConnection();
         try {
-            SQL = conecta.prepareStatement("SELECT * FROM tecnicos WHERE nome = '"+nome+"'");
-            result_set = SQL.executeQuery();
-            while (result_set.next()) {
-                Vector listas = new Vector();
-                listas.add(result_set.getString("id"));
-                listas.add(result_set.getString("matricula"));
-                listas.add(result_set.getString("nome"));
-                listas.add(result_set.getString("setor"));
-                listas.add(result_set.getString("celular"));
-                lista.add(listas);
-            }
-            return lista;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Foi encontrado um erro na busca");
-            e.printStackTrace();
-        }
-        return lista;
-    }
-
-    public List findByMatricula(String matricula) throws SQLException{
-        Connection conecta= ConnectionFactory.getInstance().getConnection();
-        Vector lista = new Vector();
-        try {
-            SQL = conecta.prepareStatement("SELECT * FROM tecnicos WHERE n_serie = '"+matricula+"'");
-            result_set = SQL.executeQuery();
-            while (result_set.next()) {
-                Vector listas = new Vector();
-                listas.add(result_set.getString("id"));
-                listas.add(result_set.getString("matricula"));
-                listas.add(result_set.getString("nome"));
-                listas.add(result_set.getString("setor"));
-                listas.add(result_set.getString("celular"));
-                lista.add(listas);
-            }
-            return lista;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Foi encontrado um erro na busca");
-            e.printStackTrace();
-        }
-        return lista;
-    }
-
-    public int selectByMat(String matricula) throws SQLException {
-        int codtec = 0;
-
-        Connection conecta= ConnectionFactory.getInstance().getConnection();
-
-        PreparedStatement sql = conecta.prepareStatement("SELECT id FROM paciente WHERE cpf = '"+matricula+"'");
-        ResultSet resultSet = sql.executeQuery();
-
-        while (resultSet.next()) {
-            codtec = resultSet.getInt("id");
-        }
-        return codtec;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see br.smagp.suporteTI.controleEstoque.database.SQLSyntax#delete(int)
-     */
-
-    @Override
-    public void delete(int cod_object) throws SQLException {
-        Connection conecta= new ConnectionFactory().getInstance().getConnection();
-        try {
-            SQL = conecta.prepareStatement("DELETE FROM tecnicos WHERE id = " + cod_object);
+            SQL = conecta.prepareStatement("DELETE FROM tecnicos WHERE id = '"+cod_object+"';");
             SQL.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Técnico removido!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Foi encontrado um erro na remoção"+JOptionPane.ERROR_MESSAGE);	
+            JOptionPane.showMessageDialog(null, "Foi encontrado um erro na remoção" + JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-        }	
+        }
     }
 }

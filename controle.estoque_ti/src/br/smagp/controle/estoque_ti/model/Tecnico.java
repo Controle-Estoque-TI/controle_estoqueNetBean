@@ -42,12 +42,12 @@ public class Tecnico extends Funcionario {
 	
     public int getID()
     {
-        return this._ID_;
+        return this.id;
     }
 
     public void setID(int _ID_)
     {
-        this._ID_ = _ID_;
+        this.id = _ID_;
     }
 
     public String getCelular()
