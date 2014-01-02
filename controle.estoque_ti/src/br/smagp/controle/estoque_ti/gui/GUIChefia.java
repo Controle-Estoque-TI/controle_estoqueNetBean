@@ -564,7 +564,14 @@ public class GUIChefia extends javax.swing.JFrame {
 
     //EVENTO GERADO PELO MENU NOVO ITEM DE EQUIPAMENTO
     private void jMenuNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoOrgaoActionPerformed
-        //new GUIOrgao().setVisible(true);
+       if (orgao == null) {  
+            orgao = new GUIOrgao(this);  
+            orgao.setVisible(true);  
+        } else {  
+            orgao.setVisible(true);  
+            orgao.setState(JFrame.NORMAL);
+            //JOptionPane.showMessageDialog(null, "Já se encontra um processo em execução.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuNovoOrgaoActionPerformed
 
     //EVENTO GERADO PELO BOTAO SALVAR
@@ -996,29 +1003,17 @@ public class GUIChefia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btProximoActionPerformed
-
-    public void setStatus(String status) {
-        this.status = status;
-    }  
-    
-    public String getStatus() {
-        return this.status;  
-    }  
-    
+     
     private void btNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoOrgaoActionPerformed
         //este é o codigo da salvação para saber se um JFrame já se encontra aberto
-        
-        this.setStatus("Ativo");
-        
         if (orgao == null) {  
             orgao = new GUIOrgao(this);  
             orgao.setVisible(true);  
         } else {  
             orgao.setVisible(true);  
-            orgao.setState(JFrame.NORMAL);  
+            orgao.setState(JFrame.NORMAL);
+            //JOptionPane.showMessageDialog(null, "Já se encontra um processo em execução.", "Atenção", JOptionPane.WARNING_MESSAGE);
         }  
-        
-        //new GUIOrgao((GUIChefia) ((btNovoOrgao) evt.getSource()).getTopLevelAncestor()).setVisible(true); 
     }//GEN-LAST:event_btNovoOrgaoActionPerformed
 
     /**

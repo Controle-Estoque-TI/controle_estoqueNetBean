@@ -44,7 +44,6 @@ public class GUIOrgao extends javax.swing.JFrame {
     public GUIOrgao(GUIChefia pai) {
         initComponents();
         this.pai = pai;  
-
         pack();  
         this.setResizable(false);
         this.setLocation(250, 100);
