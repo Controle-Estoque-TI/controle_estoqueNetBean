@@ -42,8 +42,6 @@ public class ChefiaDAO implements CRUD{
         int updated = SQL.executeUpdate();
         System.out.println("Padrao de retorno: "+updated+"\nTabela atualizada com nova chefia.");
         SQL.close();
-        JOptionPane.showMessageDialog(null, "Chefia registrada!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
-
         return updated;
     }
 
@@ -51,16 +49,12 @@ public class ChefiaDAO implements CRUD{
     public int update(Object object) throws SQLException{
         Connection conecta= ConnectionFactory.getInstance().getConnection();
         this.chefia = (Chefia) object;
-        SQL = conecta.prepareStatement("UPDATE chefias SET nome_chefia=?, matricula=?, cod_orgao=?, setor=? WHERE id=?");
+        SQL = conecta.prepareStatement("UPDATE chefias SET nome=?, matricula=?, cod_orgao=?, setor=? WHERE id=?");
         SQL.setString(1, this.chefia.getNome());
         SQL.setString(2, this.chefia.getMatricula());
         SQL.setObject(3, this.chefia.getOrgao());
         SQL.setString(4, this.chefia.getSetor());
-        
         SQL.setInt(5, this.chefia.getId());
-        
-        System.out.println("Tabela Orgaos atualizada com sucesso por: "+this.chefia);
-        JOptionPane.showMessageDialog(null, "Equipamento atualizado!", "Sucesso" ,JOptionPane.INFORMATION_MESSAGE);
         int updated = SQL.executeUpdate();
         SQL.close();
         return updated;

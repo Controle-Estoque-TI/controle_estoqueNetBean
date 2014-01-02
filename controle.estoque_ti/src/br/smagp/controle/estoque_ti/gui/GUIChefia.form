@@ -315,6 +315,9 @@
             <Property name="text" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -437,6 +440,9 @@
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/First.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPrimeiroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btUltimo">
           <Properties>
@@ -444,6 +450,9 @@
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/Last.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btUltimoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btAnterior">
           <Properties>
@@ -451,6 +460,9 @@
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/Previous.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAnteriorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btProximo">
           <Properties>
@@ -458,6 +470,9 @@
               <Image iconType="3" name="/br/smagp/controle/estoque_ti/resources/Next.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btProximoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btNovoOrgao">
           <Properties>
@@ -466,6 +481,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Novo Org&#xe3;o"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNovoOrgaoActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>

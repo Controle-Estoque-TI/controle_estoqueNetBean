@@ -41,6 +41,11 @@ public class GUIChefia extends javax.swing.JFrame {
     private static ResultSet result_set;
     private PreparedStatement SQL;
     private String result;
+    private String status;
+    private static final long serialVersionUID = 1L;  
+    GUIOrgao orgao;
+    
+    
     Connection conecta = ConnectionFactory.getInstance().getConnection();
 
     /**
@@ -138,6 +143,11 @@ public class GUIChefia extends javax.swing.JFrame {
         btEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-editar.png"))); // NOI18N
         btEditar.setText("Editar");
         btEditar.setEnabled(false);
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Matrícula");
@@ -195,15 +205,40 @@ public class GUIChefia extends javax.swing.JFrame {
         btAtualizarComboBox.setEnabled(false);
 
         btPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/First.png"))); // NOI18N
+        btPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrimeiroActionPerformed(evt);
+            }
+        });
 
         btUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Last.png"))); // NOI18N
+        btUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUltimoActionPerformed(evt);
+            }
+        });
 
         btAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Previous.png"))); // NOI18N
+        btAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnteriorActionPerformed(evt);
+            }
+        });
 
         btProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Next.png"))); // NOI18N
+        btProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProximoActionPerformed(evt);
+            }
+        });
 
         btNovoOrgao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
         btNovoOrgao.setText("Novo Orgão");
+        btNovoOrgao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoOrgaoActionPerformed(evt);
+            }
+        });
 
         jTableShowChefias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -529,7 +564,7 @@ public class GUIChefia extends javax.swing.JFrame {
 
     //EVENTO GERADO PELO MENU NOVO ITEM DE EQUIPAMENTO
     private void jMenuNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoOrgaoActionPerformed
-        new GUIOrgao().setVisible(true);
+        //new GUIOrgao().setVisible(true);
     }//GEN-LAST:event_jMenuNovoOrgaoActionPerformed
 
     //EVENTO GERADO PELO BOTAO SALVAR
@@ -575,6 +610,7 @@ public class GUIChefia extends javax.swing.JFrame {
             btSalvar.setEnabled(true);
             btCancelar.setEnabled(true);
             btApagar.setEnabled(true);
+            btAtualizarComboBox.setEnabled(true);
 
             jtID.setText("");
             jtNome.setText("");
@@ -610,6 +646,7 @@ public class GUIChefia extends javax.swing.JFrame {
         btSalvar.setEnabled(true);
         btCancelar.setEnabled(true);
         btApagar.setEnabled(true);
+        btAtualizarComboBox.setEnabled(true);
 
         jtID.setText("");
         jtNome.setText("");
@@ -642,6 +679,7 @@ public class GUIChefia extends javax.swing.JFrame {
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
         btApagar.setEnabled(false);
+        btAtualizarComboBox.setEnabled(false);
 
         jtID.setText("");
         jtNome.setText("");
@@ -656,6 +694,8 @@ public class GUIChefia extends javax.swing.JFrame {
         btUltimo.setEnabled(true);
         btAnterior.setEnabled(true);
         btProximo.setEnabled(true);
+
+        this.preencherTabela();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btBuscarChefiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarChefiaActionPerformed
@@ -676,6 +716,7 @@ public class GUIChefia extends javax.swing.JFrame {
             jtNome.setEnabled(true);
             jtMatricula.setEnabled(true);
             jtSetor.setEnabled(true);
+            jCBOrgao.setEnabled(true);
 
             btSalvar.setEnabled(false);
             btEditar.setEnabled(true);
@@ -752,6 +793,233 @@ public class GUIChefia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex, "ERRO 504", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        Connection conecta = ConnectionFactory.getInstance().getConnection();
+        Chefia chefia = new Chefia();
+        ChefiaDAO chefiaDAO = new DAOFactory().getChefia(); //INICIA UMA NOVA INSTANCIA DE EQUIPAMENTO DAO
+
+        /**
+         * Abaixo estamos coletando os dados contidos no formulário estando
+         * estes alterados ou não e ao mesmo tempo estamos jogando estes no
+         * metodo update em ChefiaDAO
+         */
+        try {
+            chefia.setId(Integer.parseInt(jtID.getText()));
+            chefia.setNome(jtNome.getText().toUpperCase());
+            chefia.setMatricula(jtMatricula.getText());
+            chefia.setSetor(jtSetor.getText());
+            String orgao = jCBOrgao.getSelectedItem().toString();
+
+            //INICIALIZA UM NOVA CONEXAO COM A BASE DE DADOS
+            PreparedStatement SQL = conecta.prepareStatement("SELECT id FROM orgaos WHERE nome_orgao='" + orgao + "';"); //CRIA UM PREPARED STATEMENT COM O SQL
+
+            ResultSet result_set = SQL.executeQuery(); //EXECUTA O SQL GERADO PELO PREPARED STATEMENT
+
+            Orgao xpto = new Orgao();
+            while (result_set.next()) { //COLETA O ITEM SELECIONADO  E ATRIBUI AO COMBO-BOX
+                xpto.setId(result_set.getInt("id"));
+            }
+            chefia.setOrgao(xpto.getId());
+
+            chefiaDAO.update(chefia); //EXCUTAMOS O METODO UPDATE EM EQUIPAMENTO_DAO RESPONSAVEL POR GERAR O COMANDO UPDATE DO SQL
+            JOptionPane.showMessageDialog(null, "Chefia: " + chefia.getNome() + " atualizada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.preencherTabela(); //PREENCHE A TABELA NOVAMENTE COM DADOS ATUALIZADOS
+
+            /**
+             * As linhas abaixo setam se os determinados campos e botões serão
+             * ablitados ou não
+             */
+            jtNome.setEnabled(false);
+            jtMatricula.setEnabled(false);
+            jtSetor.setEnabled(false);
+            jCBOrgao.setEnabled(false);
+
+            btSalvar.setEnabled(false);
+            btCancelar.setEnabled(false);
+            btApagar.setEnabled(false);
+            btEditar.setEnabled(false);
+            btExcluir.setEnabled(false);
+            btAtualizarComboBox.setEnabled(false);
+
+            btNovo.setEnabled(true);
+
+            jtID.setText("");
+            jtNome.setText("");
+            jtMatricula.setText("");
+            jtSetor.setText("");
+
+            btBuscarChefia.setEnabled(true);
+            jtBuscarMatricula.setEnabled(true);
+
+            btPrimeiro.setEnabled(true);
+            btUltimo.setEnabled(true);
+            btAnterior.setEnabled(true);
+            btProximo.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btEditarActionPerformed
+
+    private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
+        try {
+            SQL = conecta.prepareStatement("SELECT * FROM chefias;");
+            result_set = SQL.executeQuery();
+            if (result_set.first()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNome.setText(result_set.getString("nome"));
+                jtMatricula.setText(result_set.getString("matricula"));
+                jtSetor.setText(result_set.getString("setor"));
+
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNome.setEnabled(true);
+                jtMatricula.setEnabled(true);
+                jtSetor.setEnabled(true);
+                jCBOrgao.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+                this.preencherTabela();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btPrimeiroActionPerformed
+
+    private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
+        try {
+            SQL = conecta.prepareStatement("SELECT * FROM chefias;");
+            result_set = SQL.executeQuery();
+            if (result_set.last()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNome.setText(result_set.getString("nome"));
+                jtMatricula.setText(result_set.getString("matricula"));
+                jtSetor.setText(result_set.getString("setor"));
+
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNome.setEnabled(true);
+                jtMatricula.setEnabled(true);
+                jtSetor.setEnabled(true);
+                jCBOrgao.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+                this.preencherTabela();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btUltimoActionPerformed
+
+    private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
+        try {
+            if (result_set.previous()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNome.setText(result_set.getString("nome"));
+                jtMatricula.setText(result_set.getString("matricula"));
+                jtSetor.setText(result_set.getString("setor"));
+
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNome.setEnabled(true);
+                jtMatricula.setEnabled(true);
+                jtSetor.setEnabled(true);
+                jCBOrgao.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+                this.preencherTabela();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btAnteriorActionPerformed
+
+    private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        try {
+            if (result_set.next()) {
+                jtID.setText(String.valueOf(result_set.getInt("id")));
+                jtNome.setText(result_set.getString("nome"));
+                jtMatricula.setText(result_set.getString("matricula"));
+                jtSetor.setText(result_set.getString("setor"));
+
+                //campos de textos e combo box
+                jtID.setEnabled(false);
+                jtNome.setEnabled(true);
+                jtMatricula.setEnabled(true);
+                jtSetor.setEnabled(true);
+                jCBOrgao.setEnabled(true);
+
+                //botoes desativados
+                btSalvar.setEnabled(false);
+
+                //botoes abilitados
+                btCancelar.setEnabled(true);
+                btApagar.setEnabled(true);
+                btAtualizarComboBox.setEnabled(true);
+                btExcluir.setEnabled(true);
+                btEditar.setEnabled(true);
+                this.preencherTabela();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: Impossivel continuar.\nSelecione o primeiro ou o último elemento para continuar.", "ERRO 504", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btProximoActionPerformed
+
+    public void setStatus(String status) {
+        this.status = status;
+    }  
+    
+    public String getStatus() {
+        return this.status;  
+    }  
+    
+    private void btNovoOrgaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoOrgaoActionPerformed
+        //este é o codigo da salvação para saber se um JFrame já se encontra aberto
+        
+        this.setStatus("Ativo");
+        
+        if (orgao == null) {  
+            orgao = new GUIOrgao(this);  
+            orgao.setVisible(true);  
+        } else {  
+            orgao.setVisible(true);  
+            orgao.setState(JFrame.NORMAL);  
+        }  
+        
+        //new GUIOrgao((GUIChefia) ((btNovoOrgao) evt.getSource()).getTopLevelAncestor()).setVisible(true); 
+    }//GEN-LAST:event_btNovoOrgaoActionPerformed
 
     /**
      * @param args the command line arguments
