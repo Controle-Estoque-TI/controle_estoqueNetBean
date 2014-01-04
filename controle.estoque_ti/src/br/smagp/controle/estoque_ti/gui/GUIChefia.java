@@ -2,6 +2,7 @@
 package br.smagp.controle.estoque_ti.gui;
 
 //IMPORTES OBRIGATÓRIOS PARA REALIZAR AS TAREFAS CONTIDAS NESTE FORMULÁRIO
+import br.smagp.controle.estoque_ti.objects.ModeloTabela;
 import br.smagp.controle.estoque_ti.dao.ChefiaDAO;
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
 

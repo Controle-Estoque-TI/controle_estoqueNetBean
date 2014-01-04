@@ -5,6 +5,7 @@
  */
 package br.smagp.controle.estoque_ti.gui;
 
+import br.smagp.controle.estoque_ti.objects.ModeloTabela;
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
 import br.smagp.controle.estoque_ti.dao.OrgaoDAO;
 import br.smagp.controle.estoque_ti.dao.TipoEquipamentoDAO;

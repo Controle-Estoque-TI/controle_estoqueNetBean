@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.smagp.controle.estoque_ti.gui;
+package br.smagp.controle.estoque_ti.objects;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;

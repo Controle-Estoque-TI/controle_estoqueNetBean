@@ -6,6 +6,7 @@
 package br.smagp.controle.estoque_ti.gui;
 
 //IMPORTES OBRIGATÓRIOS PARA REALIZAR AS TAREFAS CONTIDAS NESTE FORMULÁRIO
+import br.smagp.controle.estoque_ti.objects.ModeloTabela;
 import br.smagp.controle.estoque_ti.dao.DAOFactory;
 import br.smagp.controle.estoque_ti.dao.EquipamentoDAO;
 import br.smagp.controle.estoque_ti.db.ConnectionFactory;
@@ -863,7 +864,7 @@ public class GUIEquipamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void jMenuListarTodosOsEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarTodosOsEquipamentosActionPerformed
-        new ListEquipamentos().setVisible(true);
+        new GUIListEquipamentos().setVisible(true);
     }//GEN-LAST:event_jMenuListarTodosOsEquipamentosActionPerformed
 
     private void btAtualizarComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarComboBoxActionPerformed

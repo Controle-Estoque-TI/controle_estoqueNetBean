@@ -1,5 +1,6 @@
 package br.smagp.controle.estoque_ti.gui;
 
+import br.smagp.controle.estoque_ti.objects.ModeloTabela;
 import br.smagp.controle.estoque_ti.dao.EquipamentoDAO;
 import br.smagp.controle.estoque_ti.dao.TipoEquipamentoDAO;
 import br.smagp.controle.estoque_ti.db.ConnectionFactory;
@@ -15,9 +16,9 @@ import javax.swing.ListSelectionModel;
  *
  * @author AllexOnRails
  */
-public class ListEquipamentos extends javax.swing.JFrame {
+public class GUIListEquipamentos extends javax.swing.JFrame {
 
-    public ListEquipamentos() {
+    public GUIListEquipamentos() {
         initComponents();
         this.setLocation(250, 100);
         this.setLocationRelativeTo(null);
@@ -187,20 +188,20 @@ public class ListEquipamentos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIListEquipamentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListEquipamentos().setVisible(true);
+                new GUIListEquipamentos().setVisible(true);
             }
         });
     }
