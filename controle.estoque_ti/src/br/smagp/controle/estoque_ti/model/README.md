@@ -10,5 +10,8 @@
             - Tecnico.java
             - TipoEquipamento.java
             - Funcionario.java
-            - Orgao.java           
+            - Orgao.java
+
+      p.s. A classe pattern controle ModelFactory ainda não foi criada
+      Devo cria-la para seguir o Design Patterns
 ################################################################################
