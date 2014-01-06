@@ -153,6 +153,11 @@ public class GUITecnico extends javax.swing.JFrame {
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/icone-cadastrar.png"))); // NOI18N
         btSalvar.setText("Salvar");
         btSalvar.setEnabled(false);
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
         btApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/smagp/controle/estoque_ti/resources/Reset.png"))); // NOI18N
         btApagar.setText("Apagar");
@@ -469,6 +474,11 @@ public class GUITecnico extends javax.swing.JFrame {
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuSairActionPerformed
+
+    //EVENTO GERADO PELO BOTAO SALVAR
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        
+    }//GEN-LAST:event_btSalvarActionPerformed
 
 
     /**
